@@ -22,7 +22,7 @@ export default function Navigation() {
             href="#"
             className="font-bold text-xl bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent"
           >
-            AC
+            Ayoub Cherguelaine
           </a>
 
           <div className="hidden md:flex gap-8">

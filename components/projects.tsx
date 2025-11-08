@@ -123,24 +123,28 @@ export default function Projects() {
                 </div>
 
                 <div className="flex gap-3 pt-4">
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-blue-500 hover:text-blue-600 transition-colors"
-                  >
-                    <Github size={16} />
-                    Code
-                  </a>
-                  <a
-                    href={project.links.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-blue-500 hover:text-blue-600 transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                    Demo
-                  </a>
+                  {project.links.github && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-blue-500 hover:text-blue-600 transition-colors"
+                    >
+                      <Github size={16} />
+                      Code
+                    </a>
+                  )}
+                  {project.links.demo && (
+                    <a
+                      href={project.links.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-blue-500 hover:text-blue-600 transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                      Demo
+                    </a>
+                  )}
                 </div>
               </div>
             </Card>
