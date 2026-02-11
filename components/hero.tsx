@@ -27,9 +27,9 @@ export default function Hero() {
           <Badge variant="secondary" className="border border-primary/25 bg-primary/10 text-primary">
             9+ shipped AI projects
           </Badge>
-          {/* <Badge variant="secondary" className="border border-primary/25 bg-primary/10 text-primary">
+          <Badge variant="secondary" className="border border-primary/25 bg-primary/10 text-primary">
             Replies within 24h
-          </Badge> */}
+          </Badge>
         </div>
 
         <div className="flex flex-wrap justify-center gap-4">

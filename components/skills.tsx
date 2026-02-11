@@ -19,7 +19,7 @@ const skillCategories = [
     category: "AI Systems",
     summary: "Agentic architectures and LLM systems for production use cases.",
     icon: BrainCircuit,
-    iconWrapClass: "border-primary/35 bg-primary/12",
+    iconWrapClass: "border-primary/35 bg-primary/10",
     iconClass: "text-primary",
     skills: ["LLMs", "Fine-tuning", "Retrieval-Augmented Generation (RAG)", "AI Agents", "LangChain", "CrewAI", "vLLM"],
   },
@@ -27,7 +27,7 @@ const skillCategories = [
     category: "Automation",
     summary: "Workflow automation for data, orchestration, and operations.",
     icon: Workflow,
-    iconWrapClass: "border-chart-2/35 bg-chart-2/12",
+    iconWrapClass: "border-chart-2/35 bg-chart-2/10",
     iconClass: "text-chart-2",
     skills: ["n8n", "Workflow Automation", "Agent Orchestration", "API Development"],
   },
@@ -35,7 +35,7 @@ const skillCategories = [
     category: "Retrieval & Data",
     summary: "Semantic search, vector retrieval, and scalable data pipelines.",
     icon: Database,
-    iconWrapClass: "border-chart-3/35 bg-chart-3/12",
+    iconWrapClass: "border-chart-3/35 bg-chart-3/10",
     iconClass: "text-chart-3",
     skills: ["Embeddings", "Vector Stores", "PostgreSQL", "MongoDB", "Redis", "Data Scraping", "Data Pipelines", "Data Visualization"],
   },
@@ -43,7 +43,7 @@ const skillCategories = [
     category: "ML Frameworks",
     summary: "Training, fine-tuning, and applied modeling toolkits.",
     icon: Wrench,
-    iconWrapClass: "border-chart-4/35 bg-chart-4/12",
+    iconWrapClass: "border-chart-4/35 bg-chart-4/10",
     iconClass: "text-chart-4",
     skills: ["PyTorch", "TensorFlow", "Hugging Face Transformers", "Scikit-learn", "Jupyter"],
   },
@@ -51,7 +51,7 @@ const skillCategories = [
     category: "Backend & Frontend",
     summary: "Full-stack implementation for AI-powered products.",
     icon: Code2,
-    iconWrapClass: "border-chart-5/35 bg-chart-5/12",
+    iconWrapClass: "border-chart-5/35 bg-chart-5/10",
     iconClass: "text-chart-5",
     skills: ["FastAPI", "Flask", "Next.js", "React", "Tailwind CSS", "shadcn/ui"],
   },
@@ -59,7 +59,7 @@ const skillCategories = [
     category: "Cloud & Delivery",
     summary: "Deployment, infrastructure, and production readiness.",
     icon: Rocket,
-    iconWrapClass: "border-primary/30 bg-primary/8",
+    iconWrapClass: "border-primary/30 bg-primary/10",
     iconClass: "text-primary",
     skills: ["Docker", "AWS EC2", "AWS Lambda", "CI/CD", "Git", "Google Cloud", "Hugging Face"],
   },
@@ -85,7 +85,7 @@ export default function Skills() {
           </p>
         </div>
 
-        <Card className="gap-4 border-primary/30 bg-gradient-to-r from-primary/12 via-chart-2/10 to-transparent p-6 shadow-sm">
+        <Card className="gap-4 border-primary/30 bg-gradient-to-r from-primary/10 via-chart-2/10 to-transparent p-6 shadow-sm">
           <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">Core Focus</p>
           <div className="flex flex-wrap gap-2">
             {coreFocus.map((skill) => (
