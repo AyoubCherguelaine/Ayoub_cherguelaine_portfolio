@@ -9,7 +9,7 @@ import Navigation from "@/components/navigation"
 
 export default function Home() {
   return (
-    <main className="bg-background text-foreground">
+    <main className="portfolio-shell bg-background text-foreground">
       <Navigation />
       <Hero />
       <About />
