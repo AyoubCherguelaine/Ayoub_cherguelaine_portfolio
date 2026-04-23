@@ -1,4 +1,6 @@
+import Image from "next/image"
 import { Mail, Linkedin, Github, MessageCircle } from "lucide-react"
+import { profileSnapshot } from "@/lib/portfolio-data"
 
 export default function Contact() {
   return (
@@ -7,10 +9,12 @@ export default function Contact() {
         <div className="space-y-3 text-center">
           <h2 className="text-4xl font-bold tracking-tight">Get In Touch</h2>
           <div className="mx-auto h-1 w-20 rounded-full bg-gradient-to-r from-primary to-chart-2" />
-          <p className="mt-4 text-muted-foreground">Let&apos;s connect on any of the channels below.</p>
+          <p className="mt-4 text-muted-foreground">
+            Let&apos;s connect on any channel below. Public profile data on this site was last verified on {profileSnapshot.verifiedLabel}.
+          </p>
         </div>
 
-        <div className="my-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="my-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           <a
             href="mailto:cherguelainea@gmail.com"
             className="flex flex-col items-center gap-3 rounded-lg border border-border bg-card p-6 text-center transition-colors hover:border-primary hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
@@ -40,6 +44,17 @@ export default function Contact() {
             <Github size={32} className="text-primary" />
             <h3 className="font-semibold">GitHub</h3>
             <p className="text-sm text-muted-foreground">View my code</p>
+          </a>
+
+          <a
+            href="https://huggingface.co/AyoubChLin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center gap-3 rounded-lg border border-border bg-card p-6 text-center transition-colors hover:border-primary hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+          >
+            <Image src="/huggingface-logo.svg" alt="" width={32} height={32} className="h-8 w-8" />
+            <h3 className="font-semibold">Hugging Face</h3>
+            <p className="text-sm text-muted-foreground">Models and datasets</p>
           </a>
 
           <a

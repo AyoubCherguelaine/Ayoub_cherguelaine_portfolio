@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 
 import { Analytics } from "@vercel/analytics/next"
 import { Geist, Geist_Mono } from "next/font/google"
+import { absoluteUrl, siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -16,9 +17,47 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Ayoub Cherguelaine - AI & NLP Engineer",
-  description: "AI & NLP Engineer specializing in Large Language Models, BERT, and advanced machine learning solutions",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: "%s | Ayoub Cherguelaine",
+  },
+  description: siteConfig.description,
   generator: "v0.app",
+  keywords: [
+    "AI Engineer",
+    "NLP Engineer",
+    "LLM",
+    "RAG",
+    "CrewAI",
+    "FastAPI",
+    "Hugging Face",
+    "Portfolio",
+  ],
+  alternates: {
+    canonical: absoluteUrl("/"),
+  },
+  openGraph: {
+    type: "website",
+    url: absoluteUrl("/"),
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: absoluteUrl("/opengraph-image"),
+        width: 1200,
+        height: 630,
+        alt: "Ayoub Cherguelaine portfolio preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [absoluteUrl("/twitter-image")],
+  },
   icons: {
     icon: [
       {
@@ -44,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         {children}
         <Analytics />

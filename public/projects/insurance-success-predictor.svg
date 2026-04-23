@@ -1,0 +1,22 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-insurance-success-predictor" x1="84" y1="56" x2="1116" y2="664" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2F1E52"/>
+      <stop offset="0.5" stop-color="#5D41A2"/>
+      <stop offset="1" stop-color="#2F7CCB"/>
+    </linearGradient>
+    <pattern id="grid-insurance-success-predictor" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="rgba(255,255,255,0.09)"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="720" rx="24" fill="url(#bg-insurance-success-predictor)"/>
+  <rect width="1200" height="720" rx="24" fill="url(#grid-insurance-success-predictor)"/>
+  <circle cx="1025" cy="130" r="186" fill="rgba(255,255,255,0.10)"/>
+  <circle cx="160" cy="610" r="220" fill="rgba(255,255,255,0.08)"/>
+  <rect x="76" y="74" width="220" height="40" rx="20" fill="rgba(255,255,255,0.2)"/>
+  <text x="92" y="101" font-family="Inter, Segoe UI, Arial" font-size="18" font-weight="600" fill="white">Portfolio Project</text>
+  <text x="76" y="304" font-family="Inter, Segoe UI, Arial" font-size="58" font-weight="700" fill="white">Insurance Predictor</text>
+  <text x="76" y="356" font-family="Inter, Segoe UI, Arial" font-size="30" font-weight="500" fill="rgba(255,255,255,0.92)">Explainable case outcome scoring</text>
+  <rect x="76" y="596" width="364" height="52" rx="14" fill="rgba(9,19,29,0.25)" stroke="rgba(255,255,255,0.22)"/>
+  <text x="102" y="629" font-family="Inter, Segoe UI, Arial" font-size="24" font-weight="500" fill="white">Details page ready</text>
+</svg>

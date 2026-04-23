@@ -1,35 +1,53 @@
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight, ChevronDown, ExternalLink, Github } from "lucide-react"
+
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ChevronDown, ExternalLink, Github } from "lucide-react"
-import { type Project, type ProjectLinkStatus, projects } from "@/lib/portfolio-data"
+import { profileSnapshot, type Project, type ProjectLinkStatus, projects } from "@/lib/portfolio-data"
 
 const statusLabel: Record<ProjectLinkStatus, string> = {
-  private: "Private Repo",
+  private: "Private Assets",
   request: "Demo on Request",
   coming_soon: "Coming Soon",
 }
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="group flex h-full flex-col border border-border bg-card/80 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/70 hover:shadow-lg hover:shadow-primary/15">
+    <Card className="group flex h-full flex-col gap-4 border border-border/80 bg-card/85 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10">
+      <Link href={`/projects/${project.id}`} className="relative overflow-hidden rounded-lg border border-border/70">
+        <Image
+          src={project.coverImage}
+          alt={`${project.title} cover`}
+          width={1200}
+          height={720}
+          sizes="(min-width: 1280px) 360px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="aspect-[16/10] h-auto w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/45 to-transparent" />
+      </Link>
+
       <div className="space-y-3">
-        <h3 className="text-lg font-semibold text-balance transition-colors group-hover:text-primary">{project.title}</h3>
-        <p className="text-sm text-muted-foreground">{project.summary}</p>
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="text-lg font-semibold text-balance transition-colors group-hover:text-primary">{project.title}</h3>
+          <Badge variant="outline" className="shrink-0 border-primary/30 text-primary">
+            Case Study
+          </Badge>
+        </div>
+        <p className="text-sm leading-relaxed text-muted-foreground">{project.summary}</p>
       </div>
 
-      <div className="mt-4 space-y-2 text-sm text-muted-foreground">
+      <div className="space-y-2 text-sm text-muted-foreground">
         <p>
           <span className="font-medium text-foreground">Problem:</span> {project.problem}
         </p>
         <p>
           <span className="font-medium text-foreground">Solution:</span> {project.solution}
         </p>
-        <p>
-          <span className="font-medium text-foreground">Impact:</span> {project.impact}
-        </p>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-auto flex flex-wrap gap-2">
         {project.tags.map((tag) => (
           <Badge key={tag} variant="secondary" className="text-xs">
             {tag}
@@ -37,7 +55,14 @@ function ProjectCard({ project }: { project: Project }) {
         ))}
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3 pt-1">
+        <Button asChild variant="outline" size="sm">
+          <Link href={`/projects/${project.id}`}>
+            View details
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </Button>
+
         {project.links.github && (
           <a
             href={project.links.github}
@@ -49,6 +74,7 @@ function ProjectCard({ project }: { project: Project }) {
             Code
           </a>
         )}
+
         {project.links.demo && (
           <a
             href={project.links.demo}
@@ -60,6 +86,7 @@ function ProjectCard({ project }: { project: Project }) {
             Demo
           </a>
         )}
+
         {project.links.status && (
           <Badge variant="outline" className="border-primary/30 text-primary">
             {statusLabel[project.links.status]}
@@ -75,13 +102,14 @@ export default function Projects() {
   const moreProjects = projects.filter((project) => project.visibility === "more")
 
   return (
-    <section id="projects" className="section-anchor reveal-up py-24 px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="section-anchor reveal-up px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl space-y-10">
         <div className="space-y-3">
           <h2 className="text-4xl font-bold tracking-tight">Featured Projects</h2>
           <div className="h-1 w-20 rounded-full bg-gradient-to-r from-primary to-chart-2" />
           <p className="max-w-3xl text-muted-foreground">
-            Selected work focused on production LLM systems, applied NLP, and data-centric AI delivery.
+            Production-focused AI systems and data products with detailed implementation notes, confidentiality-safe private case studies,
+            and verified public evidence (snapshot: {profileSnapshot.verifiedLabel}).
           </p>
         </div>
 
@@ -92,7 +120,7 @@ export default function Projects() {
         </div>
 
         {moreProjects.length > 0 && (
-          <details className="group rounded-xl border border-border bg-card/50">
+          <details className="group rounded-xl border border-border bg-card/55">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-semibold">
               <span>More Work ({moreProjects.length})</span>
               <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />

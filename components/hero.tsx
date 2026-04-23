@@ -1,6 +1,8 @@
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, ExternalLink, Download } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { profileSnapshot } from "@/lib/portfolio-data"
 
 export default function Hero() {
   return (
@@ -16,7 +18,7 @@ export default function Hero() {
             AI & NLP Engineer
           </h2>
           <p className="mx-auto max-w-2xl text-xl text-muted-foreground sm:text-2xl">
-            Building production-grade language systems with LLMs, retrieval pipelines, and modern machine learning.
+            Building production-grade language systems across private client delivery and public model and dataset releases.
           </p>
         </div>
 
@@ -25,12 +27,14 @@ export default function Hero() {
             Open to AI/NLP roles
           </Badge>
           <Badge variant="secondary" className="border border-primary/25 bg-primary/10 text-primary">
-            9+ shipped AI projects
+            GitHub: {profileSnapshot.github.publicRepos} public repos
           </Badge>
           <Badge variant="secondary" className="border border-primary/25 bg-primary/10 text-primary">
-            Replies within 24h
+            Hugging Face: {profileSnapshot.huggingFace.publicModels} models / {profileSnapshot.huggingFace.publicDatasets} datasets
           </Badge>
         </div>
+
+        <p className="text-sm text-muted-foreground">Snapshot verified on {profileSnapshot.verifiedLabel} • Typical response window: within 24h.</p>
 
         <div className="flex flex-wrap justify-center gap-4">
           <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
@@ -76,7 +80,7 @@ export default function Hero() {
             aria-label="Visit Ayoub Cherguelaine Hugging Face profile"
             className="rounded-full bg-card p-3 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
           >
-            <ExternalLink size={24} />
+            <Image src="/huggingface-logo.svg" alt="" width={24} height={24} className="h-6 w-6" />
           </a>
         </div>
       </div>
