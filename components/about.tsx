@@ -10,9 +10,7 @@ export default function About() {
         </div>
 
         <p className="text-lg text-muted-foreground leading-relaxed">
-          I am <span className="font-semibold text-foreground">Ayoub Cherguelaine</span>, an AI and NLP engineer with a strong software engineering background. I design
-          practical language systems and data pipelines that are reliable in production, not only in notebooks.
-          My core focus is applied LLM engineering, retrieval-augmented generation, and model-driven automation.
+          I am <span className="font-semibold text-foreground">Ayoub Cherguelaine</span>, an AI engineer specializing in Generative AI, LLMs, NLP, and Data Engineering, with strong software engineering expertise and hands-on experience building scalable AI systems. I design practical language systems and data pipelines that are reliable in production, not only in notebooks. My core focus is applied LLM engineering, retrieval-augmented generation, and model-driven automation.
         </p>
 
         <p className="text-sm leading-relaxed text-muted-foreground">

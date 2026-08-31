@@ -12,6 +12,7 @@ const coreFocus = [
   "n8n",
   "Embeddings",
   "Vector Stores",
+  "Document Intelligence",
 ]
 
 const skillCategories = [
@@ -21,7 +22,7 @@ const skillCategories = [
     icon: BrainCircuit,
     iconWrapClass: "border-primary/35 bg-primary/10",
     iconClass: "text-primary",
-    skills: ["LLMs", "Fine-tuning", "Retrieval-Augmented Generation (RAG)", "AI Agents", "LangChain", "CrewAI", "vLLM"],
+    skills: ["LLMs", "Fine-tuning", "Retrieval-Augmented Generation (RAG)", "AI Agents", "LangChain", "CrewAI", "vLLM", "Document Intelligence", "Arabic NLP"],
   },
   {
     category: "Automation",
@@ -40,12 +41,12 @@ const skillCategories = [
     skills: ["Embeddings", "Vector Stores", "PostgreSQL", "MongoDB", "Redis", "Data Scraping", "Data Pipelines", "Data Visualization"],
   },
   {
-    category: "ML Frameworks",
-    summary: "Training, fine-tuning, and applied modeling toolkits.",
+    category: "ML & Document AI",
+    summary: "Training, fine-tuning, and applied modeling for NLP and document understanding.",
     icon: Wrench,
     iconWrapClass: "border-chart-4/35 bg-chart-4/10",
     iconClass: "text-chart-4",
-    skills: ["PyTorch", "TensorFlow", "Hugging Face Transformers", "Scikit-learn", "Jupyter"],
+    skills: ["PyTorch", "TensorFlow", "Hugging Face Transformers", "Scikit-learn", "Jupyter", "OCR", "Arabic NLP"],
   },
   {
     category: "Backend & Frontend",

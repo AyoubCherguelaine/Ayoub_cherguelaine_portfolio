@@ -24,7 +24,7 @@ export default function Experience() {
                 <p className="whitespace-nowrap text-sm text-muted-foreground">{exp.period}</p>
               </div>
 
-              {exp.projects && exp.projects.length > 1 ? (
+              {exp.projects && exp.projects.length > 0 ? (
                 <div className="space-y-3">
                   {exp.projects.map((project) => (
                     <div key={`${exp.id}-${project.name}`} className="rounded-xl border border-border/60 bg-background/40 p-4">

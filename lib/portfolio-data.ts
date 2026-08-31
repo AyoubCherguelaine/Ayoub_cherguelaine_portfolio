@@ -1,4 +1,4 @@
-export type ProjectLinkStatus = "private" | "request" | "coming_soon"
+export type ProjectLinkStatus = "private" | "request" | "coming_soon" | "available"
 
 export type ProjectLinks = {
   github?: string
@@ -32,7 +32,7 @@ export type PublicEvidence = {
   url: string
   visibility: PublicEvidenceVisibility
   metrics?: PublicEvidenceMetrics
-  verifiedOn: "2026-04-23"
+  verifiedOn: "2026-09-01"
 }
 
 export type Project = {
@@ -48,11 +48,12 @@ export type Project = {
   details: ProjectDetails
   publicEvidence?: PublicEvidence[]
   visibility: "featured" | "more"
+  priority?: number
 }
 
 export type ProfileSnapshot = {
-  verifiedOn: "2026-04-23"
-  verifiedLabel: "April 23, 2026"
+  verifiedOn: "2026-09-01"
+  verifiedLabel: "September 1, 2026"
   github: {
     publicRepos: number
     followers: number
@@ -65,8 +66,8 @@ export type ProfileSnapshot = {
 }
 
 export const profileSnapshot: ProfileSnapshot = {
-  verifiedOn: "2026-04-23",
-  verifiedLabel: "April 23, 2026",
+  verifiedOn: "2026-09-01",
+  verifiedLabel: "September 1, 2026",
   github: {
     publicRepos: 60,
     followers: 40,
@@ -79,6 +80,206 @@ export const profileSnapshot: ProfileSnapshot = {
 }
 
 export const projects: Project[] = [
+  {
+    id: "ocr-service",
+    title: "Open-Source OCR Service",
+    summary:
+      "A self-hosted OCR service built with FastAPI and open-source computer-vision/OCR models for document text extraction.",
+    problem:
+      "Existing OCR tools were either closed APIs or lacked a clean deployable backend interface for document pipelines.",
+    solution:
+      "Developed a FastAPI service integrating open-source OCR models with a simple API contract for uploading documents and returning extracted text.",
+    impact:
+      "Created a reusable internal OCR endpoint that can be embedded into larger document-processing workflows without external API dependencies.",
+    coverImage: "/projects/ocr-service.svg",
+    tags: ["FastAPI", "OCR", "Computer Vision", "Python", "Open Source"],
+    links: {
+      github: "https://github.com/AyoubCherguelaine/vision-ocr-service-",
+      status: "available",
+    },
+    details: {
+      timeline: "Developed as an open-source internal service with model selection and API hardening phases.",
+      roleScope:
+        "Built service endpoints, model integration, input validation, and response normalization for downstream consumers.",
+      teamSetup: "Solo development with peer review on model and API design.",
+      architecture:
+        "FastAPI backend exposing document upload endpoints, preprocessing, OCR model inference, and structured JSON response formats.",
+      dataEvaluation:
+        "Benchmarked text extraction quality across scanned document types and measured latency under concurrent requests.",
+      productionOps:
+        "Packaged for containerized deployment with health checks and basic rate limiting.",
+      lessonsLearned:
+        "OCR quality in production depends as much on preprocessing and layout handling as on model choice.",
+    },
+    visibility: "more",
+    priority: 1,
+  },
+  {
+    id: "drive-like-document-platform",
+    title: "Drive-Like Document Management Platform",
+    summary:
+      "A self-hosted Drive-like platform with AI-powered document classification and a full-stack interface.",
+    problem:
+      "Teams needed a private document workspace with semantic search and classification, without relying on public cloud storage.",
+    solution:
+      "Built a full-stack document management platform with upload, storage, metadata management, and AI classification integration for automatic document tagging and retrieval.",
+    impact:
+      "Delivered a private document workspace combining standard Drive-like workflows with downstream AI classification hooks.",
+    coverImage: "/projects/drive-like-document-platform.svg",
+    tags: ["Full-Stack", "Document Management", "AI Classification", "Storage", "TypeScript"],
+    links: {
+      status: "private",
+    },
+    details: {
+      timeline: "Built iteratively across storage, permissioning, frontend UX, and AI classification integration.",
+      roleScope:
+        "Owned full-stack development: backend APIs, storage abstractions, frontend file management UI, and AI integration points.",
+      teamSetup: "Individual project with focused feature iterations.",
+      architecture:
+        "Full-stack app with file storage backend, metadata indexing, document classification pipeline, and responsive management interface.",
+      dataEvaluation:
+        "Validated classification accuracy across document types and measured retrieval relevance for semantic search.",
+      productionOps:
+        "Deployed privately with standard web-stack production hardening and backup considerations.",
+      lessonsLearned:
+        "Document management UX is only as good as metadata fidelity and classification reliability.",
+    },
+    visibility: "more",
+    priority: 2,
+  },
+  {
+    id: "gaming-marketplace-scraping",
+    title: "Gaming Marketplace Scraping and Comparison System",
+    summary:
+      "An automated scraping and comparison system for gaming marketplace deals, including data collection, processing, and price comparison.",
+    problem:
+      "Gamers needed timely price comparison across marketplaces, but manual checking was slow and inconsistent.",
+    solution:
+      "Developed automated scraping pipelines for gaming marketplace listings, normalized product data, and implemented comparison logic with alerting on price drops.",
+    impact:
+      "Created a reliable price-monitoring workflow with structured data outputs suitable for notifications or dashboards.",
+    coverImage: "/projects/gaming-marketplace-scraping.svg",
+    tags: ["Python", "Scraping", "Data Pipelines", "Automation", "E-commerce"],
+    links: {
+      status: "private",
+    },
+    details: {
+      timeline: "Built in stages: target-site analysis, scraper development, normalization, and comparison engine.",
+      roleScope:
+        "Designed scraping architecture, anti-blocking handling, data normalization, and comparison/alerting logic.",
+      teamSetup: "Independent automation project.",
+      architecture:
+        "Scraping collectors, HTML parsing and normalization, product matching, price history, and comparison/alert modules.",
+      dataEvaluation:
+        "Evaluated coverage across marketplaces, duplicate-detection accuracy, and freshness of extracted prices.",
+      productionOps:
+        "Implemented scheduling, logging, and resilience patterns for long-running scraping jobs.",
+      lessonsLearned:
+        "Marketplace scraping reliability depends on selector stability, polite throttling, and structured change detection.",
+    },
+    visibility: "more",
+    priority: 3,
+  },
+  {
+    id: "lc-management-app",
+    title: "Letter of Credit Management Web Application",
+    summary:
+      "A private web application for managing importation and LC (Letter of Credit) workflows in Algeria.",
+    problem:
+      "Import and LC tracking relied on fragmented spreadsheets and manual coordination, leading to status and documentation errors.",
+    solution:
+      "Built a private full-stack web application to manage importation workflows, LC documentation, status tracking, and stakeholder notifications.",
+    impact:
+      "Centralized LC workflow tracking with role-aware access and structured document handling.",
+    coverImage: "/projects/lc-management-app.svg",
+    tags: ["Full-Stack", "Web Application", "Workflow Automation", "TypeScript", "API Development"],
+    links: {
+      status: "private",
+    },
+    details: {
+      timeline: "Delivered as a private business-facing web application with iterative workflow and UI refinement.",
+      roleScope:
+        "Owned full-stack implementation: backend APIs, database modeling, frontend workflows, and access control.",
+      teamSetup: "Close collaboration with business users to validate workflow stages and document requirements.",
+      architecture:
+        "Full-stack app with workflow state machine, document management, role-based access, and notification mechanisms.",
+      dataEvaluation:
+        "Validated workflow correctness, document completeness, and usability across user roles.",
+      productionOps:
+        "Deployed privately with standard web-stack production hardening and backup considerations.",
+      lessonsLearned:
+        "Document-heavy workflows benefit from explicit state modeling and clear status visibility.",
+    },
+    visibility: "more",
+    priority: 4,
+  },
+  {
+    id: "saudi-arabic-dialect-models",
+    title: "Saudi Arabic Dialect NLP Models",
+    summary:
+      "A collection of Saudi Arabic dialect models for dialect-specific NLP and conversational applications.",
+    problem:
+      "Most Arabic NLP resources focus on MSA, leaving Saudi dialect under-served for intent detection and conversation.",
+    solution:
+      "Developed and fine-tuned models targeting Saudi Arabic dialect for classification and conversational tasks, with dataset and artifact preparation for reproducibility.",
+    impact:
+      "Expanded available Arabic NLP coverage with dialect-specific artifacts and documented training setups.",
+    coverImage: "/projects/saudi-arabic-dialect-models.svg",
+    tags: ["Arabic NLP", "Dialect Modeling", "Fine-tuning", "Transformers", "Dataset"],
+    links: {
+      demo: "https://huggingface.co/collections/AyoubChLin/saudi-dialect-fine-tuned-models",
+      status: "coming_soon",
+    },
+    details: {
+      timeline: "Developed across dataset preparation, model experiments, and packaging for reuse.",
+      roleScope:
+        "Led dataset curation, model training/evaluation, and artifact packaging for downstream Arabic NLP use.",
+      teamSetup: "Individual research and experimentation workflow.",
+      architecture:
+        "Transformer-based models adapted for Saudi dialect with tokenization and vocabulary considerations for Arabic text.",
+      dataEvaluation:
+        "Evaluated on dialect-specific benchmarks and compared against MSA-based baselines.",
+      productionOps:
+        "Packaged for reproducible experimentation with dataset and model card documentation.",
+      lessonsLearned:
+        "Dialect-specific tokenization and data curation materially affect Arabic NLP results beyond model choice alone.",
+    },
+    visibility: "more",
+    priority: 5,
+  },
+  {
+    id: "lfm-coding-agent",
+    title: "LFM2.5-2.6B Fable5 Coding Agent",
+    summary:
+      "A lightweight coding-agent model fine-tuned from LFM2.5-2.6B on an agentic coding dataset, optimized for local inference.",
+    problem:
+      "Local coding assistance needed a lightweight instruction-following model with agentic behavior, rather than large general models.",
+    solution:
+      "Full fine-tuned LFM2.5-2.6B Fable5 on an agentic coding dataset, optimizing for local inference constraints while preserving instruction-following behavior.",
+    impact:
+      "Created a deployable lightweight coding-agent model suitable for local and resource-constrained environments.",
+    coverImage: "/projects/lfm-coding-agent.svg",
+    tags: ["LLM", "Fine-tuning", "Coding Agent", "Local Inference", "LFM"],
+    links: {
+      demo: "https://huggingface.co/AyoubChLin/lfm2.5-2.6b-fable5-coding-agent",
+      status: "coming_soon",
+    },
+    details: {
+      timeline: "Completed fine-tuning and evaluation with local inference benchmarking.",
+      roleScope:
+        "Prepared agentic coding dataset, executed fine-tuning, and validated inference behavior on coding tasks.",
+      teamSetup: "Individual model adaptation and evaluation workflow.",
+      architecture:
+        "LFM2.5-2.6B-based model fine-tuned for agentic coding behavior with instruction-following and tool-use patterns.",
+      dataEvaluation:
+        "Evaluated on coding-agent benchmarks and measured instruction adherence, tool-use correctness, and latency.",
+      productionOps:
+        "Optimized for local inference deployment with quantization and lightweight serving paths.",
+      lessonsLearned:
+        "Lightweight coding agents require careful balance between model size, instruction tuning, and tool-use training data.",
+    },
+    visibility: "more",
+  },
   {
     id: "ai-legal-assistant",
     title: "AI Legal Assistant",
@@ -112,6 +313,7 @@ export const projects: Project[] = [
         "Legal users trusted the system more when intermediate artifacts were explicit and replayable; streaming transparency was as important as final prediction quality.",
     },
     visibility: "featured",
+    priority: 6,
   },
   {
     id: "insurance-success-predictor",
@@ -146,6 +348,7 @@ export const projects: Project[] = [
         "Decision quality improved when flight signals, legal context, and precedent analogs were fused into one orchestrated stream instead of isolated tools.",
     },
     visibility: "featured",
+    priority: 7,
   },
   {
     id: "chat-with-database",
@@ -175,6 +378,7 @@ export const projects: Project[] = [
         "Strong schema context and strict query constraints were essential to safe self-serve analytics in production.",
     },
     visibility: "featured",
+    priority: 8,
   },
   {
     id: "bart-mnli-cnn-news",
@@ -217,10 +421,11 @@ export const projects: Project[] = [
           downloads: 7,
           likes: 0,
         },
-        verifiedOn: "2026-04-23",
+        verifiedOn: "2026-09-01",
       },
     ],
     visibility: "featured",
+    priority: 9,
   },
   {
     id: "bert-arxiv-metadata",
@@ -262,10 +467,11 @@ export const projects: Project[] = [
           downloads: 1,
           likes: 0,
         },
-        verifiedOn: "2026-04-23",
+        verifiedOn: "2026-09-01",
       },
     ],
     visibility: "featured",
+    priority: 10,
   },
   {
     id: "northwind-purchase-orders",
@@ -308,10 +514,11 @@ export const projects: Project[] = [
           downloads: 879,
           likes: 6,
         },
-        verifiedOn: "2026-04-23",
+        verifiedOn: "2026-09-01",
       },
     ],
     visibility: "featured",
+    priority: 11,
   },
   {
     id: "northwind-stock-report",
@@ -354,99 +561,79 @@ export const projects: Project[] = [
           downloads: 447,
           likes: 0,
         },
-        verifiedOn: "2026-04-23",
+        verifiedOn: "2026-09-01",
       },
     ],
     visibility: "more",
+    priority: 12,
   },
+
   {
-    id: "distilbert-med-hana",
-    title: "DistilBERT-MLM Medical and Hana Classifier",
+    id: "noble-spending",
+    title: "Noble Spending",
     summary:
-      "A DistilBERT text-classification artifact published on Hugging Face for domain-specific experimentation under lightweight model constraints.",
+      "A full-stack personal finance application built with Next.js for expense tracking, budgeting, and financial insights.",
     problem:
-      "Needed a smaller classification checkpoint that could be tested quickly in constrained inference environments.",
+      "Users needed an intuitive self-hosted finance tool with modern UX, without relying on third-party services for sensitive transaction data.",
     solution:
-      "Released a DistilBERT-based model (`transformers`/safetensors) on Hugging Face with endpoint-compatible packaging.",
+      "Built a Next.js full-stack app with authentication, transaction management, budget tracking, and data visualization, with a responsive UI and reliable state management.",
     impact:
-      "Established a deployable lightweight baseline and expanded the public model portfolio, with metadata verified on the Hub.",
-    coverImage: "/projects/distilbert-med-hana.svg",
-    tags: ["DistilBERT", "MLM", "Medical NLP", "Classification"],
+      "Delivered a usable private finance workspace with clean separation of concerns between frontend interfaces and backend logic.",
+    coverImage: "/projects/noble-spending.svg",
+    tags: ["Next.js", "Full-Stack", "Finance", "TypeScript", "Tailwind CSS"],
     links: {
-      demo: "https://huggingface.co/AyoubChLin/distilbert-mlm-med-hana-classification",
+      github: "https://github.com/AyoubCherguelaine/noble-spending",
+      status: "available",
     },
     details: {
-      timeline: "Published on April 30, 2025, as a text-classification model artifact.",
+      timeline: "Built as a standalone full-stack project with iterative UI and data-model improvements.",
       roleScope:
-        "Prepared and published the model package for practical inference testing, with a focus on lightweight DistilBERT deployment behavior.",
-      teamSetup: "Individual model publication and iteration workflow.",
+        "Owned end-to-end development: frontend pages/components, backend APIs, data modeling, and deployment setup.",
+      teamSetup: "Independent project with personal design and product decisions.",
       architecture:
-        "DistilBERT-family classifier exported in safetensors format with Hugging Face endpoint compatibility tags.",
+        "Next.js app with server-side rendering, protected routes, transaction CRUD flows, dashboard analytics, and persistent storage.",
       dataEvaluation:
-        "Hub card currently has minimal documented evaluation details, so validation emphasis stayed on deployability and baseline behavior checks.",
+        "Validated correctness through manual transaction workflows, budget boundary cases, and UI responsiveness checks.",
       productionOps:
-        "Published via Hugging Face with `transformers` compatibility and public artifact access for downstream integration tests.",
+        "Deployed with standard Next.js production build; private repo with no external dependency on payment processors.",
       lessonsLearned:
-        "A complete model card (dataset + metrics + limits) is essential; publication quality includes documentation quality, not only checkpoint upload.",
+        "Finance UIs benefit from tight feedback loops between data entry, categorization, and visual summaries.",
     },
-    publicEvidence: [
-      {
-        platform: "huggingface_model",
-        label: "distilbert-mlm-med-hana-classification model",
-        url: "https://huggingface.co/AyoubChLin/distilbert-mlm-med-hana-classification",
-        visibility: "public",
-        metrics: {
-          downloads: 2,
-          likes: 0,
-        },
-        verifiedOn: "2026-04-23",
-      },
-    ],
     visibility: "more",
+    priority: 13,
   },
   {
-    id: "qwen-passet-classifier",
-    title: "Qwen2.5-Coder LLM Passet Classifier",
+    id: "gemini-phi3-apps",
+    title: "Lightweight LLM Applications with Gemini and Phi-3",
     summary:
-      "A Qwen2.5-Coder-derived domain model published on Hugging Face, fine-tuned from `unsloth/qwen2.5-coder-7b-instruct-bnb-4bit`.",
+      "Built lightweight LLM applications using Gemini and Phi-3 for practical AI integrations.",
     problem:
-      "The passet taxonomy required stronger instruction-following behavior for ambiguous domain records than generic classifiers provided.",
+      "Teams needed quick access to capable small-model LLM applications without heavy infrastructure or closed API lock-in.",
     solution:
-      "Fine-tuned and published a Qwen2.5-Coder checkpoint using Unsloth + TRL tooling, with `text-generation-inference` compatibility tags.",
+      "Developed lightweight applications leveraging Gemini and Phi-3 for practical AI tasks, including chat, summarization, and structured extraction.",
     impact:
-      "Created a domain-adapted public artifact that can be integrated into instruction-driven classification and workflow automation pipelines.",
-    coverImage: "/projects/qwen-passet-classifier.svg",
-    tags: ["LLM", "Qwen2.5", "Classification", "Instruct"],
+      "Demonstrated practical small-model LLM integration patterns for fast prototyping and low-latency deployments.",
+    coverImage: "/projects/gemini-phi3-apps.svg",
+    tags: ["LLM", "Gemini", "Phi-3", "Lightweight Models", "Application Development"],
     links: {
-      demo: "https://huggingface.co/AyoubChLin/Qwen2.5-Coder-7B-Instruct_passet_classifer_1.0",
+      status: "coming_soon",
     },
     details: {
-      timeline: "Published on December 30, 2024, after iterative fine-tuning and packaging cycles.",
+      timeline: "Built across experimentation and application packaging phases.",
       roleScope:
-        "Owned prompt/data preparation, fine-tuning pipeline execution, and artifact publication workflow on Hugging Face.",
-      teamSetup: "Individual LLM adaptation workflow targeting passet-classification use cases.",
+        "Implemented application logic, prompt engineering, and integration patterns for Gemini and Phi-3.",
+      teamSetup: "Individual application development and evaluation.",
       architecture:
-        "Qwen2.5-Coder-7B-Instruct derivative trained with Unsloth and TRL, packaged for transformers/TGI-compatible deployment paths.",
+        "Application layer integrating Gemini/Phi-3 APIs with prompt templates, response parsing, and fallback logic.",
       dataEvaluation:
-        "Primary evaluation was qualitative on domain examples; public card currently emphasizes base model lineage and tooling over benchmark tables.",
+        "Evaluated output quality, latency, and cost against task requirements.",
       productionOps:
-        "Published under Apache-2.0 with safetensors and endpoint-compatible tags for controlled integration testing.",
+        "Packaged for deployment with environment configuration and request monitoring hooks.",
       lessonsLearned:
-        "For domain LLM adapters, rich benchmark documentation should ship with the checkpoint to make performance claims verifiable.",
+        "Lightweight model applications require careful prompt design and output parsing to be reliable in production.",
     },
-    publicEvidence: [
-      {
-        platform: "huggingface_model",
-        label: "Qwen2.5-Coder-7B-Instruct_passet_classifer_1.0 model",
-        url: "https://huggingface.co/AyoubChLin/Qwen2.5-Coder-7B-Instruct_passet_classifer_1.0",
-        visibility: "public",
-        metrics: {
-          likes: 0,
-        },
-        verifiedOn: "2026-04-23",
-      },
-    ],
     visibility: "more",
+    priority: 14,
   },
 ]
 
@@ -475,16 +662,16 @@ export const experiences: Experience[] = [
     period: "10/2024 - Present",
     projects: [
       {
-        name: "Paseet chatbot - Geospatial Interactions and LLM Classification Agent",
-        context: "Riyadh - 4 months - Part-Time AI Engineer",
+        name: "Paseet Chatbot - Geospatial Interactions and LLM Classification Agent",
+        context: "Riyadh - Oct 2024 - Feb 2025 - Part-Time AI Engineer",
         description:
           "Implemented support for geospatial interactions, including adding and processing polygon geometry directly within the chat interface (property boundaries, zones, land selection, etc.), and fine-tuned open-source LLMs to build a custom classification agent for better intent detection and property-related query categorization.",
       },
       {
         name: "Paseetah Platform - Data Quality, GeoAI, and Automation Project",
-        context: "Riyadh - 12 months - AI & Data Engineer",
+        context: "Riyadh - Oct 2024 - Oct 2025 - AI & Data Engineer",
         description:
-          "Improved legacy datasets (parcels, transactions, roads) by cleaning data, fixing missing information, and harmonizing inconsistent attributes; designed multi-step pipelines to detect outliers in real-estate transactions and align each transaction with its correct parcel using spatial matching and rule-based validation; developed an LLM agent to extract legal rules from building codes into machine-readable formats; and performed large-scale scraping from open data sources to enrich the internal knowledge base for downstream AI models.",
+          "Improved legacy datasets (parcels, transactions, roads) by cleaning data, fixing missing information, and harmonizing inconsistent attributes; designed ETL/data pipelines for large-scale real-estate and geospatial data, including scraping, cleaning, deduplication, validation, and performance optimization; applied Machine Learning, LLMs, OCR, and NLP to real-estate and Arabic data, including transaction anomaly detection, Arabic text processing, translation, and information extraction; and developed LLM agents and AI pipelines to extract legal/regulatory rules from building codes and convert unstructured documents into structured, machine-readable data for automated compliance.",
       },
     ],
   },
@@ -496,15 +683,9 @@ export const experiences: Experience[] = [
     projects: [
       {
         name: "Jurai Assistant",
-        context: "Denmark - 6 months - LLM Engineer & Full-Stack Developer",
+        context: "Denmark - Jan 2025 - Dec 2025 - LLM Engineer & Full-Stack Developer",
         description:
-          "Designed and implemented the full agentic AI architecture, including retrieval, classifier, and reasoning agents using LangChain and CrewAI; built automated large-scale scraping pipelines for Danish legal cases and laws; developed the backend ecosystem with FastAPI for AI orchestration, RAG pipelines, authentication, chat memory, and Pinecone embeddings; and deployed and maintained production workloads on AWS EC2 with Docker.",
-      },
-      {
-        name: "Predict AI",
-        context: "Denmark - 7 months - LLM Engineer & Full-Stack Developer",
-        description:
-          "Designed the end-to-end AI pipeline for new client case processing, structured fact extraction, API-based enrichment (flight and weather), and resilient validation/fallback handling; built the semantic retrieval and comparison engine to match cases with historical European court decisions using LLMs and embeddings; and developed the decision-prediction module to estimate likely court outcomes and improve insurers' case resolution efficiency.",
+          "Designed and implemented production-grade agentic AI systems using LangChain and CrewAI, including retrieval, classification, reasoning, legal analysis, RAG, and decision-prediction agents. Built LLM pipelines with semantic retrieval, embeddings, and long-term contextual memory, plus automated legal-data ingestion, preprocessing, validation, and enrichment. Developed the FastAPI backend and AI orchestration layer, integrating PostgreSQL/vector databases, external APIs, authentication, and scalable async workflows. Deployed and monitored AI services on AWS EC2 with Docker, implementing production testing, logging, error handling, fallback mechanisms, and performance monitoring.",
       },
     ],
   },
@@ -517,7 +698,7 @@ export const experiences: Experience[] = [
       "Developed and improved front-end features for the Admin Platform using Next.js, TypeScript, and Tailwind, including dashboards, forms, tables, and management interfaces.",
       "Integrated and tested APIs across admin workflows, ensuring reliable data flow and improving overall UI/UX performance.",
       "Built key e-commerce features on the main platform such as product pages, category listings, search, filters, cart interactions, and navigation improvements.",
-      "Optimized performance and code quality through component refactoring, responsive design, and best practices to improve speed, usability, and maintainability across both platforms.",
+      "Optimized performance and code quality through component refactoring, responsive design, and best practices to enhance speed, usability, and maintainability across both platforms.",
     ],
   },
   {

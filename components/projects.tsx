@@ -11,6 +11,7 @@ const statusLabel: Record<ProjectLinkStatus, string> = {
   private: "Private Assets",
   request: "Demo on Request",
   coming_soon: "Coming Soon",
+  available: "Open Source",
 }
 
 function ProjectCard({ project }: { project: Project }) {
@@ -98,8 +99,12 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Projects() {
-  const featuredProjects = projects.filter((project) => project.visibility === "featured")
-  const moreProjects = projects.filter((project) => project.visibility === "more")
+  const featuredProjects = projects
+    .filter((project) => project.visibility === "featured")
+    .sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999))
+  const moreProjects = projects
+    .filter((project) => project.visibility === "more")
+    .sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999))
 
   return (
     <section id="projects" className="section-anchor reveal-up px-4 py-24 sm:px-6 lg:px-8">

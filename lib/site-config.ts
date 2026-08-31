@@ -5,7 +5,7 @@ export const siteConfig = {
   role: "AI & NLP Engineer",
   title: "Ayoub Cherguelaine - AI & NLP Engineer",
   description:
-    "AI & NLP Engineer building production-grade language systems, agentic pipelines, and document intelligence products.",
+    "AI Engineer specializing in Generative AI, LLMs, NLP, and Data Engineering, with strong software engineering expertise and hands-on experience building scalable AI systems. Experienced in LLM fine-tuning, agentic AI, RAG, machine learning, document intelligence, and large-scale data processing pipelines.",
   url: baseUrl,
   email: "cherguelainea@gmail.com",
   location: "Riyadh, Saudi Arabia",
