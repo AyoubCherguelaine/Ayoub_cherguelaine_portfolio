@@ -76,49 +76,49 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-anchor reveal-up bg-gradient-to-b from-background to-card/40 py-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl space-y-8">
+    <section id="skills" className="section-anchor reveal-up bg-gradient-to-b from-[#050505] to-[#0c0c0c] py-24 px-4 sm:px-6 lg:px-8">
+      <div className="stagger-children mx-auto max-w-6xl space-y-8">
         <div className="space-y-3">
           <h2 className="text-4xl font-bold tracking-tight">Skills & Expertise</h2>
-          <div className="h-1 w-20 rounded-full bg-gradient-to-r from-primary to-chart-2" />
-          <p className="max-w-3xl text-sm text-muted-foreground sm:text-base">
+          <div className="h-1 w-20 rounded-full bg-gradient-to-r from-[#00d2be] to-[#d4d4d4]" />
+          <p className="max-w-3xl text-sm text-[#b0b0b0] sm:text-base">
             Building production AI systems across agent orchestration, retrieval, automation, and full-stack delivery.
           </p>
         </div>
 
-        <Card className="gap-4 border-primary/30 bg-gradient-to-r from-primary/10 via-chart-2/10 to-transparent p-6 shadow-sm">
-          <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">Core Focus</p>
+        <Card className="gap-4 border border-[#2a2a2a] bg-[#0c0c0c] p-6 shadow-sm">
+          <p className="text-xs font-semibold tracking-[0.2em] text-[#00d2be] uppercase">Core Focus</p>
           <div className="flex flex-wrap gap-2">
             {coreFocus.map((skill) => (
-              <Badge key={skill} className="border border-primary/25 bg-background/70 text-primary">
+              <Badge key={skill} className="border border-[#2a2a2a] bg-[#050505] text-[#d4d4d4]">
                 {skill}
               </Badge>
             ))}
           </div>
         </Card>
 
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="stagger-children grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {skillCategories.map((cat) => {
             const Icon = cat.icon
 
             return (
               <Card
                 key={cat.category}
-                className="h-full gap-4 border-border/80 bg-card/75 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-md hover:shadow-primary/15"
+                className="hover-lift h-full gap-4 border border-[#2a2a2a] bg-[#0c0c0c] p-5 transition-all duration-300"
               >
                 <div className="flex items-start gap-3">
-                  <span className={cn("inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border", cat.iconWrapClass)}>
-                    <Icon className={cn("h-5 w-5", cat.iconClass)} />
+                  <span className={cn("inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#2a2a2a] bg-[#050505] text-[#00d2be]")}>
+                    <Icon className={cn("h-5 w-5 text-[#00d2be]")} />
                   </span>
                   <div>
-                    <h3 className="text-base font-semibold">{cat.category}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{cat.summary}</p>
+                    <h3 className="text-base font-semibold text-[#f2f2f2]">{cat.category}</h3>
+                    <p className="mt-1 text-sm text-[#b0b0b0]">{cat.summary}</p>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   {cat.skills.map((skill) => (
-                    <Badge key={`${cat.category}-${skill}`} variant="outline" className="border-border/80 bg-background/40 py-1.5 text-xs">
+                    <Badge key={`${cat.category}-${skill}`} variant="outline" className="border-[#2a2a2a] bg-[#050505] py-1.5 text-xs text-[#d4d4d4]">
                       {skill}
                     </Badge>
                   ))}

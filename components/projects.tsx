@@ -16,8 +16,8 @@ const statusLabel: Record<ProjectLinkStatus, string> = {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="group flex h-full flex-col gap-4 border border-border/80 bg-card/85 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10">
-      <Link href={`/projects/${project.id}`} className="relative overflow-hidden rounded-lg border border-border/70">
+    <Card className="group flex h-full flex-col gap-4 border border-[#2a2a2a] bg-[#0c0c0c] p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#00d2be] hover:shadow-xl hover:shadow-[#00d2be]/10">
+      <Link href={`/projects/${project.id}`} className="relative overflow-hidden rounded-3xl border border-border/70">
         <Image
           src={project.coverImage}
           alt={`${project.title} cover`}
@@ -32,7 +32,7 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-lg font-semibold text-balance transition-colors group-hover:text-primary">{project.title}</h3>
-          <Badge variant="outline" className="shrink-0 border-primary/30 text-primary">
+          <Badge variant="outline" className="shrink-0 border-[#00d2be]/30 text-[#00d2be]">
             Case Study
           </Badge>
         </div>
@@ -50,7 +50,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       <div className="mt-auto flex flex-wrap gap-2">
         {project.tags.map((tag) => (
-          <Badge key={tag} variant="secondary" className="text-xs">
+          <Badge key={tag} variant="secondary" className="border border-[#333] bg-[#1a1a1a] text-[#d4d4d4]">
             {tag}
           </Badge>
         ))}
@@ -69,7 +69,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-chart-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+            className="inline-flex items-center gap-2 rounded-full text-sm font-medium text-[#00d2be] transition-colors hover:text-[#d4d4d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2be]/60"
           >
             <Github size={16} />
             Code
@@ -81,7 +81,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.links.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-chart-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+            className="inline-flex items-center gap-2 rounded-full text-sm font-medium text-[#00d2be] transition-colors hover:text-[#d4d4d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2be]/60"
           >
             <ExternalLink size={16} />
             Demo
@@ -89,7 +89,7 @@ function ProjectCard({ project }: { project: Project }) {
         )}
 
         {project.links.status && (
-          <Badge variant="outline" className="border-primary/30 text-primary">
+          <Badge variant="outline" className="border-[#00d2be]/30 text-[#00d2be]">
             {statusLabel[project.links.status]}
           </Badge>
         )}
@@ -118,25 +118,25 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+      <div className="stagger-children grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {featuredProjects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </div>
 
-        {moreProjects.length > 0 && (
-          <details className="group rounded-xl border border-border bg-card/55">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-semibold">
-              <span>More Work ({moreProjects.length})</span>
-              <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
-            </summary>
-            <div className="grid gap-6 border-t border-border p-5 md:grid-cols-2 lg:grid-cols-3">
-              {moreProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
-          </details>
-        )}
+      {moreProjects.length > 0 && (
+        <details className="group rounded-3xl border border-[#2a2a2a] bg-[#0c0c0c]">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-full px-5 py-4 text-sm font-semibold">
+            <span>More Work ({moreProjects.length})</span>
+            <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="stagger-children grid gap-6 border-t border-[#2a2a2a] p-5 md:grid-cols-2 lg:grid-cols-3">
+            {moreProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </details>
+      )}
       </div>
     </section>
   )

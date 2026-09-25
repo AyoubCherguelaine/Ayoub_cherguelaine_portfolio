@@ -40,55 +40,55 @@ export default function Education() {
   return (
     <section
       id="education"
-      className="section-anchor reveal-up bg-gradient-to-b from-card/70 to-background py-24 px-4 sm:px-6 lg:px-8"
+      className="section-anchor reveal-up bg-gradient-to-b from-[#0c0c0c] to-[#050505] py-24 px-4 sm:px-6 lg:px-8"
     >
-      <div className="mx-auto max-w-4xl space-y-12">
+      <div className="stagger-children mx-auto max-w-4xl space-y-12">
         <div className="space-y-3">
           <h2 className="text-4xl font-bold tracking-tight">Education & Certifications</h2>
-          <div className="h-1 w-20 rounded-full bg-gradient-to-r from-primary to-chart-2" />
+          <div className="h-1 w-20 rounded-full bg-gradient-to-r from-[#00d2be] to-[#d4d4d4]" />
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="space-y-4">
+          <div className="stagger-children space-y-4">
             <h3 className="font-semibold text-xl">Education</h3>
             {education.map((edu, i) => (
               <Card
                 key={i}
-                className="border border-border bg-card/80 p-4 transition-all duration-300 hover:border-primary/70 hover:shadow-md hover:shadow-primary/15"
+                className="border border-[#2a2a2a] bg-[#0c0c0c] p-4 transition-all duration-300 hover:border-[#00d2be] hover:shadow-md hover:shadow-[#00d2be]/15"
               >
-                <h4 className="font-semibold">{edu.degree}</h4>
-                <p className="text-primary text-sm">{edu.field}</p>
-                <p className="text-muted-foreground text-sm">
+                <h4 className="font-semibold text-[#f2f2f2]">{edu.degree}</h4>
+                <p className="text-[#00d2be] text-sm">{edu.field}</p>
+                <p className="text-[#b0b0b0] text-sm">
                   {edu.school} • {edu.year}
                 </p>
-                <p className="text-xs text-muted-foreground mt-2">{edu.honors}</p>
+                <p className="text-xs text-[#b0b0b0] mt-2">{edu.honors}</p>
               </Card>
             ))}
           </div>
 
-          <div className="space-y-4">
+          <div className="stagger-children space-y-4">
             <h3 className="font-semibold text-xl">Certifications</h3>
-            <div className="space-y-3">
+            <div className="stagger-children space-y-3">
               {certifications.map((cert) => (
                 <Card
                   key={cert.title}
-                  className="gap-3 border border-border bg-card/80 p-4 transition-all duration-300 hover:border-primary/70 hover:shadow-md hover:shadow-primary/15"
+                  className="border border-[#2a2a2a] bg-[#0c0c0c] p-4 transition-all duration-300 hover:border-[#00d2be] hover:shadow-md hover:shadow-[#00d2be]/15"
                 >
                   <div className="flex flex-wrap items-center gap-2">
-                    <h4 className="text-sm font-semibold">{cert.title}</h4>
+                    <h4 className="text-sm font-semibold text-[#f2f2f2]">{cert.title}</h4>
                     <Badge
                       variant="secondary"
-                      className="border border-primary/20 bg-primary/10 py-1 text-[10px] text-primary"
+                      className="border border-[#00d2be]/20 bg-[#050505] py-1 text-[10px] text-[#00d2be]"
                     >
                       {cert.issuer}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground">{cert.description}</p>
+                  <p className="text-sm text-[#b0b0b0]">{cert.description}</p>
                   <a
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex w-fit items-center gap-1 text-xs font-medium text-primary transition-colors hover:text-chart-2"
+                    className="inline-flex w-fit items-center gap-1 text-xs font-medium text-[#00d2be] transition-colors hover:text-[#d4d4d4]"
                   >
                     View Credential
                     <ExternalLink className="h-3.5 w-3.5" />
