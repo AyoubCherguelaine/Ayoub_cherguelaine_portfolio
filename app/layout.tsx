@@ -2,14 +2,16 @@ import type React from "react"
 import type { Metadata } from "next"
 
 import { Analytics } from "@vercel/analytics/next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { DM_Sans, Manrope, Geist_Mono } from "next/font/google"
 import { absoluteUrl, siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
-const geistSans = Geist({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-dm-sans",
 })
+
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" })
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -60,20 +62,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      {
-        url: "/ChatGPT_Image_Jun_10_2026_10_48_51_AM_30.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/ChatGPT Image Jun 10, 2026, 10_48_51 AM.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
     ],
-    apple: "/ChatGPT_Image_Jun_10_2026_10_48_51_AM_30.png",
+    shortcut: "/favicon.ico",
+    apple: { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
   },
 }
 
@@ -84,7 +77,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body
+        className={`${dmSans.variable} ${manrope.variable} ${geistMono.variable} font-sans antialiased`}
+      >
         {children}
         <Analytics />
       </body>

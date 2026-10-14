@@ -32,7 +32,7 @@ export type PublicEvidence = {
   url: string
   visibility: PublicEvidenceVisibility
   metrics?: PublicEvidenceMetrics
-  verifiedOn: "2026-09-01"
+  verifiedOn: `${number}-${number}-${number}`
 }
 
 export type Project = {
@@ -228,7 +228,7 @@ export const projects: Project[] = [
     tags: ["Arabic NLP", "Dialect Modeling", "Fine-tuning", "Transformers", "Dataset"],
     links: {
       demo: "https://huggingface.co/collections/AyoubChLin/saudi-dialect-fine-tuned-models",
-      status: "coming_soon",
+       status: "available",
     },
     details: {
       timeline: "Developed across dataset preparation, model experiments, and packaging for reuse.",
@@ -262,7 +262,7 @@ export const projects: Project[] = [
     tags: ["LLM", "Fine-tuning", "Coding Agent", "Local Inference", "LFM"],
     links: {
       demo: "https://huggingface.co/AyoubChLin/lfm2.5-2.6b-fable5-coding-agent",
-      status: "coming_soon",
+       status: "available",
     },
     details: {
       timeline: "Completed fine-tuning and evaluation with local inference benchmarking.",
@@ -395,6 +395,7 @@ export const projects: Project[] = [
     tags: ["Zero-Shot", "BART", "News Classification", "NLP"],
     links: {
       demo: "https://huggingface.co/AyoubChLin/Bart-MNLI-CNN_news",
+      status: "available",
     },
     details: {
       timeline: "Published to Hugging Face on July 12, 2023, after data prep, fine-tuning, and model-card documentation.",
@@ -474,98 +475,51 @@ export const projects: Project[] = [
     priority: 10,
   },
   {
-    id: "northwind-purchase-orders",
-    title: "Northwind Purchase Orders Document Dataset",
+    id: "company-document-dataset-v2",
+    title: "Company Documents v2",
     summary:
-      "A document-classification dataset of Northwind purchase orders published on Hugging Face with PDF and CSV assets.",
+      "353,580 synthetic business PDFs across 13 document types in English and French, with structured gold labels for document AI.",
     problem:
-      "Document-AI prototyping often lacks small, business-like datasets that include both visual document format and tabular structure.",
+      "Document-AI experiments need varied business documents with aligned text, fields, and layout annotations.",
     solution:
-      "Built and published a Northwind-derived purchase-order dataset with structured fields (`order_id`, dates, customer, products, quantity, unit price).",
+      "Generated documents for 60 synthetic companies from four sample databases, exporting PDFs, gold fields, word boxes, and degraded scans.",
     impact:
-      "Created a reusable public benchmark for document classification/feature extraction with 879 downloads and 6 likes at the verification snapshot.",
-    coverImage: "/projects/northwind-purchase-orders.svg",
-    tags: ["Dataset", "Document Classification", "Business Data", "PDF to CSV"],
+      "Published 404,514 PDF pages and 120,523 scan/photo images for classification, OCR, and key information extraction.",
+    coverImage: "/projects/company-document-dataset-v2.svg",
+    tags: ["Dataset", "Document AI", "OCR", "Synthetic Data", "English / French"],
     links: {
-      demo: "https://huggingface.co/datasets/AyoubChLin/northwind_PurchaseOrders",
+      github: "https://github.com/AyoubCherguelaine/Company-document-dataset-v2",
+      demo: "https://huggingface.co/datasets/AyoubChLin/Company-document-dataset-v2",
+      status: "available",
     },
     details: {
-      timeline: "Published on April 7, 2023, as a compact (`n<1K`) finance-oriented document dataset.",
-      roleScope:
-        "Prepared the data structure, generated document assets, and packaged a public dataset card with usage context and schema notes.",
-      teamSetup:
-        "Co-created with Faycal Boubekri (as stated in the dataset card) with focus on practical document analytics use cases.",
+      timeline: "Published in October 2026; successor to CompanyDocuments.",
+      roleScope: "Created the document generator, annotations, scan augmentation, and public dataset exports.",
+      teamSetup: "Created by Ayoub Cherguelaine, with publicly available generator code.",
       architecture:
-        "Dataset includes purchase-order PDFs plus tabular CSV representation, enabling both OCR/document workflows and structured-model pipelines.",
+        "Sample databases feed company-specific templates, PDF rendering, field annotations, scan augmentation, and Parquet exports.",
       dataEvaluation:
-        "Tagged for `text-classification` and `feature-extraction`, language `en`, modality `document`, and Apache-2.0 reuse.",
+        "Train, validation, and test splits hold out issuing companies. Generated documents undergo text and arithmetic checks; classes are imbalanced.",
       productionOps:
-        "Published as a public Hugging Face dataset with card metadata, pretty name, and reproducible hub access.",
+        "Seeded generation supports checkpoints and resume. Hugging Face offers per-type subsets and streaming access under Apache-2.0.",
       lessonsLearned:
-        "Providing both document and tabular forms in one dataset significantly lowers experimentation overhead for downstream teams.",
+        "Issuer-held-out evaluation helps assess generalization, while synthetic layouts and shared source records limit real-world coverage.",
     },
     publicEvidence: [
       {
         platform: "huggingface_dataset",
-        label: "northwind_PurchaseOrders dataset",
-        url: "https://huggingface.co/datasets/AyoubChLin/northwind_PurchaseOrders",
+        label: "Company Documents v2 dataset",
+        url: "https://huggingface.co/datasets/AyoubChLin/Company-document-dataset-v2",
         visibility: "public",
         metrics: {
-          downloads: 879,
-          likes: 6,
+          downloads: 12107,
+          likes: 2,
         },
-        verifiedOn: "2026-09-01",
+        verifiedOn: "2026-10-14",
       },
     ],
     visibility: "featured",
-    priority: 11,
-  },
-  {
-    id: "northwind-stock-report",
-    title: "Northwind Stock Report Dataset",
-    summary:
-      "A Northwind-based stock-report dataset containing monthly and category-level report documents for document analytics experiments.",
-    problem:
-      "Stock-report pipelines needed labeled examples that reflect recurring financial report structure, not only ad-hoc text snippets.",
-    solution:
-      "Used SQL extraction from Northwind and PDF generation workflows to create labeled monthly and category report corpora.",
-    impact:
-      "Provided a public finance-document dataset with 447 downloads, supporting both classification and feature-extraction prototyping.",
-    coverImage: "/projects/northwind-stock-report.svg",
-    tags: ["Dataset", "Finance", "Document Analytics", "PDF Generation"],
-    links: {
-      demo: "https://huggingface.co/datasets/AyoubChLin/northwind-Stock_rapport",
-    },
-    details: {
-      timeline: "Published on April 7, 2023, as a companion Northwind finance-document dataset.",
-      roleScope:
-        "Implemented dataset generation and publication pipeline, including report-structure design and Hugging Face dataset-card packaging.",
-      teamSetup:
-        "Co-created with Faycal Boubekri (per card), with a shared focus on realistic finance report templates.",
-      architecture:
-        "Composed of `monthly_reports` and `category_reports` PDF sets generated from Northwind SQL outputs (document modality, English metadata).",
-      dataEvaluation:
-        "Hub metadata marks `text-classification` and `feature-extraction` task categories with Apache-2.0 licensing for reuse.",
-      productionOps:
-        "Published as a public Hugging Face dataset with stable URL, tags, and region-hosted distribution for reproducible access.",
-      lessonsLearned:
-        "Synthetic-but-structured report datasets are useful when schema consistency and labeling discipline are treated as first-class constraints.",
-    },
-    publicEvidence: [
-      {
-        platform: "huggingface_dataset",
-        label: "northwind-Stock_rapport dataset",
-        url: "https://huggingface.co/datasets/AyoubChLin/northwind-Stock_rapport",
-        visibility: "public",
-        metrics: {
-          downloads: 447,
-          likes: 0,
-        },
-        verifiedOn: "2026-09-01",
-      },
-    ],
-    visibility: "more",
-    priority: 12,
+    priority: 0,
   },
 
   {

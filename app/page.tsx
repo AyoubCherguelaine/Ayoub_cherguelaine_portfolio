@@ -39,7 +39,11 @@ export default function Home() {
           "@type": "PostalAddress",
           addressLocality: siteConfig.location,
         },
-        sameAs: [siteConfig.links.github, siteConfig.links.linkedin, siteConfig.links.huggingface],
+        sameAs: [
+          siteConfig.links.github,
+          siteConfig.links.linkedin,
+          siteConfig.links.huggingface,
+        ],
         agentInteractionStatistic: [
           {
             "@type": "InteractionCounter",
@@ -62,6 +66,9 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+      <a href="#projects" className="skip-link">
+        Skip to projects
+      </a>
       <Navigation />
       <Hero />
       <About />
@@ -70,6 +77,10 @@ export default function Home() {
       <Skills />
       <Education />
       <Contact />
+      <footer className="portfolio-footer">
+        <span>Ayoub Cherguelaine</span>
+        <a href="#home">Back to top ↑</a>
+      </footer>
     </main>
   )
 }

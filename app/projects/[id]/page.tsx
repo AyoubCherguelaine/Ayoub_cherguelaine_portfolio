@@ -6,7 +6,13 @@ import { notFound } from "next/navigation"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { getProjectById, profileSnapshot, projects, type ProjectLinkStatus, type PublicEvidence } from "@/lib/portfolio-data"
+import {
+  getProjectById,
+  profileSnapshot,
+  projects,
+  type ProjectLinkStatus,
+  type PublicEvidence,
+} from "@/lib/portfolio-data"
 import { absoluteUrl } from "@/lib/site-config"
 
 type PageProps = {
@@ -17,6 +23,7 @@ const statusLabel: Record<ProjectLinkStatus, string> = {
   private: "Private Assets",
   request: "Demo on Request",
   coming_soon: "Coming Soon",
+  available: "Open Source",
 }
 
 const evidencePlatformLabel: Record<PublicEvidence["platform"], string> = {
@@ -29,7 +36,9 @@ export async function generateStaticParams() {
   return projects.map((project) => ({ id: project.id }))
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { id } = await params
   const project = getProjectById(id)
 
@@ -71,8 +80,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 function DetailPanel({ title, content }: { title: string; content: string }) {
   return (
     <div className="rounded-xl border border-border bg-card/70 p-5">
-      <h3 className="text-sm font-semibold tracking-wide text-foreground/80 uppercase">{title}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{content}</p>
+      <h3 className="text-sm font-semibold tracking-wide text-foreground/80 uppercase">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        {content}
+      </p>
     </div>
   )
 }
@@ -103,9 +116,23 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
 
   const projectIndex = projects.findIndex((item) => item.id === project.id)
   const previousProject = projectIndex > 0 ? projects[projectIndex - 1] : null
-  const nextProject = projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null
+  const nextProject =
+    projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null
 
-  const publicEvidence = (project.publicEvidence ?? []).filter((evidence) => evidence.visibility === "public")
+  const publicEvidence = (project.publicEvidence ?? []).filter(
+    (evidence) => evidence.visibility === "public",
+  )
+  const latestVerification = publicEvidence.reduce(
+    (latest, evidence) =>
+      evidence.verifiedOn > latest ? evidence.verifiedOn : latest,
+    profileSnapshot.verifiedOn as string,
+  )
+  const verifiedLabel = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${latestVerification}T00:00:00Z`))
 
   return (
     <main className="portfolio-shell min-h-screen bg-background px-4 py-14 text-foreground sm:px-6 lg:px-8">
@@ -117,14 +144,21 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
               Back to projects
             </Link>
           </Button>
-          <Badge variant="outline" className="border-primary/30 px-3 py-1 text-primary">
+          <Badge
+            variant="outline"
+            className="border-primary/30 px-3 py-1 text-primary"
+          >
             Case Study
           </Badge>
         </div>
 
         <header className="space-y-5">
-          <h1 className="text-3xl font-bold text-balance sm:text-4xl">{project.title}</h1>
-          <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">{project.summary}</p>
+          <h1 className="text-4xl font-medium tracking-tight text-balance sm:text-6xl">
+            {project.title}
+          </h1>
+          <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            {project.summary}
+          </p>
 
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
@@ -149,7 +183,10 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
 
         <section className="grid gap-4 md:grid-cols-3">
           <DetailPanel title="Timeline" content={project.details.timeline} />
-          <DetailPanel title="Role & Scope" content={project.details.roleScope} />
+          <DetailPanel
+            title="Role & Scope"
+            content={project.details.roleScope}
+          />
           <DetailPanel title="Team Setup" content={project.details.teamSetup} />
         </section>
 
@@ -157,13 +194,16 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
           <h2 className="text-xl font-semibold">Context</h2>
           <div className="space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>
-              <span className="font-medium text-foreground">Problem:</span> {project.problem}
+              <span className="font-medium text-foreground">Problem:</span>{" "}
+              {project.problem}
             </p>
             <p>
-              <span className="font-medium text-foreground">Solution:</span> {project.solution}
+              <span className="font-medium text-foreground">Solution:</span>{" "}
+              {project.solution}
             </p>
             <p>
-              <span className="font-medium text-foreground">Impact:</span> {project.impact}
+              <span className="font-medium text-foreground">Impact:</span>{" "}
+              {project.impact}
             </p>
           </div>
         </section>
@@ -171,16 +211,30 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
         <section className="space-y-4 rounded-xl border border-border bg-card/70 p-6">
           <h2 className="text-xl font-semibold">Implementation Details</h2>
           <div className="grid gap-4 md:grid-cols-2">
-            <DetailPanel title="Architecture" content={project.details.architecture} />
-            <DetailPanel title="Data & Evaluation" content={project.details.dataEvaluation} />
-            <DetailPanel title="Production & Ops" content={project.details.productionOps} />
-            <DetailPanel title="Lessons Learned" content={project.details.lessonsLearned} />
+            <DetailPanel
+              title="Architecture"
+              content={project.details.architecture}
+            />
+            <DetailPanel
+              title="Data & Evaluation"
+              content={project.details.dataEvaluation}
+            />
+            <DetailPanel
+              title="Production & Ops"
+              content={project.details.productionOps}
+            />
+            <DetailPanel
+              title="Lessons Learned"
+              content={project.details.lessonsLearned}
+            />
           </div>
         </section>
 
         <section className="space-y-3 rounded-xl border border-border bg-card/70 p-6">
           <h2 className="text-xl font-semibold">Links</h2>
-          <p className="text-xs text-muted-foreground">Last verified: {profileSnapshot.verifiedLabel}</p>
+          <p className="text-xs text-muted-foreground">
+            Last verified: {verifiedLabel}
+          </p>
           <div className="flex flex-wrap items-center gap-3">
             {project.links.github && (
               <a
@@ -207,7 +261,10 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
             )}
 
             {project.links.status && (
-              <Badge variant="outline" className="border-primary/30 text-primary">
+              <Badge
+                variant="outline"
+                className="border-primary/30 text-primary"
+              >
                 {statusLabel[project.links.status]}
               </Badge>
             )}
@@ -217,7 +274,9 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
         <section className="space-y-4 rounded-xl border border-border bg-card/70 p-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-xl font-semibold">Public Evidence</h2>
-            <p className="text-xs text-muted-foreground">Last verified: {profileSnapshot.verifiedLabel}</p>
+            <p className="text-xs text-muted-foreground">
+              Last verified: {verifiedLabel}
+            </p>
           </div>
 
           {publicEvidence.length > 0 ? (
@@ -226,10 +285,18 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                 const metrics = formatMetrics(evidence.metrics)
 
                 return (
-                  <div key={evidence.url} className="rounded-xl border border-border bg-background/70 p-4">
+                  <div
+                    key={evidence.url}
+                    className="rounded-xl border border-border bg-background/70 p-4"
+                  >
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h3 className="text-sm font-semibold text-foreground">{evidence.label}</h3>
-                      <Badge variant="outline" className="border-primary/30 text-primary">
+                      <h3 className="text-sm font-semibold text-foreground">
+                        {evidence.label}
+                      </h3>
+                      <Badge
+                        variant="outline"
+                        className="border-primary/30 text-primary"
+                      >
                         {evidencePlatformLabel[evidence.platform]}
                       </Badge>
                     </div>
@@ -246,7 +313,11 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                     {metrics.length > 0 && (
                       <div className="mt-3 flex flex-wrap gap-2">
                         {metrics.map((metric) => (
-                          <Badge key={metric} variant="secondary" className="text-xs">
+                          <Badge
+                            key={metric}
+                            variant="secondary"
+                            className="text-xs"
+                          >
                             {metric}
                           </Badge>
                         ))}
@@ -258,8 +329,10 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
             </div>
           ) : (
             <p className="text-sm leading-relaxed text-muted-foreground">
-              This case study summarizes production work delivered under private repositories and confidentiality constraints. Public
-              artifacts are intentionally omitted while keeping the implementation narrative transparent.
+              This case study summarizes production work delivered under private
+              repositories and confidentiality constraints. Public artifacts are
+              intentionally omitted while keeping the implementation narrative
+              transparent.
             </p>
           )}
         </section>

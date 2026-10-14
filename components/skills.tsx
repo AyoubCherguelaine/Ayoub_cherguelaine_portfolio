@@ -1,7 +1,15 @@
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { BrainCircuit, Code2, Database, Languages, Rocket, Wrench, Workflow } from "lucide-react"
+import {
+  BrainCircuit,
+  Code2,
+  Database,
+  Languages,
+  Rocket,
+  Wrench,
+  Workflow,
+} from "lucide-react"
 
 const coreFocus = [
   "Retrieval-Augmented Generation (RAG)",
@@ -22,7 +30,17 @@ const skillCategories = [
     icon: BrainCircuit,
     iconWrapClass: "border-primary/35 bg-primary/10",
     iconClass: "text-primary",
-    skills: ["LLMs", "Fine-tuning", "Retrieval-Augmented Generation (RAG)", "AI Agents", "LangChain", "CrewAI", "vLLM", "Document Intelligence", "Arabic NLP"],
+    skills: [
+      "LLMs",
+      "Fine-tuning",
+      "Retrieval-Augmented Generation (RAG)",
+      "AI Agents",
+      "LangChain",
+      "CrewAI",
+      "vLLM",
+      "Document Intelligence",
+      "Arabic NLP",
+    ],
   },
   {
     category: "Automation",
@@ -30,7 +48,12 @@ const skillCategories = [
     icon: Workflow,
     iconWrapClass: "border-chart-2/35 bg-chart-2/10",
     iconClass: "text-chart-2",
-    skills: ["n8n", "Workflow Automation", "Agent Orchestration", "API Development"],
+    skills: [
+      "n8n",
+      "Workflow Automation",
+      "Agent Orchestration",
+      "API Development",
+    ],
   },
   {
     category: "Retrieval & Data",
@@ -38,15 +61,33 @@ const skillCategories = [
     icon: Database,
     iconWrapClass: "border-chart-3/35 bg-chart-3/10",
     iconClass: "text-chart-3",
-    skills: ["Embeddings", "Vector Stores", "PostgreSQL", "MongoDB", "Redis", "Data Scraping", "Data Pipelines", "Data Visualization"],
+    skills: [
+      "Embeddings",
+      "Vector Stores",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Data Scraping",
+      "Data Pipelines",
+      "Data Visualization",
+    ],
   },
   {
     category: "ML & Document AI",
-    summary: "Training, fine-tuning, and applied modeling for NLP and document understanding.",
+    summary:
+      "Training, fine-tuning, and applied modeling for NLP and document understanding.",
     icon: Wrench,
     iconWrapClass: "border-chart-4/35 bg-chart-4/10",
     iconClass: "text-chart-4",
-    skills: ["PyTorch", "TensorFlow", "Hugging Face Transformers", "Scikit-learn", "Jupyter", "OCR", "Arabic NLP"],
+    skills: [
+      "PyTorch",
+      "TensorFlow",
+      "Hugging Face Transformers",
+      "Scikit-learn",
+      "Jupyter",
+      "OCR",
+      "Arabic NLP",
+    ],
   },
   {
     category: "Backend & Frontend",
@@ -54,7 +95,14 @@ const skillCategories = [
     icon: Code2,
     iconWrapClass: "border-chart-5/35 bg-chart-5/10",
     iconClass: "text-chart-5",
-    skills: ["FastAPI", "Flask", "Next.js", "React", "Tailwind CSS", "shadcn/ui"],
+    skills: [
+      "FastAPI",
+      "Flask",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "shadcn/ui",
+    ],
   },
   {
     category: "Cloud & Delivery",
@@ -62,7 +110,15 @@ const skillCategories = [
     icon: Rocket,
     iconWrapClass: "border-primary/30 bg-primary/10",
     iconClass: "text-primary",
-    skills: ["Docker", "AWS EC2", "AWS Lambda", "CI/CD", "Git", "Google Cloud", "Hugging Face"],
+    skills: [
+      "Docker",
+      "AWS EC2",
+      "AWS Lambda",
+      "CI/CD",
+      "Git",
+      "Google Cloud",
+      "Hugging Face",
+    ],
   },
   {
     category: "Languages",
@@ -76,49 +132,72 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-anchor reveal-up bg-gradient-to-b from-[#050505] to-[#0c0c0c] py-24 px-4 sm:px-6 lg:px-8">
-      <div className="stagger-children mx-auto max-w-6xl space-y-8">
-        <div className="space-y-3">
-          <h2 className="text-4xl font-bold tracking-tight">Skills & Expertise</h2>
-          <div className="h-1 w-20 rounded-full bg-gradient-to-r from-[#00d2be] to-[#d4d4d4]" />
-          <p className="max-w-3xl text-sm text-[#b0b0b0] sm:text-base">
-            Building production AI systems across agent orchestration, retrieval, automation, and full-stack delivery.
+    <section
+      id="skills"
+      className="section-anchor reveal-up bg-muted py-24 px-4 sm:px-6 lg:px-8"
+    >
+      <div className="mx-auto max-w-6xl space-y-8">
+        <div className="section-heading space-y-3">
+          <span className="eyebrow text-muted-foreground">04 / SKILLS</span>
+          <h2 className="text-4xl font-medium tracking-tight">
+            Skills & Expertise
+          </h2>
+          <p className="max-w-3xl text-sm text-muted-foreground sm:text-base">
+            Building production AI systems across agent orchestration,
+            retrieval, automation, and full-stack delivery.
           </p>
         </div>
 
-        <Card className="gap-4 border border-[#2a2a2a] bg-[#0c0c0c] p-6 shadow-sm">
-          <p className="text-xs font-semibold tracking-[0.2em] text-[#00d2be] uppercase">Core Focus</p>
+        <Card className="gap-4 border border-border bg-card p-6 shadow-sm">
+          <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
+            Core Focus
+          </p>
           <div className="flex flex-wrap gap-2">
             {coreFocus.map((skill) => (
-              <Badge key={skill} className="border border-[#2a2a2a] bg-[#050505] text-[#d4d4d4]">
+              <Badge
+                key={skill}
+                className="border border-border bg-background text-foreground"
+              >
                 {skill}
               </Badge>
             ))}
           </div>
         </Card>
 
-        <div className="stagger-children grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="skill-services grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {skillCategories.map((cat) => {
             const Icon = cat.icon
 
             return (
               <Card
                 key={cat.category}
-                className="hover-lift h-full gap-4 border border-[#2a2a2a] bg-[#0c0c0c] p-5 transition-all duration-300"
+                className="hover-lift h-full gap-4 border border-border bg-card p-5 transition-all duration-300"
               >
                 <div className="flex items-start gap-3">
-                  <span className={cn("inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#2a2a2a] bg-[#050505] text-[#00d2be]")}>
-                    <Icon className={cn("h-5 w-5 text-[#00d2be]")} />
+                  <span
+                    className={cn(
+                      "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-background text-primary",
+                    )}
+                  >
+                    <Icon className={cn("h-5 w-5 text-primary")} />
                   </span>
                   <div>
-                    <h3 className="text-base font-semibold text-[#f2f2f2]">{cat.category}</h3>
-                    <p className="mt-1 text-sm text-[#b0b0b0]">{cat.summary}</p>
+                    <h3 className="text-base font-semibold text-foreground">
+                      {cat.category}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {cat.summary}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   {cat.skills.map((skill) => (
-                    <Badge key={`${cat.category}-${skill}`} variant="outline" className="border-[#2a2a2a] bg-[#050505] py-1.5 text-xs text-[#d4d4d4]">
+                    <Badge
+                      key={`${cat.category}-${skill}`}
+                      variant="outline"
+                      className="border-border bg-background py-1.5 text-xs text-foreground"
+                    >
                       {skill}
                     </Badge>
                   ))}
