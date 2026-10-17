@@ -381,35 +381,61 @@ export const projects: Project[] = [
   },
   {
     id: "insurance-success-predictor",
-    title: "AI Insurance Case Success Predictor",
+    title: "Jurai Assurance — AI Flight Claim Assessment",
     summary:
-      "A travel-claim litigation prediction system that enriches new cases with flight context, legal references, historical analogs, and multi-agent decision synthesis.",
+      "A Danish and English flight-claim assessment app that turns journey details and supporting documents into a provisional assessment, then an optional legal review with archived source quotes.",
     problem:
-      "Insurance/legal teams needed faster go/no-go triage for EU flight-compensation disputes, but manual review across facts, laws, and precedent was slow and inconsistent.",
+      "Passengers need a clear way to assess disrupted flights, bring together tickets and airline messages, and understand which facts and legal sources support a claim.",
     solution:
-      "Built a FastAPI + SQLAlchemy backend (`/chat`) where `CaseProcessor` validates/normalizes case payloads, enriches with flight/weather signals, retrieves relevant laws and Pinecone-similar history cases, then executes concurrent reasoning stages before a final `GeneralDecisionPredictorAgent` synthesis.",
+      "Built a Next.js case room and FastAPI backend with a guided claim form, local PDF extraction and Tesseract OCR, bundled airport lookup, and two-stage LLM assessment. The deeper review retrieves passages from 36 bundled legal records and returns reasons with validated citation IDs and exact archived quotes.",
     impact:
-      "Enabled real-time triage with SSE progress, bounded runtime controls (expected-time + timeout multiplier), and persisted decision traces per case for audit and review.",
-    coverImage: "/projects/insurance-success-predictor.svg",
-    tags: ["FastAPI", "SQLAlchemy", "Postgres", "Pinecone", "Insurance AI"],
+      "Connected claim intake, document evidence, initial triage, and source-linked legal reasoning in one workflow. Saved facts and documents support review, while cached legal results avoid repeating successful model requests.",
+    coverImage: "/projects/jurai-assurance/assessment.png",
+    tags: ["Next.js", "FastAPI", "PostgreSQL", "OCR", "Legal AI", "Docker"],
+    screenshots: [
+      {
+        src: "/projects/jurai-assurance/journey.png",
+        alt: "Jurai Assurance case room with a Copenhagen to London itinerary and guided claim form",
+        caption: "Start with the journey: airport lookup, departure date, operating carrier, and passenger attendance details in an English or Danish case room.",
+        width: 1600, height: 1531,
+      },
+      {
+        src: "/projects/jurai-assurance/evidence.png",
+        alt: "Flight disruption form with arrival delay, reported cause, expenses, and supporting document upload",
+        caption: "Capture the disruption and supporting evidence. PDFs and images are processed locally using text extraction and OCR when the claim is submitted.",
+        width: 1600, height: 2326,
+      },
+      {
+        src: "/projects/jurai-assurance/assessment.png",
+        alt: "Initial flight-claim assessment with a provisional outcome and an option to request legal reasoning",
+        caption: "An initial assessment of an illustrative claim identifies the outlook and missing facts before the user chooses a deeper legal review.",
+        width: 1600, height: 1523,
+      },
+      {
+        src: "/projects/jurai-assurance/legal-reasoning.png",
+        alt: "Legal assessment with expanded EU261 Article 3 quote, source attribution, and claim summary",
+        caption: "The optional legal review connects each reason to an archived passage. Expand a citation to inspect the exact quote, source link, and collection date. Shown with an illustrative claim.",
+        width: 1600, height: 1100,
+      },
+    ],
     links: {
       status: "request",
     },
     details: {
       timeline:
-        "Delivered in 2025 in phases: schema + ingestion, historical-case loading, retrieval/ranking, concurrent reasoning, then stream-oriented UX hardening.",
+        "Evolved from the 2025 insurance-case predictor into Jurai Assurance Lite, with the current flight-claim workflow and portable deployment updated in October 2026.",
       roleScope:
-        "Led backend architecture and implementation: SQLAlchemy domain models, orchestrator pipeline, vector retrieval weighting, agent chaining, and SSE contracts consumed by the Next.js frontend.",
+        "Built the claim intake and assessment workflow across Next.js, FastAPI, SQLAlchemy persistence, document processing, local law retrieval, citation validation, and Docker packaging.",
       teamSetup:
-        "Collaborated with legal and insurance stakeholders to align output schema and confidence framing with real claim-handling workflows.",
+        "Developed in the Jurai legal-tech context, with a guided interface for passengers and structured assessment outputs for claim review.",
       architecture:
-        "Pipeline entrypoint `/chat` constructs `CaseProcessor`, requires core fields (`planned_departure_date`, `flight`), enriches with `FlightAPI` markdown context, generates case humanization + law checks, retrieves similar cases through weighted Pinecone class scoring (`Information`, `Argument - Defendant`, `Argument - Plaintiff`), runs concurrent per-case stages (similarity, argument comparison, reasoning, decision), then finalizes via a two-task `GeneralDecisionPredictorAgent` JSON output.",
+        "Next.js proxies same-origin requests to FastAPI. PostgreSQL stores normalized claim facts, original documents, extracted text, and results. One model request produces a first impression; a second, user-triggered request analyzes locally retrieved law passages. The backend validates citation identifiers and inserts exact archive quotes. OpenAI or Anthropic supplies model inference; airports, OCR, and the legal archive run locally.",
       dataEvaluation:
-        "Validated similarity ranking relevance, monitored streamed event progression, and compared intermediate agent outputs against final decision probability consistency.",
+        "Backend tests cover normalization, document validation and extraction, citation grounding, persistence, and deployment boundaries with mocked model calls. Frontend tests cover translations, API and stream handling, and proxy errors. Assessments expose uncertainty and missing facts; quotes establish source traceability without guaranteeing legal correctness or current validity.",
       productionOps:
-        "Production stack uses Docker Compose (PostGIS + backend + frontend), DB health checks before backend startup, thread-local DB sessions for worker safety, capped similar-case counts, timeout guards, and Google Drive ingestion for historical-case PDFs.",
+        "Docker Compose packages the frontend, backend, and PostgreSQL with health checks and persistent storage. Uploads have file, byte, and page limits; inference has stage deadlines; successful legal analyses are cached. A source release bundles airports and the law snapshot while excluding credentials and uploaded documents.",
       lessonsLearned:
-        "Decision quality improved when flight signals, legal context, and precedent analogs were fused into one orchestrated stream instead of isolated tools.",
+        "Separating provisional triage from an optional legal review makes the workflow easier to follow. Exact source quotes, explicit evidence gaps, and local document processing keep the reasoning inspectable while reducing deployment dependencies.",
     },
     visibility: "featured",
     priority: 7,
