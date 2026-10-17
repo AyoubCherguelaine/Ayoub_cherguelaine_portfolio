@@ -44,6 +44,7 @@ export type Project = {
   impact: string
   coverImage: string
   tags: string[]
+  screenshots?: { src: string; alt: string; caption: string; width: number; height: number }[]
   links: ProjectLinks
   details: ProjectDetails
   publicEvidence?: PublicEvidence[]
@@ -80,6 +81,69 @@ export const profileSnapshot: ProfileSnapshot = {
 }
 
 export const projects: Project[] = [
+  {
+    id: "mustashar-data-platform",
+    title: "Mustashar Data Platform",
+    summary:
+      "An end-to-end platform that collects education regulations, extracts Arabic text, builds document knowledge graphs, and brings pipeline operations into one live admin workspace.",
+    problem:
+      "Regulations, rules, ministry systems, and salary tables arrive in different formats. Collecting them is only the first step: extraction, provenance, storage, and failed processing stages also need to be traceable.",
+    solution:
+      "Built four source pipelines with scheduled execution, resumable stages, Arabic OCR, and PostgreSQL/Neo4j loading, alongside a Next.js monitor for inspecting documents, tracking costs, and managing operations.",
+    impact:
+      "Connected collection, extraction, and exploration in one workspace: operators can follow processing, resume unfinished stages, inspect source PDFs and extracted text, and explore document-scoped knowledge graphs.",
+    coverImage: "/projects/mustashar-data-platform/overview.png",
+    tags: ["Python", "Next.js", "Arabic OCR", "Knowledge Graphs", "PostgreSQL", "Neo4j", "Docker"],
+    screenshots: [
+      {
+        src: "/projects/mustashar-data-platform/sources.png",
+        alt: "Arabic source catalog showing four education data pipelines and their schedules",
+        caption: "Four sources, one workspace: rules, regulations, ministry systems, and salary tables with schedules and execution status.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/mustashar-data-platform/document-library.png",
+        alt: "Searchable Arabic PDF library with extraction and graph indexing status",
+        caption: "A searchable document library keeps PDFs, OCR completion, and knowledge graph indexing visible together.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/mustashar-data-platform/arabic-ocr.png",
+        alt: "Document workspace rendering extracted Arabic text with PDF and Markdown downloads",
+        caption: "Inspect extracted Arabic Markdown alongside the original PDF, with downloads and document-level processing status.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/mustashar-data-platform/knowledge-graph.png",
+        alt: "Interactive document knowledge graph with Arabic entities and evidence navigation",
+        caption: "Explore document-scoped entities and their evidence through an interactive Neo4j-backed knowledge graph.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/mustashar-data-platform/run-history.png",
+        alt: "Live pipeline run history with source filters, statuses, durations, and estimated costs",
+        caption: "Track execution history with source and status filters, durations, and estimated model costs.",
+        width: 1600, height: 1000,
+      },
+    ],
+    links: { status: "private" },
+    details: {
+      timeline: "Built iteratively across source collection, OCR, knowledge graph extraction, orchestration, and the admin monitor.",
+      roleScope:
+        "Developed the Python pipelines, storage integrations, job orchestration, and the Arabic Next.js monitoring and document exploration interface.",
+      teamSetup: "End-to-end implementation spanning data engineering, AI processing, and full-stack development.",
+      architecture:
+        "Docker Compose runs a scheduler, worker, Next.js monitor, pipeline PostgreSQL, a separate monitoring PostgreSQL, Neo4j, and MinIO. PDF jobs follow preflight, scrape, OCR, graph build, load, and validation; systems and salary sources use structured extraction paths.",
+      dataEvaluation:
+        "Final validation checks loaded records against staged data. The document workspace exposes original PDFs, extracted Markdown, chunks, entities, and evidence so processing outputs can be inspected against their sources.",
+      productionOps:
+        "Checkpoint-based retries reuse completed work. The monitor provides live logs, service health, per-model token and estimated cost tracking, model fallback settings, weekly schedule controls, role-based accounts, and an administration audit log.",
+      lessonsLearned:
+        "Reliable document processing needs visibility at every stage: retaining source evidence, recording model usage immediately, and resuming unfinished work make extraction easier to operate and debug.",
+    },
+    visibility: "featured",
+    priority: 1,
+  },
   {
     id: "ocr-service",
     title: "Open-Source OCR Service",

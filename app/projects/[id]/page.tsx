@@ -173,13 +173,51 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
           <Image
             src={project.coverImage}
             alt={`${project.title} cover`}
-            width={1200}
-            height={720}
+            width={project.screenshots?.length ? 1600 : 1200}
+            height={project.screenshots?.length ? 1200 : 720}
             sizes="(min-width: 1024px) 896px, (min-width: 768px) calc(100vw - 96px), calc(100vw - 32px)"
             priority
             className="h-auto w-full object-cover"
           />
         </div>
+
+        {project.screenshots?.length ? (
+          <section className="space-y-5" aria-labelledby="screenshots-heading">
+            <div className="space-y-2">
+              <h2 id="screenshots-heading" className="text-2xl font-semibold">
+                Inside the Platform
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Screenshots from the running application. Open any image to inspect it at full size.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              {project.screenshots.map((screenshot) => (
+                <figure key={screenshot.src} className="overflow-hidden rounded-xl border border-border bg-card/70">
+                  <a
+                    href={screenshot.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+                    aria-label={`Open full-size image: ${screenshot.alt}`}
+                  >
+                    <Image
+                      src={screenshot.src}
+                      alt={screenshot.alt}
+                      width={screenshot.width}
+                      height={screenshot.height}
+                      sizes="(min-width: 768px) 500px, calc(100vw - 32px)"
+                      className="h-auto w-full"
+                    />
+                  </a>
+                  <figcaption className="p-4 text-sm leading-relaxed text-muted-foreground">
+                    {screenshot.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className="grid gap-4 md:grid-cols-3">
           <DetailPanel title="Timeline" content={project.details.timeline} />
