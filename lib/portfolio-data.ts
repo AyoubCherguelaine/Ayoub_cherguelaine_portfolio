@@ -148,33 +148,42 @@ export const projects: Project[] = [
     id: "ocr-service",
     title: "Open-Source OCR Service",
     summary:
-      "A self-hosted OCR service built with FastAPI and open-source computer-vision/OCR models for document text extraction.",
+      "A self-hosted FastAPI service that turns images and multi-page PDFs into page-level text using Unlimited-OCR on an NVIDIA GPU.",
     problem:
-      "Existing OCR tools were either closed APIs or lacked a clean deployable backend interface for document pipelines.",
+      "Document pipelines needed local OCR with predictable API responses and controls for GPU memory, long outputs, and invalid uploads.",
     solution:
-      "Developed a FastAPI service integrating open-source OCR models with a simple API contract for uploading documents and returning extracted text.",
+      "Wrapped Unlimited-OCR in two upload endpoints: a base mode for accurate extraction and a crop-based long-document mode with optional repetition control.",
     impact:
-      "Created a reusable internal OCR endpoint that can be embedded into larger document-processing workflows without external API dependencies.",
+      "Provides reusable PDF and image extraction with page-level results, processing times, and local model inference.",
     coverImage: "/projects/ocr-service.svg",
-    tags: ["FastAPI", "OCR", "Computer Vision", "Python", "Open Source"],
+    tags: ["FastAPI", "Unlimited-OCR", "PyTorch", "CUDA", "Docker", "Document AI"],
     links: {
       github: "https://github.com/AyoubCherguelaine/vision-ocr-service-",
       status: "available",
     },
     details: {
-      timeline: "Developed as an open-source internal service with model selection and API hardening phases.",
+      timeline: "Developed through iterations on GPU serving, PDF support, authentication, and extraction controls.",
       roleScope:
-        "Built service endpoints, model integration, input validation, and response normalization for downstream consumers.",
-      teamSetup: "Solo development with peer review on model and API design.",
+        "Implemented upload validation, PDF rasterization, model integration, page-level responses, and container deployment.",
+      teamSetup: "Open-source service maintained in a public GitHub repository.",
       architecture:
-        "FastAPI backend exposing document upload endpoints, preprocessing, OCR model inference, and structured JSON response formats.",
+        "FastAPI loads baidu/Unlimited-OCR at startup. PyMuPDF rasterizes PDFs; base and long modes configure inference resolution and cropping. An inference lock serializes GPU work, and temporary directories isolate request files.",
       dataEvaluation:
-        "Benchmarked text extraction quality across scanned document types and measured latency under concurrent requests.",
+        "Responses expose page text and elapsed time for inspection. No aggregate accuracy or latency benchmark is published; the configured Arabic workflow intentionally skips or redacts Quranic verse regions.",
       productionOps:
-        "Packaged for containerized deployment with health checks and basic rate limiting.",
+        "Docker targets CUDA 12.8. The API includes optional bearer authentication, upload and page limits, per-page timeouts, GPU health reporting, and request IDs for tracing errors.",
       lessonsLearned:
-        "OCR quality in production depends as much on preprocessing and layout handling as on model choice.",
+        "GPU memory limits, repeated generation, and PDF preprocessing need explicit handling to make OCR useful inside a larger pipeline.",
     },
+    publicEvidence: [
+      {
+        platform: "github",
+        label: "Vision OCR Service source code",
+        url: "https://github.com/AyoubCherguelaine/vision-ocr-service-",
+        visibility: "public",
+        verifiedOn: "2026-10-18",
+      },
+    ],
     visibility: "more",
     priority: 1,
   },
@@ -503,13 +512,13 @@ export const projects: Project[] = [
     id: "bart-mnli-cnn-news",
     title: "BART-MNLI CNN News Zero-Shot Classifier",
     summary:
-      "A Hugging Face zero-shot news classifier fine-tuned from `facebook/bart-large-mnli` on `AyoubChLin/CNN_News_Articles_2011-2022`.",
+      "A BART-MNLI model adapted to CNN news for topic classification through the Hugging Face zero-shot pipeline.",
     problem:
-      "News categorization needed broad-topic coverage without building a large fully supervised pipeline for every category variant.",
+      "News categorization needed a reusable model that could score candidate topic labels in a standard inference workflow.",
     solution:
-      "Fine-tuned BART-MNLI for zero-shot-style topic assignment and published an inference-ready model artifact on Hugging Face.",
+      "Fine-tuned facebook/bart-large-mnli on CNN articles and published the model, tokenizer, and a Transformers inference example.",
     impact:
-      "Model card reports 94% F1 and 94% accuracy on the CNN test split, with an openly reproducible deployment path.",
+      "The model card reports 94% F1 and accuracy on the CNN test split; weights are available for local inference.",
     coverImage: "/projects/bart-mnli-cnn-news.svg",
     tags: ["Zero-Shot", "BART", "News Classification", "NLP"],
     links: {
@@ -519,17 +528,17 @@ export const projects: Project[] = [
     details: {
       timeline: "Published to Hugging Face on July 12, 2023, after data prep, fine-tuning, and model-card documentation.",
       roleScope:
-        "Handled dataset preparation, fine-tuning, packaging, and Hub publication, with explicit model-card documentation of metrics and training setup.",
+        "Prepared CNN news data, fine-tuned the model, and packaged the weights, tokenizer, and model card for reuse.",
       teamSetup:
         "Co-developed with Faycal Boubekri (as listed in the model card), with shared validation on category behavior and outputs.",
       architecture:
-        "Built on BART-Large-MNLI (12 layers, hidden size 1024, ~406M parameters) and exported as safetensors for zero-shot classification pipelines.",
+        "BART-Large-MNLI retains contradiction, neutral, and entailment outputs. The zero-shot pipeline scores article and candidate-label pairs using the entailment prediction; published weights use safetensors.",
       dataEvaluation:
-        "Model card records one-epoch fine-tuning (max length 256) and evaluation at max length 128 with F1 and accuracy as primary metrics.",
+        "The card documents one training epoch with 256-token inputs and CNN test evaluation at 128 tokens. Reported scores describe that test setup; they do not establish performance on unseen domains or arbitrary labels.",
       productionOps:
-        "Published as an endpoint-compatible Hugging Face model with Apache-2.0 license and documented `transformers` usage snippet.",
+        "Published under Apache-2.0 with a Transformers loading example. The Hub provides downloadable artifacts; a hosted inference service is not bundled with the project.",
       lessonsLearned:
-        "In zero-shot settings, category wording and candidate-label design materially affect performance even when base model quality is strong.",
+        "Candidate-label wording and input truncation deserve explicit evaluation when adapting an NLI model to a specific news domain.",
     },
     publicEvidence: [
       {
@@ -597,13 +606,13 @@ export const projects: Project[] = [
     id: "company-document-dataset-v2",
     title: "Company Documents v2",
     summary:
-      "353,580 synthetic business PDFs across 13 document types in English and French, with structured gold labels for document AI.",
+      "A reproducible document generator and public dataset of 353,580 English and French business PDFs across 13 document types.",
     problem:
-      "Document-AI experiments need varied business documents with aligned text, fields, and layout annotations.",
+      "Document-AI training needs varied business layouts with aligned text, field values, and coordinates for evaluating extraction.",
     solution:
-      "Generated documents for 60 synthetic companies from four sample databases, exporting PDFs, gold fields, word boxes, and degraded scans.",
+      "Built a seeded pipeline that renders documents for 60 synthetic companies, checks text and financial totals, and exports gold fields, word boxes, and degraded scans.",
     impact:
-      "Published 404,514 PDF pages and 120,523 scan/photo images for classification, OCR, and key information extraction.",
+      "Published 404,514 PDF pages and 120,523 degraded page images, with company-based splits for classification, OCR, and field extraction.",
     coverImage: "/projects/company-document-dataset-v2.svg",
     tags: ["Dataset", "Document AI", "OCR", "Synthetic Data", "English / French"],
     links: {
@@ -613,18 +622,25 @@ export const projects: Project[] = [
     },
     details: {
       timeline: "Published in October 2026; successor to CompanyDocuments.",
-      roleScope: "Created the document generator, annotations, scan augmentation, and public dataset exports.",
+      roleScope: "Built source adapters, document templates, annotation and validation steps, scan augmentation, and dataset publishing.",
       teamSetup: "Created by Ayoub Cherguelaine, with publicly available generator code.",
       architecture:
-        "Sample databases feed company-specific templates, PDF rendering, field annotations, scan augmentation, and Parquet exports.",
+        "Northwind, AdventureWorks, Chinook, and Sakila feed normalized records into Jinja2 templates and WeasyPrint PDFs. The pipeline extracts text and coordinates, augments scan images, and exports Parquet shards.",
       dataEvaluation:
-        "Train, validation, and test splits hold out issuing companies. Generated documents undergo text and arithmetic checks; classes are imbalanced.",
+        "Checks compare rendered PDF text with gold values and verify arithmetic using Decimal. Splits hold out issuing companies, while source records and layout families may overlap. Document classes are imbalanced.",
       productionOps:
-        "Seeded generation supports checkpoints and resume. Hugging Face offers per-type subsets and streaming access under Apache-2.0.",
+        "Seeded generation resumes from checkpoints. Publishing one document type at a time limits local disk use; Hugging Face provides per-type subsets and streaming Parquet access. Code and generated documents use Apache-2.0.",
       lessonsLearned:
-        "Issuer-held-out evaluation helps assess generalization, while synthetic layouts and shared source records limit real-world coverage.",
+        "Useful synthetic data needs aligned annotations, validation, and clear split boundaries. Simulated layouts and scan artifacts still require evaluation against real documents.",
     },
     publicEvidence: [
+      {
+        platform: "github",
+        label: "Company Documents v2 generator",
+        url: "https://github.com/AyoubCherguelaine/Company-document-dataset-v2",
+        visibility: "public",
+        verifiedOn: "2026-10-18",
+      },
       {
         platform: "huggingface_dataset",
         label: "Company Documents v2 dataset",
