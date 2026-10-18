@@ -553,7 +553,7 @@ export const projects: Project[] = [
         verifiedOn: "2026-09-01",
       },
     ],
-    visibility: "featured",
+    visibility: "more",
     priority: 9,
   },
   {
