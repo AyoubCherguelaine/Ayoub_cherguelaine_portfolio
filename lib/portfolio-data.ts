@@ -220,39 +220,39 @@ export const projects: Project[] = [
     visibility: "more",
     priority: 2,
   },
-  {
-    id: "gaming-marketplace-scraping",
-    title: "Gaming Marketplace Scraping and Comparison System",
-    summary:
-      "An automated scraping and comparison system for gaming marketplace deals, including data collection, processing, and price comparison.",
-    problem:
-      "Gamers needed timely price comparison across marketplaces, but manual checking was slow and inconsistent.",
-    solution:
-      "Developed automated scraping pipelines for gaming marketplace listings, normalized product data, and implemented comparison logic with alerting on price drops.",
-    impact:
-      "Created a reliable price-monitoring workflow with structured data outputs suitable for notifications or dashboards.",
-    coverImage: "/projects/gaming-marketplace-scraping.svg",
-    tags: ["Python", "Scraping", "Data Pipelines", "Automation", "E-commerce"],
-    links: {
-      status: "private",
-    },
-    details: {
-      timeline: "Built in stages: target-site analysis, scraper development, normalization, and comparison engine.",
-      roleScope:
-        "Designed scraping architecture, anti-blocking handling, data normalization, and comparison/alerting logic.",
-      teamSetup: "Independent automation project.",
-      architecture:
-        "Scraping collectors, HTML parsing and normalization, product matching, price history, and comparison/alert modules.",
-      dataEvaluation:
-        "Evaluated coverage across marketplaces, duplicate-detection accuracy, and freshness of extracted prices.",
-      productionOps:
-        "Implemented scheduling, logging, and resilience patterns for long-running scraping jobs.",
-      lessonsLearned:
-        "Marketplace scraping reliability depends on selector stability, polite throttling, and structured change detection.",
-    },
-    visibility: "more",
-    priority: 3,
-  },
+  // {
+  //   id: "gaming-marketplace-scraping",
+  //   title: "Gaming Marketplace Scraping and Comparison System",
+  //   summary:
+  //     "An automated scraping and comparison system for gaming marketplace deals, including data collection, processing, and price comparison.",
+  //   problem:
+  //     "Gamers needed timely price comparison across marketplaces, but manual checking was slow and inconsistent.",
+  //   solution:
+  //     "Developed automated scraping pipelines for gaming marketplace listings, normalized product data, and implemented comparison logic with alerting on price drops.",
+  //   impact:
+  //     "Created a reliable price-monitoring workflow with structured data outputs suitable for notifications or dashboards.",
+  //   coverImage: "/projects/gaming-marketplace-scraping.svg",
+  //   tags: ["Python", "Scraping", "Data Pipelines", "Automation", "E-commerce"],
+  //   links: {
+  //     status: "private",
+  //   },
+  //   details: {
+  //     timeline: "Built in stages: target-site analysis, scraper development, normalization, and comparison engine.",
+  //     roleScope:
+  //       "Designed scraping architecture, anti-blocking handling, data normalization, and comparison/alerting logic.",
+  //     teamSetup: "Independent automation project.",
+  //     architecture:
+  //       "Scraping collectors, HTML parsing and normalization, product matching, price history, and comparison/alert modules.",
+  //     dataEvaluation:
+  //       "Evaluated coverage across marketplaces, duplicate-detection accuracy, and freshness of extracted prices.",
+  //     productionOps:
+  //       "Implemented scheduling, logging, and resilience patterns for long-running scraping jobs.",
+  //     lessonsLearned:
+  //       "Marketplace scraping reliability depends on selector stability, polite throttling, and structured change detection.",
+  //   },
+  //   visibility: "more",
+  //   priority: 3,
+  // },
   {
     id: "lc-management-app",
     title: "Letter of Credit Management Web Application",
@@ -691,39 +691,39 @@ export const projects: Project[] = [
     visibility: "more",
     priority: 13,
   },
-  {
-    id: "gemini-phi3-apps",
-    title: "Lightweight LLM Applications with Gemini and Phi-3",
-    summary:
-      "Built lightweight LLM applications using Gemini and Phi-3 for practical AI integrations.",
-    problem:
-      "Teams needed quick access to capable small-model LLM applications without heavy infrastructure or closed API lock-in.",
-    solution:
-      "Developed lightweight applications leveraging Gemini and Phi-3 for practical AI tasks, including chat, summarization, and structured extraction.",
-    impact:
-      "Demonstrated practical small-model LLM integration patterns for fast prototyping and low-latency deployments.",
-    coverImage: "/projects/gemini-phi3-apps.svg",
-    tags: ["LLM", "Gemini", "Phi-3", "Lightweight Models", "Application Development"],
-    links: {
-      status: "coming_soon",
-    },
-    details: {
-      timeline: "Built across experimentation and application packaging phases.",
-      roleScope:
-        "Implemented application logic, prompt engineering, and integration patterns for Gemini and Phi-3.",
-      teamSetup: "Individual application development and evaluation.",
-      architecture:
-        "Application layer integrating Gemini/Phi-3 APIs with prompt templates, response parsing, and fallback logic.",
-      dataEvaluation:
-        "Evaluated output quality, latency, and cost against task requirements.",
-      productionOps:
-        "Packaged for deployment with environment configuration and request monitoring hooks.",
-      lessonsLearned:
-        "Lightweight model applications require careful prompt design and output parsing to be reliable in production.",
-    },
-    visibility: "more",
-    priority: 14,
-  },
+  // {
+  //   id: "gemini-phi3-apps",
+  //   title: "Lightweight LLM Applications with Gemini and Phi-3",
+  //   summary:
+  //     "Built lightweight LLM applications using Gemini and Phi-3 for practical AI integrations.",
+  //   problem:
+  //     "Teams needed quick access to capable small-model LLM applications without heavy infrastructure or closed API lock-in.",
+  //   solution:
+  //     "Developed lightweight applications leveraging Gemini and Phi-3 for practical AI tasks, including chat, summarization, and structured extraction.",
+  //   impact:
+  //     "Demonstrated practical small-model LLM integration patterns for fast prototyping and low-latency deployments.",
+  //   coverImage: "/projects/gemini-phi3-apps.svg",
+  //   tags: ["LLM", "Gemini", "Phi-3", "Lightweight Models", "Application Development"],
+  //   links: {
+  //     status: "coming_soon",
+  //   },
+  //   details: {
+  //     timeline: "Built across experimentation and application packaging phases.",
+  //     roleScope:
+  //       "Implemented application logic, prompt engineering, and integration patterns for Gemini and Phi-3.",
+  //     teamSetup: "Individual application development and evaluation.",
+  //     architecture:
+  //       "Application layer integrating Gemini/Phi-3 APIs with prompt templates, response parsing, and fallback logic.",
+  //     dataEvaluation:
+  //       "Evaluated output quality, latency, and cost against task requirements.",
+  //     productionOps:
+  //       "Packaged for deployment with environment configuration and request monitoring hooks.",
+  //     lessonsLearned:
+  //       "Lightweight model applications require careful prompt design and output parsing to be reliable in production.",
+  //   },
+  //   visibility: "more",
+  //   priority: 14,
+  // },
 ]
 
 export function getProjectById(id: string) {
