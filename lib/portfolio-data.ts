@@ -442,31 +442,60 @@ export const projects: Project[] = [
   },
   {
     id: "chat-with-database",
-    title: "Chat with Database (OLAP-LLM)",
-    summary: "A conversational analytics tool that converts natural language into structured data insights.",
-    problem: "Business stakeholders relied on engineers for routine analytics requests.",
-    solution: "Connected PostgreSQL and MongoDB to an LLM interface for query generation and aggregation.",
-    impact: "Enabled self-serve analytics for non-technical users through guided question workflows.",
-    coverImage: "/projects/chat-with-database.svg",
-    tags: ["OLAP", "LLM", "Data Engineering", "LangChain", "PostgreSQL"],
+    title: "QueryLens — Conversational Data Analytics",
+    summary:
+      "A conversational analytics workspace for CSV, SQLite, and PostgreSQL data, with inspectable SQL, query evidence, and downloadable written reports.",
+    problem:
+      "Exploring unfamiliar tables takes SQL knowledge, while a fluent AI answer alone does not show which data or queries support its claims.",
+    solution:
+      "Built a source-aware analyst that inspects schemas, samples tables, executes guarded read-only SQL, and answers from observed results. Users can import datasets, select tables, follow tool activity, and request written analysis.",
+    impact:
+      "Brings data import, schema exploration, saved conversations, SQL inspection, and evidence-backed reporting into one English and Arabic workspace.",
+    coverImage: "/projects/querylens/landing.png",
+    tags: ["AI Agents", "Next.js", "FastAPI", "PostgreSQL", "Text-to-SQL", "Docker"],
+    screenshots: [
+      {
+        src: "/projects/querylens/demo.png",
+        alt: "QueryLens sample workspace showing a sales question, calculated results, and SQL evidence",
+        caption: "The public demo calculates preset answers from a local sample dataset and exposes the supporting SQL. It runs without sign-in or model inference.",
+        width: 737, height: 794,
+      },
+      {
+        src: "/projects/querylens/landing-ar.png",
+        alt: "QueryLens Arabic landing page with right-to-left navigation and a localized analytics demo",
+        caption: "English and Arabic interfaces share the same workflow, with right-to-left layout and localized copy for Arabic.",
+        width: 1600, height: 1000,
+      },
+    ],
     links: {
-      status: "private",
+      github: "https://github.com/AyoubCherguelaine/querylens",
+      status: "available",
     },
     details: {
-      timeline: "Multi-sprint internal build delivered across schema mapping, query-safety constraints, and dashboard integration.",
+      timeline:
+        "Evolved from Chat OLAP into QueryLens, with the conversational workspace and public project presentation updated in October 2026.",
       roleScope:
-        "Built NL-to-query flow, retrieval-aware schema grounding, and summarization layers for business-facing analytics responses.",
+        "Built the Next.js interface, FastAPI backend, PostgreSQL source catalog, CSV and SQLite imports, conversational tool agent, SQL validation, and report and evidence downloads.",
       teamSetup:
-        "Partnered with analytics and platform teams to validate SQL quality, KPI definitions, and acceptable latency targets.",
+        "A portfolio project bringing frontend, backend, data modeling, and agent tooling together in one repository.",
       architecture:
-        "Hybrid OLAP assistant with intent parsing, guarded SQL generation, execution middleware, and result-to-insight summarization.",
+        "Next.js proxies same-origin requests to FastAPI and keeps authentication in an HTTP-only cookie. PostgreSQL persists sources, semantic cubes, and conversations. The tool agent inspects selected tables, samples rows, executes SELECT queries, and produces answers or reports linked to successful query evidence.",
       dataEvaluation:
-        "Benchmarked query correctness, execution success rate, and answer usefulness on a representative business-question set.",
+        "The repository includes tests for imports, semantic modeling, query compilation, conversational history, SQL scope, narrative evidence references, and provider failures. The public demo calculates preset results locally; it does not demonstrate live model inference. Analytical claims still need review against the displayed results and limitations.",
       productionOps:
-        "Implemented query allowlists, observability traces, and circuit-breaker behavior for expensive or unsafe requests.",
+        "Docker Compose packages PostgreSQL, migrations, FastAPI, and Next.js. SQL is parsed and checked against selected tables and allowed functions, then executed in read-only transactions with timeouts and bounded results. Imports have size and row limits, while source ownership scopes access to uploaded data.",
       lessonsLearned:
-        "Strong schema context and strict query constraints were essential to safe self-serve analytics in production.",
+        "Schema context, table scope, and observable query results make conversational analytics easier to inspect. Keeping tool evidence with saved conversations supports follow-up questions and report rewriting without losing the supporting queries.",
     },
+    publicEvidence: [
+      {
+        platform: "github",
+        label: "QueryLens source code",
+        url: "https://github.com/AyoubCherguelaine/querylens",
+        visibility: "public",
+        verifiedOn: "2026-10-18",
+      },
+    ],
     visibility: "featured",
     priority: 8,
   },
