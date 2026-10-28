@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Mustashar: data jobs and regulation agents</title>
+  <desc id="desc">Scheduled jobs collect four education data sources, extract Arabic Markdown, and load PostgreSQL and Neo4j. A FastAPI chat API routes questions through a gateway and coordinator to four specialists, which retrieve shared evidence before review and cited answers.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="none" stroke="#64d9cb" stroke-width="1.5"/></marker>
+  </defs>
+  <rect width="1600" height="1000" rx="28" fill="#0c1424"/>
+  <g font-family="Arial, sans-serif">
+    <text x="80" y="79" fill="#64d9cb" font-size="20" letter-spacing="3">MUSTASHAR / ARCHITECTURE</text>
+    <text x="80" y="145" fill="#f1f5f9" font-size="46" font-weight="700">From source jobs to cited answers</text>
+    <text x="80" y="188" fill="#b5c3d5" font-size="23">One data foundation for pipeline operations and regulation research.</text>
+    <rect x="60" y="230" width="700" height="490" rx="22" fill="#142137" stroke="#32455e"/>
+    <rect x="840" y="230" width="700" height="490" rx="22" fill="#142137" stroke="#32455e"/>
+    <text x="92" y="277" fill="#64d9cb" font-size="22" font-weight="700">01 / DATA JOBS</text>
+    <text x="872" y="277" fill="#64d9cb" font-size="22" font-weight="700">02 / CHAT API &amp; AGENTS</text>
+    <g fill="#1e3049" stroke="#405772">
+      <rect x="92" y="305" width="636" height="83" rx="12"/>
+      <rect x="92" y="418" width="636" height="83" rx="12"/>
+      <rect x="92" y="531" width="636" height="83" rx="12"/>
+      <rect x="872" y="305" width="636" height="83" rx="12"/>
+      <rect x="872" y="418" width="636" height="83" rx="12"/>
+      <rect x="872" y="531" width="636" height="83" rx="12"/>
+    </g>
+    <g fill="#f1f5f9" font-size="24" font-weight="700">
+      <text x="114" y="339">Four source pipelines</text>
+      <text x="114" y="452">Scheduler + resumable worker</text>
+      <text x="114" y="565">Extract, index, load, validate</text>
+      <text x="894" y="339">Authenticated FastAPI endpoints</text>
+      <text x="894" y="452">Scope gateway + coordinator</text>
+      <text x="894" y="565">Four source specialists + evidence review</text>
+    </g>
+    <g fill="#b5c3d5" font-size="21">
+      <text x="114" y="370">Rules · regulations · ministry services · salaries</text>
+      <text x="114" y="483">Weekly schedules · checkpoints · stage retries</text>
+      <text x="114" y="596">Arabic OCR · document graphs · structured tables</text>
+      <text x="894" y="370">Sessions · messages · WhatsApp integration endpoints</text>
+      <text x="894" y="483">Direct source routing or research across sources</text>
+      <text x="894" y="596">Read-only retrieval · graph context · cited passages</text>
+    </g>
+    <g stroke="#64d9cb" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M410 390V412"/><path d="M410 503V525"/>
+      <path d="M1190 390V412"/><path d="M1190 503V525"/>
+      <path d="M410 720V766"/><path d="M1190 766V720"/>
+    </g>
+    <text x="92" y="658" fill="#b5c3d5" font-size="21">Next.js monitor: source browsing, logs, schedules,</text>
+    <text x="92" y="688" fill="#b5c3d5" font-size="21">service health, token usage, and estimated costs</text>
+    <text x="872" y="658" fill="#b5c3d5" font-size="21">Answers with page references and evidence gaps</text>
+    <text x="872" y="688" fill="#b5c3d5" font-size="21">Quick / deep / auto effort · persisted chat history</text>
+    <rect x="60" y="778" width="1480" height="152" rx="22" fill="#103039" stroke="#3c8c8a"/>
+    <text x="92" y="816" fill="#64d9cb" font-size="19" letter-spacing="2">SHARED DATA &amp; EVIDENCE</text>
+    <g fill="#f1f5f9" font-size="26" font-weight="700">
+      <text x="92" y="858">PostgreSQL</text><text x="592" y="858">Neo4j</text><text x="1092" y="858">Markdown</text>
+    </g>
+    <g fill="#b5c3d5" font-size="21">
+      <text x="92" y="895">Source records + chat history</text><text x="592" y="895">Chunks, entities + linked evidence</text><text x="1092" y="895">Extracted Arabic document text</text>
+    </g>
+    <path d="M560 835V906M1060 835V906" stroke="#3c8c8a"/>
+    <text x="80" y="970" fill="#8193ab" font-size="18">Architecture illustration · backend copies of a document share the same source evidence</text>
+  </g>
+</svg>

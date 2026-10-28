@@ -82,19 +82,88 @@ export const profileSnapshot: ProfileSnapshot = {
 
 export const projects: Project[] = [
   {
-    id: "mustashar-data-platform",
-    title: "Mustashar Data Platform",
+    id: "doctool-document-ai",
+    title: "DOCTool — Semantic OCR & Document AI",
     summary:
-      "An end-to-end platform that collects education regulations, extracts Arabic text, builds document knowledge graphs, and brings pipeline operations into one live admin workspace.",
+      "From scanned pages to structured intelligence. A full-stack Document AI workspace that turns Arabic and English PDFs into layout-aware semantic blocks, searchable knowledge, and grounded conversations.",
     problem:
-      "Regulations, rules, ministry systems, and salary tables arrive in different formats. Collecting them is only the first step: extraction, provenance, storage, and failed processing stages also need to be traceable.",
+      "A scanned document can hold critical information that ordinary text extraction cannot reach. Flattening it into plain text loses tables, reading order, and the context connecting one page to the next.",
     solution:
-      "Built four source pipelines with scheduled execution, resumable stages, Arabic OCR, and PostgreSQL/Neo4j loading, alongside a Next.js monitor for inspecting documents, tracking costs, and managing operations.",
+      "Built a vision-powered OCR engine that identifies text, tables, formulas, and visuals; preserves verbatim transcription; and returns structured JSON with page references, reading order, bounding boxes, and cross-page continuation links. Wrapped it in an interactive workspace with block inspection, text search, exports, and document agents.",
     impact:
-      "Connected collection, extraction, and exploration in one workspace: operators can follow processing, resume unfinished stages, inspect source PDFs and extracted text, and explore document-scoped knowledge graphs.",
-    coverImage: "/projects/mustashar-data-platform/overview.png",
-    tags: ["Python", "Next.js", "Arabic OCR", "Knowledge Graphs", "PostgreSQL", "Neo4j", "Docker"],
+      "Brings the entire journey from PDF to usable intelligence into one product: inspect semantic blocks, export JSON or Markdown, and explore documents through hybrid search and specialized AI agents. Arabic and English extraction are central to the workflow.",
+    coverImage: "/projects/doctool/cover.svg",
+    tags: ["Semantic OCR", "Arabic & English", "Document AI", "Hybrid RAG", "FastAPI", "Next.js", "PostgreSQL"],
     screenshots: [
+      {
+        src: "/projects/doctool/ocr-workspace.png",
+        alt: "DOCTool Advanced OCR workspace with PDF upload, page selection, and language controls",
+        caption: "The OCR workspace: upload a PDF, choose pages and language, and extract layout-aware document blocks. Captured locally with a demo account.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/doctool/semantic-blocks.png",
+        alt: "DOCTool semantic block inspector showing Arabic text, table structure, and normalized bounding boxes",
+        caption: "Semantic block inspection with Arabic transcription, typed content, and page coordinates. Interface demonstration with synthetic sample data; not an accuracy benchmark.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/doctool/structured-json.png",
+        alt: "DOCTool JSON view exposing semantic OCR blocks with content, transcription, reading order, and bounding boxes",
+        caption: "Structured output ready for downstream systems: inspect the complete JSON response or download JSON and Markdown. Uses the same synthetic sample data.",
+        width: 1600, height: 1100,
+      },
+    ],
+    links: {
+      github: "https://github.com/AyoubCherguelaine/Doc-tool",
+      status: "available",
+    },
+    details: {
+      timeline: "Developed iteratively across document chat, hybrid retrieval, specialized agents, semantic OCR, and the full-stack workspace.",
+      roleScope:
+        "Built the OCR pipeline, extraction validation, document tools, retrieval integration, FastAPI endpoints, and Next.js interfaces for inspecting and exporting results.",
+      teamSetup: "End-to-end engineering spanning multimodal AI, backend services, data infrastructure, and frontend product development.",
+      architecture:
+        "Vision models process rendered PDF pages into semantic blocks. The engine validates structured content and normalized 0–1000 bounding boxes, then adds stable block IDs and reading order. Sequential processing passes the previous page's final meaningful block to link continuations. Document chat combines BM25 and dense retrieval through reciprocal rank fusion.",
+      dataEvaluation:
+        "Validation checks block counts, required fields, finite coordinates, and positive bounding-box dimensions, with a retry for malformed output. Tests cover semantic extraction, continuation handling, invalid output, and API behavior. The inspector keeps transcription separate from visual descriptions so outputs can be reviewed against the source.",
+      productionOps:
+        "Docker Compose brings together Next.js, FastAPI, PostgreSQL with pgvector, Redis workers, and S3-compatible SeaweedFS storage. The API supports session authentication and company API keys; asynchronous jobs include signed webhooks. OCR exports expose structured data for integration into other document workflows.",
+      lessonsLearned:
+        "Useful OCR preserves relationships as well as words. Keeping layout, verbatim transcription, and page continuity in an inspectable schema makes extracted content easier to review, search, and reuse.",
+    },
+    publicEvidence: [
+      {
+        platform: "github",
+        label: "DOCTool source code",
+        url: "https://github.com/AyoubCherguelaine/Doc-tool",
+        visibility: "public",
+        verifiedOn: "2026-10-28",
+      },
+    ],
+    visibility: "featured",
+    priority: -1,
+  },
+  {
+    id: "mustashar-data-platform",
+    title: "Mustashar — Data Pipelines & Regulation Agents",
+    summary:
+      "From scheduled data jobs to cited Arabic answers: a platform that collects education regulations and salary data, then serves a FastAPI chat API through specialist agents using PostgreSQL, Neo4j, and Markdown.",
+    problem:
+      "Regulations, employment rules, ministry services, and salary tables arrive in different formats. Making them useful requires reliable collection jobs and agents that can retrieve the right passages, preserve conditions and exceptions, and show where an answer came from.",
+    solution:
+      "Built four scheduled, resumable source pipelines with Arabic OCR, Markdown extraction, PostgreSQL loading, and Neo4j indexing. Added a Next.js operations monitor and an authenticated FastAPI chat API with a scope gateway, coordinator, four source specialists, and evidence review.",
+    impact:
+      "Connects data operations with conversational access: operators inspect source data and resume failed jobs, while API clients ask about regulations, employment rules, ministry services, and teacher salaries and receive answers with source citations and explicit evidence gaps.",
+    coverImage: "/projects/mustashar-data-platform/overview.png",
+    tags: ["Python", "FastAPI", "AI Agents", "Data Pipelines", "PostgreSQL", "Neo4j", "Markdown", "Arabic OCR", "Next.js", "Docker"],
+    screenshots: [
+      {
+        src: "/projects/mustashar-data-platform/architecture.svg",
+        alt: "Architecture diagram connecting scheduled source jobs, PostgreSQL, Neo4j, and Markdown to the FastAPI chat API and four specialist agents",
+        caption: "Architecture overview: scheduled jobs prepare the source data; the chat API routes questions to specialists that retrieve and review evidence from PostgreSQL, Neo4j, and Markdown.",
+        width: 1600, height: 1000,
+      },
       {
         src: "/projects/mustashar-data-platform/sources.png",
         alt: "Arabic source catalog showing four education data pipelines and their schedules",
@@ -128,18 +197,18 @@ export const projects: Project[] = [
     ],
     links: { status: "private" },
     details: {
-      timeline: "Built iteratively across source collection, OCR, knowledge graph extraction, orchestration, and the admin monitor.",
+      timeline: "Built iteratively across source jobs, Arabic OCR, graph indexing, the admin monitor, and the regulation chat API.",
       roleScope:
-        "Developed the Python pipelines, storage integrations, job orchestration, and the Arabic Next.js monitoring and document exploration interface.",
-      teamSetup: "End-to-end implementation spanning data engineering, AI processing, and full-stack development.",
+        "Developed the Python data jobs, PostgreSQL and Neo4j integrations, Markdown retrieval, Arabic Next.js monitor, FastAPI session and message endpoints, and Gemini tool-calling agents.",
+      teamSetup: "End-to-end implementation spanning data engineering, agent orchestration, backend APIs, and the monitoring interface.",
       architecture:
-        "Docker Compose runs a scheduler, worker, Next.js monitor, pipeline PostgreSQL, a separate monitoring PostgreSQL, Neo4j, and MinIO. PDF jobs follow preflight, scrape, OCR, graph build, load, and validation; systems and salary sources use structured extraction paths.",
+        "Scheduled jobs run preflight, scraping, OCR, graph building, loading, and validation; systems and salaries use structured extraction paths. The chat API reuses their outputs: PostgreSQL holds source records and chat history, Neo4j connects document chunks and entities, and Markdown retains extracted text. A scope gateway routes clear questions to one of four specialists; a coordinator handles mixed questions. Agents merge evidence across the three backends, expand graph context, read complete sections, and submit cited answers for review.",
       dataEvaluation:
-        "Final validation checks loaded records against staged data. The document workspace exposes original PDFs, extracted Markdown, chunks, entities, and evidence so processing outputs can be inspected against their sources.",
+        "Pipeline validation compares loaded records with staged data, and the monitor exposes PDFs, Markdown, chunks, and entities for inspection. Retrieval uses Arabic normalization, BM25 passage ranking, and duplicate reduction across PostgreSQL, Neo4j, and Markdown. Salary tools support exact level and grade lookups. Citation checks and evidence review constrain answers to retrieved passages; incomplete coverage or unavailable sources are reported explicitly.",
       productionOps:
-        "Checkpoint-based retries reuse completed work. The monitor provides live logs, service health, per-model token and estimated cost tracking, model fallback settings, weekly schedule controls, role-based accounts, and an administration audit log.",
+        "Docker Compose connects the pipeline and chat services to shared storage. Jobs resume from checkpoints, with live logs, weekly schedules, service health, token usage, estimated costs, and administration controls. The chat API supports bearer authentication, isolated sessions, persisted history, idempotent message retries, and WhatsApp message/history endpoints. Read-only source tools, model and tool budgets, request deadlines, and quick/deep/auto effort modes bound agent work.",
       lessonsLearned:
-        "Reliable document processing needs visibility at every stage: retaining source evidence, recording model usage immediately, and resuming unfinished work make extraction easier to operate and debug.",
+        "Reliable answers start with inspectable data jobs. PostgreSQL records, Neo4j relationships, and Markdown passages provide complementary access to the same evidence; preserving headings, page references, and exceptions matters as much as finding a matching passage.",
     },
     visibility: "featured",
     priority: 1,
@@ -553,7 +622,7 @@ export const projects: Project[] = [
         verifiedOn: "2026-09-01",
       },
     ],
-    visibility: "featured",
+    visibility: "more",
     priority: 9,
   },
   {

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="bg" x2="1600" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#071A24"/><stop offset="1" stop-color="#103B3D"/></linearGradient>
+    <linearGradient id="line"><stop stop-color="#5EEAD4" stop-opacity="0"/><stop offset=".5" stop-color="#5EEAD4"/><stop offset="1" stop-color="#5EEAD4" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="1380" cy="140" r="310" stroke="#5EEAD4" stroke-opacity=".08" stroke-width="100"/>
+  <g font-family="Arial, sans-serif">
+    <rect x="80" y="74" width="70" height="70" rx="20" fill="#5EEAD4"/>
+    <path d="M99 95h32v29H99zM106 105h18m-18 8h13" stroke="#0C3437" stroke-width="3" stroke-linejoin="round"/>
+    <text x="170" y="125" fill="#F0FDFA" font-size="42" font-weight="700">DOCTool</text>
+    <text x="80" y="233" fill="#5EEAD4" font-size="20" letter-spacing="4">SEMANTIC OCR / DOCUMENT AI</text>
+    <text x="80" y="327" fill="#F0FDFA" font-size="74" font-weight="700">Scanned pages.</text>
+    <text x="80" y="413" fill="#F0FDFA" font-size="74" font-weight="700">Structured intelligence.</text>
+    <text x="84" y="478" fill="#9DBDBE" font-size="27">Arabic &amp; English · Layout-aware extraction · Grounded answers</text>
+    <rect x="80" y="536" width="620" height="330" rx="24" fill="#F5FAF9"/>
+    <text x="112" y="583" fill="#52706E" font-size="18" letter-spacing="2">01 / DOCUMENT PAGE</text>
+    <rect x="110" y="609" width="560" height="56" rx="8" fill="#CCFBF1" stroke="#14B8A6" stroke-dasharray="5 5"/>
+    <text x="644" y="645" fill="#115E59" font-size="25" text-anchor="end">تحليل المستندات بذكاء</text>
+    <rect x="110" y="681" width="560" height="66" rx="8" fill="#E2E8F0" stroke="#94A3B8" stroke-dasharray="5 5"/>
+    <path d="M132 704h510m-510 20h420" stroke="#7B9295" stroke-width="7" stroke-linecap="round"/>
+    <rect x="110" y="763" width="560" height="72" rx="8" fill="#DBEAFE" stroke="#60A5FA" stroke-dasharray="5 5"/>
+    <path d="M110 799h560m-380-36v72m190-72v72" stroke="#93B5DD" stroke-width="2"/>
+    <path d="M725 700h110m-18-13 18 13-18 13" stroke="#5EEAD4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="860" y="536" width="660" height="330" rx="24" fill="#0A2029" stroke="#346362"/>
+    <text x="894" y="583" fill="#7DABAA" font-size="18" letter-spacing="2">02 / SEMANTIC BLOCKS</text>
+    <g font-family="monospace" font-size="22">
+      <text x="894" y="634" fill="#5EEAD4">{ "type": "table",</text>
+      <text x="918" y="676" fill="#C7DFDF">"content": { ... },</text>
+      <text x="918" y="718" fill="#C7DFDF">"ocr_text": "...",</text>
+      <text x="918" y="760" fill="#C7DFDF">"bbox": [50, 120, 950, 400],</text>
+      <text x="918" y="802" fill="#C7DFDF">"reading_order": 3</text>
+      <text x="894" y="840" fill="#5EEAD4">}</text>
+    </g>
+    <path d="M80 911h1440" stroke="url(#line)"/>
+    <text x="80" y="951" fill="#83ABA9" font-size="20">VISION OCR</text>
+    <text x="391" y="951" fill="#83ABA9" font-size="20">JSON + MARKDOWN</text>
+    <text x="852" y="951" fill="#83ABA9" font-size="20">HYBRID RAG</text>
+    <text x="1252" y="951" fill="#83ABA9" font-size="20">FULL-STACK AI</text>
+  </g>
+</svg>

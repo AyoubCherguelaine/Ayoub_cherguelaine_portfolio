@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     template: "%s | Ayoub Cherguelaine",
   },
   description: siteConfig.description,
-  generator: "v0.app",
   keywords: [
     "AI Engineer",
     "NLP Engineer",
@@ -62,11 +61,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
-      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/apple-icon.png?v=2", sizes: "180x180", type: "image/png" },
+      { url: "/icon.svg?v=2", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png?v=2", sizes: "32x32", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
-    apple: { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    shortcut: "/favicon.ico?v=2",
+    apple: [
+      { url: "/apple-icon.png?v=2", sizes: "180x180", type: "image/png" },
+    ],
   },
 }
 
