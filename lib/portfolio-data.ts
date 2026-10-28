@@ -728,34 +728,48 @@ export const projects: Project[] = [
 
   {
     id: "noble-spending",
-    title: "Noble Spending",
+    title: "Noble Fund",
     summary:
-      "A full-stack personal finance application built with Next.js for expense tracking, budgeting, and financial insights.",
+      "A personal finance and wealth dashboard for tracking money across USD, EUR, and Algerian dinar accounts, with budgets, savings vaults, recurring payments, and interactive analytics.",
     problem:
-      "Users needed an intuitive self-hosted finance tool with modern UX, without relying on third-party services for sensitive transaction data.",
+      "Managing income, spending, debts, and savings across different currencies makes it difficult to see available cash, understand spending patterns, and plan ahead in one workspace.",
     solution:
-      "Built a Next.js full-stack app with authentication, transaction management, budget tracking, and data visualization, with a responsive UI and reliable state management.",
+      "Built an authenticated Next.js application backed by PostgreSQL, with multi-currency accounts and transfers, transaction management, category budgets, recurring bills and subscriptions, savings goals, and interactive charts. English and Arabic interfaces support daily use, including right-to-left layouts.",
     impact:
-      "Delivered a usable private finance workspace with clean separation of concerns between frontend interfaces and backend logic.",
-    coverImage: "/projects/noble-spending.svg",
-    tags: ["Next.js", "Full-Stack", "Finance", "TypeScript", "Tailwind CSS"],
+      "Brings account balances, money flow, budget progress, and savings planning into one workspace. Account history and chart drill-downs connect financial summaries to the transactions behind them.",
+    coverImage: "/projects/noble-fund/overview.png",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Recharts", "Tailwind CSS", "Personal Finance"],
+    screenshots: [
+      {
+        src: "/projects/noble-fund/overview.png",
+        alt: "Noble Fund dashboard showing wealth, net savings, income, spending, and a six-month money flow chart",
+        caption: "The wealth overview brings balances, savings rate, and income versus spending into one view. Captured locally from the current interface with synthetic financial data.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/noble-fund/accounts.png",
+        alt: "Noble Fund accounts screen grouping USD, EUR, and Algerian dinar accounts with balance history",
+        caption: "Multi-currency account management with grouped balances, transfers, currency exchange, and account history. All accounts and amounts shown are synthetic demo data.",
+        width: 1600, height: 1100,
+      },
+    ],
     links: {
       github: "https://github.com/AyoubCherguelaine/noble-spending",
       status: "available",
     },
     details: {
-      timeline: "Built as a standalone full-stack project with iterative UI and data-model improvements.",
+      timeline: "Developed iteratively from expense tracking into a multi-currency finance and wealth dashboard.",
       roleScope:
-        "Owned end-to-end development: frontend pages/components, backend APIs, data modeling, and deployment setup.",
-      teamSetup: "Independent project with personal design and product decisions.",
+        "Owned product design, React interfaces, financial aggregations, PostgreSQL persistence, authentication, and deployment configuration.",
+      teamSetup: "Independent full-stack project.",
       architecture:
-        "Next.js app with server-side rendering, protected routes, transaction CRUD flows, dashboard analytics, and persistent storage.",
+        "Next.js App Router with server-rendered initial data, a client dashboard, route-handler APIs, and PostgreSQL through pg. Recharts powers money-flow and account-history charts. Shared currency utilities convert balances and transactions for the selected display currency.",
       dataEvaluation:
-        "Validated correctness through manual transaction workflows, budget boundary cases, and UI responsiveness checks.",
+        "The dashboard distinguishes transfers from income and spending, aggregates category budgets, and reconstructs account balance history. Portfolio screenshots demonstrate the running interface with synthetic fixtures; they do not represent real financial records or a calculation benchmark.",
       productionOps:
-        "Deployed with standard Next.js production build; private repo with no external dependency on payment processors.",
+        "Netlify deployment configuration with runtime PostgreSQL connection settings, HTTP-only JWT session cookies, and protected routes. Additional workflows include data import/export, receipt OCR, and optional Gmail purchase review before importing transactions.",
       lessonsLearned:
-        "Finance UIs benefit from tight feedback loops between data entry, categorization, and visual summaries.",
+        "Multi-currency finance requires consistent conversion rules and clear treatment of transfers. Connecting summaries to account history and transaction details makes the numbers easier to inspect.",
     },
     visibility: "more",
     priority: 13,
