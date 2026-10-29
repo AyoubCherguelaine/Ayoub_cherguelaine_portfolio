@@ -1,6 +1,6 @@
 import { profileSnapshot } from "@/lib/portfolio-data"
 
-export default function About() {
+export default function About({ github }: { github: typeof profileSnapshot.github }) {
   return (
     <section
       id="about"
@@ -26,9 +26,9 @@ export default function About() {
         </p>
 
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Verified profile snapshot ({profileSnapshot.verifiedLabel}):{" "}
-          {profileSnapshot.github.publicRepos} public GitHub repositories,{" "}
-          {profileSnapshot.github.followers} GitHub followers,{" "}
+          Public profile:{" "}
+          {github.publicRepos} public GitHub repositories,{" "}
+          {github.followers} GitHub followers,{" "}
           {profileSnapshot.huggingFace.publicModels} public Hugging Face models,
           and {profileSnapshot.huggingFace.publicDatasets} public Hugging Face
           datasets.
@@ -36,8 +36,8 @@ export default function About() {
 
         <div className="rounded-lg border border-border bg-card p-4">
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Verification method: public profile counters and linked Hugging Face
-            artifacts were manually verified in a static snapshot on{" "}
+            GitHub counters refresh hourly from the public API, with a saved fallback.
+            Hugging Face artifacts were manually verified on{" "}
             <span className="font-medium text-foreground">
               {profileSnapshot.verifiedLabel}
             </span>

@@ -81,7 +81,7 @@ function LanguageNetwork() {
   )
 }
 
-export default function Hero() {
+export default function Hero({ github }: { github: typeof profileSnapshot.github }) {
   return (
     <section id="home" className="portfolio-hero reveal-up">
       <div className="hero-topline">
@@ -157,7 +157,7 @@ export default function Hero() {
       <div className="hero-proof">
         <div>
           <strong>
-            {profileSnapshot.github.publicRepos}
+            {github.publicRepos}
             <span> /</span>
           </strong>
           <p>GitHub public repos</p>
@@ -177,7 +177,9 @@ export default function Hero() {
           <p>Hugging Face datasets</p>
         </div>
         <p className="hero-proof-note">
-          Snapshot verified on {profileSnapshot.verifiedLabel}
+          GitHub counters refresh hourly.
+          <br />
+          HF snapshot: {profileSnapshot.verifiedLabel}
           <br />
           <span>Typical response window: within 24h.</span>
         </p>

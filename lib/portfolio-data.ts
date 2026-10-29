@@ -70,9 +70,9 @@ export const profileSnapshot: ProfileSnapshot = {
   verifiedOn: "2026-09-01",
   verifiedLabel: "September 1, 2026",
   github: {
-    publicRepos: 60,
-    followers: 40,
-    following: 49,
+    publicRepos: 48,
+    followers: 43,
+    following: 53,
   },
   huggingFace: {
     publicModels: 52,

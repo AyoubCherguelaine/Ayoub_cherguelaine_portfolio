@@ -1,3 +1,4 @@
+import { VisitorAnalytics } from "@/components/visitor-analytics"
 import type React from "react"
 import type { Metadata } from "next"
 
@@ -82,7 +83,7 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${manrope.variable} ${geistMono.variable} font-sans antialiased`}
       >
-        {children}
+        <VisitorAnalytics>{children}</VisitorAnalytics>
         <Analytics />
       </body>
     </html>

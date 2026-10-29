@@ -1,3 +1,5 @@
+import { getGitHubProfile } from "@/lib/github-profile"
+import { VisitorCounter } from "@/components/visitor-analytics"
 import Hero from "@/components/hero"
 import About from "@/components/about"
 import Projects from "@/components/projects"
@@ -6,10 +8,13 @@ import Skills from "@/components/skills"
 import Education from "@/components/education"
 import Contact from "@/components/contact"
 import Navigation from "@/components/navigation"
-import { profileSnapshot, projects } from "@/lib/portfolio-data"
+import { projects } from "@/lib/portfolio-data"
 import { absoluteUrl, siteConfig } from "@/lib/site-config"
 
-export default function Home() {
+export const revalidate = 3600
+
+export default async function Home() {
+  const github = await getGitHubProfile()
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -48,12 +53,12 @@ export default function Home() {
           {
             "@type": "InteractionCounter",
             interactionType: "https://schema.org/FollowAction",
-            userInteractionCount: profileSnapshot.github.followers,
+            userInteractionCount: github.followers,
           },
           {
             "@type": "InteractionCounter",
             interactionType: "https://schema.org/WriteAction",
-            userInteractionCount: profileSnapshot.github.publicRepos,
+            userInteractionCount: github.publicRepos,
           },
         ],
       },
@@ -70,8 +75,8 @@ export default function Home() {
         Skip to projects
       </a>
       <Navigation />
-      <Hero />
-      <About />
+      <Hero github={github} />
+      <About github={github} />
       <Projects />
       <Experience />
       <Skills />
@@ -79,6 +84,7 @@ export default function Home() {
       <Contact />
       <footer className="portfolio-footer">
         <span>Ayoub Cherguelaine</span>
+        <VisitorCounter />
         <a href="#home">Back to top ↑</a>
       </footer>
     </main>
