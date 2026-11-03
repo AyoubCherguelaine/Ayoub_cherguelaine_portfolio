@@ -83,34 +83,52 @@ export const profileSnapshot: ProfileSnapshot = {
 export const projects: Project[] = [
   {
     id: "doctool-document-ai",
-    title: "DOCTool — Semantic OCR & Document AI",
+    title: "DOCTool — Bilingual Document AI Workspace",
     summary:
-      "From scanned pages to structured intelligence. A full-stack Document AI workspace that turns Arabic and English PDFs into layout-aware semantic blocks, searchable knowledge, and grounded conversations.",
+      "An Arabic and English document workspace combining chat, semantic OCR, and 16 task-focused services. Process invoices, contracts, forms, and reports through an interactive playground or API, with model selection and optional source verification.",
     problem:
-      "A scanned document can hold critical information that ordinary text extraction cannot reach. Flattening it into plain text loses tables, reading order, and the context connecting one page to the next.",
+      "Teams need more than text extracted from a PDF: they need usable fields, traceable answers, and a way to check the result. Scanned pages, Arabic layouts, tables, and inconsistent model output make that difficult to automate reliably.",
     solution:
-      "Built a vision-powered OCR engine that identifies text, tables, formulas, and visuals; preserves verbatim transcription; and returns structured JSON with page references, reading order, bounding boxes, and cross-page continuation links. Wrapped it in an interactive workspace with block inspection, text search, exports, and document agents.",
+      "Built a bilingual workspace with a searchable service catalog, document chat, semantic OCR, and an extraction playground for uploaded files or direct text. Users choose a processing model, customize the prompt and JSON schema, and inspect structured output and agent steps. Optional Guardian mode checks schemas and source evidence; the same service engine powers API requests and queued jobs.",
     impact:
-      "Brings the entire journey from PDF to usable intelligence into one product: inspect semantic blocks, export JSON or Markdown, and explore documents through hybrid search and specialized AI agents. Arabic and English extraction are central to the workflow.",
-    coverImage: "/projects/doctool/cover.svg",
-    tags: ["Semantic OCR", "Arabic & English", "Document AI", "Hybrid RAG", "FastAPI", "Next.js", "PostgreSQL"],
+      "Connects document review and application integration in one workflow: extract invoice fields, review contract terms, classify documents, mask sensitive text, or translate between Arabic and English. The current local app includes 16 catalog services, model comparison, credit tracking, and developer integration guides. Outputs remain reviewable against the source.",
+    coverImage: "/projects/doctool/services-workspace.png",
+    tags: ["Document AI", "Arabic & English", "Semantic OCR", "Hybrid RAG", "AI Agents", "FastAPI", "Next.js", "PostgreSQL", "Redis"],
     screenshots: [
       {
-        src: "/projects/doctool/ocr-workspace.png",
-        alt: "DOCTool Advanced OCR workspace with PDF upload, page selection, and language controls",
-        caption: "The OCR workspace: upload a PDF, choose pages and language, and extract layout-aware document blocks. Captured locally with a demo account.",
+        src: "/projects/doctool/services-workspace.png",
+        alt: "DOCTool service catalog with task filters, model controls, Guardian verification, and credit balance",
+        caption: "The current workspace: 16 document services with search, task categories, model selection, and credit visibility. Captured from the local app on November 3, 2026 using a dedicated demo account.",
         width: 1600, height: 1100,
       },
       {
-        src: "/projects/doctool/semantic-blocks.png",
-        alt: "DOCTool semantic block inspector showing Arabic text, table structure, and normalized bounding boxes",
-        caption: "Semantic block inspection with Arabic transcription, typed content, and page coordinates. Interface demonstration with synthetic sample data; not an accuracy benchmark.",
+        src: "/projects/doctool/invoice-playground.png",
+        alt: "Invoice extraction playground with sample input, editable JSON schema, and structured output panel",
+        caption: "Invoice processing with the built-in synthetic sample: configure the input, prompt, JSON schema, model, and Guardian verification, then inspect the service response. Demonstrates the workflow rather than an extraction benchmark.",
         width: 1600, height: 1100,
       },
       {
-        src: "/projects/doctool/structured-json.png",
-        alt: "DOCTool JSON view exposing semantic OCR blocks with content, transcription, reading order, and bounding boxes",
-        caption: "Structured output ready for downstream systems: inspect the complete JSON response or download JSON and Markdown. Uses the same synthetic sample data.",
+        src: "/projects/doctool/services-arabic.png",
+        alt: "Arabic DOCTool service catalog with right-to-left navigation and localized document tasks",
+        caption: "Arabic and English share the same product workflow. The Arabic interface uses right-to-left navigation, localized service descriptions, and task filters.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/doctool/model-matrix.png",
+        alt: "Model comparison table showing configured model IDs, pricing, credit costs, and selection controls",
+        caption: "Compare configured processing models and their application credit costs before selecting one. Catalog pricing and capability labels come from the project's configuration.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/doctool/advanced-ocr-current.png",
+        alt: "Current Advanced OCR workspace with PDF upload, model selection, page-range controls, and language selection",
+        caption: "The current OCR setup screen: upload a PDF, select a processing model and page range, and set a language hint before extracting semantic blocks.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/doctool/integration-guide.png",
+        alt: "DOCTool developer integration guide for document processing APIs and application clients",
+        caption: "Developer documentation connects the workspace to API-based workflows, including document ingestion, service execution, and client integration. The demo API key is redacted.",
         width: 1600, height: 1100,
       },
     ],
@@ -119,18 +137,18 @@ export const projects: Project[] = [
       status: "available",
     },
     details: {
-      timeline: "Developed iteratively across document chat, hybrid retrieval, specialized agents, semantic OCR, and the full-stack workspace.",
+      timeline: "Ongoing development; progress reviewed November 3, 2026. Expanded document chat and semantic OCR into a bilingual service workspace with a configurable playground, model controls, and shared API execution.",
       roleScope:
-        "Built the OCR pipeline, extraction validation, document tools, retrieval integration, FastAPI endpoints, and Next.js interfaces for inspecting and exporting results.",
-      teamSetup: "End-to-end engineering spanning multimodal AI, backend services, data infrastructure, and frontend product development.",
+        "Built the document agents, OCR pipeline, hybrid retrieval, service validation and billing integration, FastAPI endpoints, and Next.js interfaces for service selection, extraction, review, and export.",
+      teamSetup: "End-to-end engineering across document AI, backend services, data infrastructure, and frontend product development.",
       architecture:
-        "Vision models process rendered PDF pages into semantic blocks. The engine validates structured content and normalized 0–1000 bounding boxes, then adds stable block IDs and reading order. Sequential processing passes the previous page's final meaningful block to link continuations. Document chat combines BM25 and dense retrieval through reciprocal rank fusion.",
+        "Next.js provides the bilingual workspace; FastAPI exposes document, chat, OCR, and service APIs. Document chat fuses BM25 keyword and dense retrieval through reciprocal rank fusion. Vision-based OCR produces semantic page blocks with transcription, normalized bounding boxes, and continuation links. A shared service engine handles playground, synchronous API, and Redis worker execution, with PostgreSQL persistence and S3-compatible SeaweedFS storage.",
       dataEvaluation:
-        "Validation checks block counts, required fields, finite coordinates, and positive bounding-box dimensions, with a retry for malformed output. Tests cover semantic extraction, continuation handling, invalid output, and API behavior. The inspector keeps transcription separate from visual descriptions so outputs can be reviewed against the source.",
+        "Guardian mode validates structured responses and locates field evidence in source pages, leaving unsupported values for review; direct mode returns output marked as unverified. Financial checks use decimal arithmetic, translation checks inspect preserved values, and configurable rules evaluate extracted fields. Repository tests cover validation failures, evidence matching, tenant access, idempotent execution, credit refunds, and queued jobs. These checks do not establish a measured extraction accuracy rate.",
       productionOps:
-        "Docker Compose brings together Next.js, FastAPI, PostgreSQL with pgvector, Redis workers, and S3-compatible SeaweedFS storage. The API supports session authentication and company API keys; asynchronous jobs include signed webhooks. OCR exports expose structured data for integration into other document workflows.",
+        "Docker Compose runs the frontend, API, worker, PostgreSQL with pgvector, Redis, and SeaweedFS. Session authentication and company API keys support workspace and integration access. Model-aware credit charging, refunds on failed service execution, idempotent requests, asynchronous job polling, signed webhooks, and expiring document sessions support repeatable processing. Integration surfaces include REST, a Python SDK, MCP tools, and function-calling schemas.",
       lessonsLearned:
-        "Useful OCR preserves relationships as well as words. Keeping layout, verbatim transcription, and page continuity in an inspectable schema makes extracted content easier to review, search, and reuse.",
+        "Extraction becomes more useful when users can see both the result and how to check it. Keeping source evidence, schema validation, processing costs, and model choice visible makes document automation easier to review and integrate.",
     },
     publicEvidence: [
       {
@@ -324,33 +342,81 @@ export const projects: Project[] = [
   // },
   {
     id: "lc-management-app",
-    title: "Letter of Credit Management Web Application",
+    title: "ATLAS Trade OS — Letter of Credit Management",
     summary:
-      "A private web application for managing importation and LC (Letter of Credit) workflows in Algeria.",
+      "A bilingual trade operations workspace for Algerian importers: manage LC dossiers, review shipping documents, track discrepancies, and prepare SWIFT drafts before bank submission.",
     problem:
-      "Import and LC tracking relied on fragmented spreadsheets and manual coordination, leading to status and documentation errors.",
+      "Importers coordinate contract terms, shipping deadlines, bank requirements, and document corrections across a long LC lifecycle. Fragmented spreadsheets and document folders make discrepancies and pending actions difficult to follow.",
     solution:
-      "Built a private full-stack web application to manage importation workflows, LC documentation, status tracking, and stakeholder notifications.",
+      "Built a React and FastAPI application with searchable LC lists, a seven-stage Kanban pipeline, editable dossiers, PDF previews, discrepancy resolution, a UCP 600 rules desk, SWIFT MT700/MT707 views, operational tasks, and an integrated AI trade assistant. Arabic RTL and English interfaces serve the same workflows.",
     impact:
-      "Centralized LC workflow tracking with role-aware access and structured document handling.",
-    coverImage: "/projects/lc-management-app.svg",
-    tags: ["Full-Stack", "Web Application", "Workflow Automation", "TypeScript", "API Development"],
-    links: {
-      status: "private",
-    },
+      "Brings credit terms, documents, compliance checks, and operational history into one workspace. The local demonstration includes a synthetic 44-document import dossier, three reference discrepancies, and a 15-rule matrix; these fixtures illustrate the workflow without claiming measured customer outcomes.",
+    coverImage: "/projects/lc-management-app/operations.png",
+    tags: ["React", "TypeScript", "FastAPI", "Python", "Trade Finance", "AI Agents", "Arabic RTL", "Docker"],
+    screenshots: [
+      {
+        src: "/projects/lc-management-app/dossier.png",
+        alt: "LC dossier with lifecycle stages, commercial parties, shipping dates, and credit terms",
+        caption: "The synthetic AgroClub / ChemChina dossier brings banking details, shipping deadlines, and credit terms into one editable workspace.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/lc-management-app/documents.png",
+        alt: "Archive of 44 synthetic trade documents",
+        caption: "A 44-document reference archive covers the import lifecycle, with status, original/copy counts, and PDF preview actions.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/lc-management-app/discrepancies.png",
+        alt: "Pre-audit discrepancy records with observed and expected values",
+        caption: "Review discrepancies against expected terms and record a waiver, correction, or refusal.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/lc-management-app/swift.png",
+        alt: "SWIFT MT700 message fields and MT707 amendments",
+        caption: "Inspect structured SWIFT MT700 drafts and MT707 amendments alongside the LC dossier.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/lc-management-app/compliance.png",
+        alt: "UCP 600 compliance matrix for the reference dossier",
+        caption: "A 15-rule compliance matrix exposes the reference dossier checks and their outcomes.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/lc-management-app/arabic-kanban.png",
+        alt: "Arabic right-to-left Kanban board of LC stages",
+        caption: "Arabic and English interfaces support the same workflow, including an RTL Kanban board from draft through settlement.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/lc-management-app/analytics.png",
+        alt: "Trade commitments dashboard with stage distribution and bank exposure",
+        caption: "Reporting summarizes LC commitments, stage distribution, discrepancy indicators, and bank exposure using local demonstration data.",
+        width: 1600, height: 1000,
+      },
+      {
+        src: "/projects/lc-management-app/trade-assistant.png",
+        alt: "Trade assistant with Arabic guidance and suggested dossier questions",
+        caption: "An integrated assistant offers dossier inspection, document checklists, and configured Algerian trade guidance.",
+        width: 1600, height: 1000,
+      },
+    ],
+    links: { status: "private" },
     details: {
-      timeline: "Delivered as a private business-facing web application with iterative workflow and UI refinement.",
+      timeline: "Ongoing implementation, reviewed against the running local application in November 2026; expanded from LC tracking into document review, bilingual workflows, SWIFT preparation, and assistant integration.",
       roleScope:
-        "Owned full-stack implementation: backend APIs, database modeling, frontend workflows, and access control.",
-      teamSetup: "Close collaboration with business users to validate workflow stages and document requirements.",
+        "Implemented the frontend workspace, LC APIs, dossier persistence, document handling, workflow actions, reporting views, and tool-calling trade assistant integration.",
+      teamSetup: "End-to-end implementation spanning the importer interface, backend services, and synthetic trade dossier fixtures.",
       architecture:
-        "Full-stack app with workflow state machine, document management, role-based access, and notification mechanisms.",
+        "React 18, TypeScript, Vite, and Tailwind CSS frontend backed by FastAPI. The current LC workspace persists dossiers, messages, and activities to an atomic JSON store. The broader backend includes SQLAlchemy/PostgreSQL models, Redis integration, and local or S3-compatible document storage. The assistant uses an OpenAI-compatible tool-calling loop with a deterministic fallback.",
       dataEvaluation:
-        "Validated workflow correctness, document completeness, and usability across user roles.",
+        "The synthetic AgroClub / ChemChina dossier supplies 44 PDFs, extraction ground truth, expected discrepancies, validation rules, and a milestone timeline. Reviewed the running list, Kanban, dossier, archive, discrepancy desk, SWIFT view, compliance matrix, analytics, and Arabic RTL interface. Screenshots document the local implementation; legal accuracy, model quality, and production readiness have not been established by this review.",
       productionOps:
-        "Deployed privately with standard web-stack production hardening and backup considerations.",
+        "Docker Compose packages the Nginx-served frontend, FastAPI backend, PostgreSQL, and Redis with persistent volumes and service health checks. LC state and uploaded documents use mounted local storage in the current setup; document storage also supports S3-compatible configuration.",
       lessonsLearned:
-        "Document-heavy workflows benefit from explicit state modeling and clear status visibility.",
+        "Trade workflows need clear separation between document evidence, discrepancy decisions, and bank lifecycle stages. Keeping original documents, corrections, waivers, and operational notes together makes each decision easier to inspect.",
     },
     visibility: "more",
     priority: 4,
@@ -522,21 +588,39 @@ export const projects: Project[] = [
     id: "chat-with-database",
     title: "QueryLens — Conversational Data Analytics",
     summary:
-      "A conversational analytics workspace for CSV, SQLite, and PostgreSQL data, with inspectable SQL, query evidence, and downloadable written reports.",
+      "A bilingual analytics workspace that turns CSV, SQLite, and PostgreSQL data into conversations, interactive charts, and written reports, with inspectable SQL and downloadable source evidence.",
     problem:
-      "Exploring unfamiliar tables takes SQL knowledge, while a fluent AI answer alone does not show which data or queries support its claims.",
+      "Exploring unfamiliar relational data takes SQL knowledge and context across tables. A fluent AI answer or polished chart alone does not show which query, rows, or assumptions support it.",
     solution:
-      "Built a source-aware analyst that inspects schemas, samples tables, executes guarded read-only SQL, and answers from observed results. Users can import datasets, select tables, follow tool activity, and request written analysis.",
+      "Built a source-aware analyst that inspects schemas, samples selected tables, executes guarded read-only SQL with joins, and answers from observed results. The workspace now combines a dataset overview, relational schema explorer, multi-table conversations, and evidence-linked chart generation. Users can switch chart types, filter results, compare grouped or stacked series, and download chart data as CSV or JSON.",
     impact:
-      "Brings data import, schema exploration, saved conversations, SQL inspection, and evidence-backed reporting into one English and Arabic workspace.",
-    coverImage: "/projects/querylens/landing.png",
-    tags: ["AI Agents", "Next.js", "FastAPI", "PostgreSQL", "Text-to-SQL", "Docker"],
+      "Connects data import, schema inspection, multi-table questions, visual exploration, and reporting in one English and Arabic workflow. Model selection, agent process controls, and a visible credit balance make analysis settings and application costs easier to understand. A local demo joined three imported tables and generated a grouped revenue chart from six query-result rows.",
+    coverImage: "/projects/querylens/overview-current.png",
+    tags: ["AI Agents", "Text-to-SQL", "Data Visualization", "Arabic & English", "Next.js", "FastAPI", "PostgreSQL", "Docker"],
     screenshots: [
       {
-        src: "/projects/querylens/demo.png",
-        alt: "QueryLens sample workspace showing a sales question, calculated results, and SQL evidence",
-        caption: "The public demo calculates preset answers from a local sample dataset and exposes the supporting SQL. It runs without sign-in or model inference.",
-        width: 737, height: 794,
+        src: "/projects/querylens/chart-current.png",
+        alt: "QueryLens grouped revenue chart with category series, chart-type controls, CSV and JSON downloads, and all three source tables selected",
+        caption: "Multi-table analysis in the running app: the agent joined synthetic sales, regions, and products to generate a grouped revenue chart. Six result rows support the chart; users can switch visualizations and download its data. Captured locally on November 3, 2026 with a dedicated demo account.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/querylens/overview-current.png",
+        alt: "QueryLens overview showing credit balance, imported source and table counts, model selection, recent sessions, and analysis shortcuts",
+        caption: "The new overview brings datasets, table counts, recent conversations, model configuration, and credits into one dashboard. This demo uses one SQLite source with three tables and 60 synthetic rows in total.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/querylens/schema-current.png",
+        alt: "QueryLens relational schema explorer displaying products, regions, and sales tables with column types and relationship metadata",
+        caption: "Explore imported tables before asking a question: search tables or columns, inspect field types and declared relationships, and switch between the relational map, table inspection, and generated SQL DDL views.",
+        width: 1600, height: 1100,
+      },
+      {
+        src: "/projects/querylens/settings-current.png",
+        alt: "QueryLens agent settings with configured model, per-question credit rate, process modes, temperature, step limits, and custom instructions",
+        caption: "New agent controls expose configured model costs, Standard, Fast, and Deep Analytical modes, temperature, maximum tool steps, and custom guidance. Separate settings tabs provide credit and account controls.",
+        width: 1600, height: 1100,
       },
       {
         src: "/projects/querylens/landing-ar.png",
@@ -551,19 +635,19 @@ export const projects: Project[] = [
     },
     details: {
       timeline:
-        "Evolved from Chat OLAP into QueryLens, with the conversational workspace and public project presentation updated in October 2026.",
+        "Evolved from Chat OLAP into QueryLens. Reviewed November 3, 2026 after adding multi-table chat, chart generation, grouped and stacked series, the overview dashboard, relational schema inspection, and model and credit settings.",
       roleScope:
-        "Built the Next.js interface, FastAPI backend, PostgreSQL source catalog, CSV and SQLite imports, conversational tool agent, SQL validation, and report and evidence downloads.",
+        "Built the Next.js interface, FastAPI backend, PostgreSQL source catalog, CSV and SQLite imports, conversational tool agent, SQL validation, chart tooling, model and credit controls, and report and evidence downloads.",
       teamSetup:
         "A portfolio project bringing frontend, backend, data modeling, and agent tooling together in one repository.",
       architecture:
-        "Next.js proxies same-origin requests to FastAPI and keeps authentication in an HTTP-only cookie. PostgreSQL persists sources, semantic cubes, and conversations. The tool agent inspects selected tables, samples rows, executes SELECT queries, and produces answers or reports linked to successful query evidence.",
+        "Next.js proxies same-origin requests to FastAPI and keeps authentication in an HTTP-only cookie. PostgreSQL persists sources, semantic cubes, conversations, model preferences, and credit transactions. The analyst inspects the selected tables and runs SELECT queries; GraphAgent validates chart specifications against successful query evidence and packages result rows for export. Recharts renders bar, line, area, pie, and scatter views, including third-dimension series and bubble sizing.",
       dataEvaluation:
-        "The repository includes tests for imports, semantic modeling, query compilation, conversational history, SQL scope, narrative evidence references, and provider failures. The public demo calculates preset results locally; it does not demonstrate live model inference. Analytical claims still need review against the displayed results and limitations.",
+        "Repository tests cover imports, query scope, conversational history, narrative references, chart specifications and evidence, credit accounting, model settings, and provider failures. The current local walkthrough imported three related SQLite tables and generated a grouped chart through the live agent. Screenshots use synthetic data and demonstrate functionality; analytical claims still need review against query results and limitations.",
       productionOps:
-        "Docker Compose packages PostgreSQL, migrations, FastAPI, and Next.js. SQL is parsed and checked against selected tables and allowed functions, then executed in read-only transactions with timeouts and bounded results. Imports have size and row limits, while source ownership scopes access to uploaded data.",
+        "Docker Compose packages PostgreSQL, migrations, FastAPI, and Next.js. SQL is parsed and checked against selected tables and allowed functions, then executed in read-only transactions with timeouts and bounded results. Imports have size and row limits, source ownership scopes uploaded data, and model-specific credit accounting tracks analysis usage. Agent settings expose process mode and tool-step limits.",
       lessonsLearned:
-        "Schema context, table scope, and observable query results make conversational analytics easier to inspect. Keeping tool evidence with saved conversations supports follow-up questions and report rewriting without losing the supporting queries.",
+        "A useful chart needs the same evidence trail as a written answer. Keeping selected tables, query results, visualization controls, and downloadable source data together makes follow-up analysis easier to inspect. Visible model settings and credit costs help users choose how to run that analysis.",
     },
     publicEvidence: [
       {
