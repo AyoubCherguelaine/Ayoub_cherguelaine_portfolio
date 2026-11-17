@@ -2,10 +2,10 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https:/
 
 export const siteConfig = {
   name: "Ayoub Cherguelaine",
-  role: "AI & NLP Engineer",
-  title: "Ayoub Cherguelaine - AI & NLP Engineer",
+  role: "Applied AI Engineer",
+  title: "Ayoub Cherguelaine - Applied AI Engineer | Document AI & Agents",
   description:
-    "AI Engineer specializing in Generative AI, LLMs, NLP, and Data Engineering, with strong software engineering expertise and hands-on experience building scalable AI systems. Experienced in LLM fine-tuning, agentic AI, RAG, machine learning, document intelligence, and large-scale data processing pipelines.",
+    "I build Arabic/English document AI and agent systems for legal, insurance & trade-finance teams — from scanned PDF to source-verified answer. Available for projects & retainers.",
   url: baseUrl,
   email: "cherguelainea@gmail.com",
   location: "Riyadh, Saudi Arabia",

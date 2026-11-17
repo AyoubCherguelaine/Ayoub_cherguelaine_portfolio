@@ -294,7 +294,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                 className="inline-flex items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-chart-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
               >
                 <ExternalLink className="h-4 w-4" />
-                Live Artifact
+                Live Demo
               </a>
             )}
 

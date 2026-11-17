@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowDownRight, Github, Linkedin, Download } from "lucide-react"
+import { ArrowDownRight, Calendar, Github, Linkedin, Download } from "lucide-react"
 import { profileSnapshot } from "@/lib/portfolio-data"
 
 function LanguageNetwork() {
@@ -68,14 +68,14 @@ function LanguageNetwork() {
         ))}
       </svg>
       <span className="network-label network-label-top">
-        AI & NLP
+        Document AI
         <br />
-        <span>Language systems</span>
+        <span>OCR · RAG · Agents</span>
       </span>
       <span className="network-label network-label-bottom">
         Production Delivery
         <br />
-        <span>Models / Data / Systems</span>
+        <span>Legal · Insurance · Trade</span>
       </span>
     </div>
   )
@@ -87,9 +87,11 @@ export default function Hero({ github }: { github: typeof profileSnapshot.github
       <div className="hero-topline">
         <span className="eyebrow availability">
           <span />
-          Open to AI/NLP roles
+          Available for projects &amp; retainers
         </span>
-        <span className="eyebrow text-muted-foreground">AI & NLP Engineer</span>
+        <span className="eyebrow text-muted-foreground">
+          Applied AI Engineer
+        </span>
       </div>
       <div className="hero-layout">
         <div className="hero-copy">
@@ -98,24 +100,36 @@ export default function Hero({ github }: { github: typeof profileSnapshot.github
             <br />
             <span className="text-primary">Cherguelaine</span>
           </h1>
-          <h2>AI & NLP Engineer</h2>
+          <h2>Applied AI Engineer</h2>
           <p>
-            Building production-grade language systems across private client
-            delivery and public model and dataset releases.
+            I build Arabic/English document AI and agent systems for legal, insurance &amp; trade-finance teams — from scanned PDF to source-verified answer.
           </p>
-          <div className="hero-actions">
-            <a href="#projects" className="primary-action">
-              View Projects
-              <ArrowDownRight size={18} />
-            </a>
-            <a
-              href="/CHERGUELAINE_Ayoub.pdf"
-              download="CHERGUELAINE_Ayoub.pdf"
-              className="text-action"
-            >
-              Download CV
-              <Download size={15} />
-            </a>
+          <div className="hero-focus-tags">
+            <code>Document AI</code>
+            <span className="divider">·</span>
+            <code>AI Agents</code>
+            <span className="divider">·</span>
+            <code>Data Engineering</code>
+          </div>
+          <div className="hero-cta-block">
+            <div className="hero-actions">
+              <a href="#contact" className="primary-action">
+                Book a 15-min call
+                <Calendar size={18} />
+              </a>
+              <a href="#projects" className="secondary-action">
+                View Projects
+                <ArrowDownRight size={15} />
+              </a>
+              <a
+                href="/CHERGUELAINE_Ayoub.pdf"
+                download="CHERGUELAINE_Ayoub.pdf"
+                className="text-action"
+              >
+                Download CV
+                <Download size={15} />
+              </a>
+            </div>
           </div>
           <div className="hero-socials">
             <a

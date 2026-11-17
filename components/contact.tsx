@@ -8,11 +8,11 @@ export default function Contact() {
       <div className="mx-auto max-w-6xl space-y-10">
         <div className="space-y-3">
           <span className="eyebrow">06 / CONTACT</span>
-          <h2 className="text-5xl font-medium tracking-tight">Get In Touch</h2>
+          <h2 className="text-5xl font-medium tracking-tight">Book a 15-Min Call</h2>
 
           <p className="mt-4 text-muted-foreground">
-            Let&apos;s connect on any channel below. Public profile data on this
-            site was last verified on {profileSnapshot.verifiedLabel}.
+            Available for projects &amp; retainers.
+            Connect directly via email, LinkedIn, or WhatsApp to schedule a 15-minute consultation.
           </p>
         </div>
 

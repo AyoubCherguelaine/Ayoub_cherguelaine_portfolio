@@ -1,3 +1,5 @@
+import Link from "next/link"
+import { FileText, Bot, Database } from "lucide-react"
 import { profileSnapshot } from "@/lib/portfolio-data"
 
 export default function About({ github }: { github: typeof profileSnapshot.github }) {
@@ -8,8 +10,8 @@ export default function About({ github }: { github: typeof profileSnapshot.githu
     >
       <div className="mx-auto max-w-6xl space-y-8">
         <div className="section-heading space-y-3">
-          <span className="eyebrow text-muted-foreground">01 / ABOUT</span>
-          <h2 className="text-4xl font-medium tracking-tight">About Me</h2>
+          <span className="eyebrow text-muted-foreground">01 / ABOUT &amp; CORE PILLARS</span>
+          <h2 className="text-4xl font-medium tracking-tight">Core Pillars</h2>
         </div>
 
         <p className="text-lg text-muted-foreground leading-relaxed">
@@ -17,27 +19,87 @@ export default function About({ github }: { github: typeof profileSnapshot.githu
           <span className="font-semibold text-foreground">
             Ayoub Cherguelaine
           </span>
-          , an AI engineer specializing in Generative AI, LLMs, NLP, and Data
-          Engineering, with strong software engineering expertise and hands-on
-          experience building scalable AI systems. I design practical language
-          systems and data pipelines that are reliable in production, not only
-          in notebooks. My core focus is applied LLM engineering,
-          retrieval-augmented generation, and model-driven automation.
+          , an Applied AI Engineer building Arabic/English document AI and agent systems for legal, insurance &amp; trade-finance teams — from scanned PDF to source-verified answer.
         </p>
 
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          Public profile:{" "}
-          {github.publicRepos} public GitHub repositories,{" "}
-          {github.followers} GitHub followers,{" "}
-          {profileSnapshot.huggingFace.publicModels} public Hugging Face models,
-          and {profileSnapshot.huggingFace.publicDatasets} public Hugging Face
-          datasets.
-        </p>
+        <div className="about-services grid sm:grid-cols-3 gap-6 pt-2">
+          <div className="hover-lift flex flex-col justify-between rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary/60">
+            <div>
+              <div className="mb-3 inline-flex rounded-md bg-primary/10 p-2.5 text-primary">
+                <FileText className="h-5 w-5" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-foreground">
+                Document AI
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Scanned Arabic &amp; English PDFs → structured, schema-checked data with source evidence.
+              </p>
+            </div>
+            <div className="mt-5 border-t border-border/60 pt-3 text-xs leading-relaxed text-muted-foreground">
+              {/* <span className="font-semibold text-primary">Proof:</span>{" "} */}
+              <Link href="/projects/doctool-document-ai" className="hover:text-foreground underline underline-offset-2">
+                DOCTool
+              </Link>{" "}
+              +{" "}
+              <Link href="/projects/company-document-dataset-v2" className="hover:text-foreground underline underline-offset-2">
+                353,580-document public dataset
+              </Link>.
+            </div>
+          </div>
+
+          <div className="hover-lift flex flex-col justify-between rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary/60">
+            <div>
+              <div className="mb-3 inline-flex rounded-md bg-primary/10 p-2.5 text-primary">
+                <Bot className="h-5 w-5" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-foreground">
+                AI Agents
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Retrieval, reasoning and decision agents that cite their sources — in production for legal &amp; insurance clients.
+              </p>
+            </div>
+            <div className="mt-5 border-t border-border/60 pt-3 text-xs leading-relaxed text-muted-foreground">
+              {/* <span className="font-semibold text-primary">Proof:</span>{" "} */}
+              <Link href="/projects/insurance-success-predictor" className="hover:text-foreground underline underline-offset-2">
+                JURAI (Denmark)
+              </Link>
+              ,{" "}
+              <Link href="/projects/mustashar-data-platform" className="hover:text-foreground underline underline-offset-2">
+                Mustashar
+              </Link>
+              , compliance agents at{" "}
+              <a href="#experience" className="hover:text-foreground underline underline-offset-2">
+                Paseetah
+              </a>.
+            </div>
+          </div>
+
+          <div className="hover-lift flex flex-col justify-between rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary/60">
+            <div>
+              <div className="mb-3 inline-flex rounded-md bg-primary/10 p-2.5 text-primary">
+                <Database className="h-5 w-5" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-foreground">
+                Data Engineering
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                The foundation under the AI: ETL, scraping and validation at 10M+ records, 99% accuracy.
+              </p>
+            </div>
+            <div className="mt-5 border-t border-border/60 pt-3 text-xs leading-relaxed text-muted-foreground">
+              {/* <span className="font-semibold text-primary">Proof:</span>{" "} */}
+              <a href="#experience" className="hover:text-foreground underline underline-offset-2">
+                Paseetah real-estate pipelines
+              </a>.
+            </div>
+          </div>
+        </div>
 
         <div className="rounded-lg border border-border bg-card p-4">
           <p className="text-sm leading-relaxed text-muted-foreground">
-            GitHub counters refresh hourly from the public API, with a saved fallback.
-            Hugging Face artifacts were manually verified on{" "}
+            GitHub counters refresh hourly from the public API, with a saved fallback ({github.publicRepos} repos, {github.followers} followers).
+            Hugging Face artifacts ({profileSnapshot.huggingFace.publicModels} models, {profileSnapshot.huggingFace.publicDatasets} datasets) were verified on{" "}
             <span className="font-medium text-foreground">
               {profileSnapshot.verifiedLabel}
             </span>
@@ -45,32 +107,6 @@ export default function About({ github }: { github: typeof profileSnapshot.githu
             repository inspection and intentionally exclude confidential client
             data.
           </p>
-        </div>
-
-        <div className="about-services grid sm:grid-cols-3 gap-6">
-          <div className="hover-lift rounded-lg border border-border bg-card p-6 transition-all duration-300">
-            <h3 className="font-semibold text-lg mb-2">
-              Applied LLM Engineering
-            </h3>
-            <p className="text-muted-foreground text-sm">
-              Designing retrieval and agent pipelines for legal, insurance, and
-              analytics use cases.
-            </p>
-          </div>
-          <div className="hover-lift rounded-lg border border-border bg-card p-6 transition-all duration-300">
-            <h3 className="font-semibold text-lg mb-2">Production Delivery</h3>
-            <p className="text-muted-foreground text-sm">
-              Shipped private client systems with traceability, guardrails, and
-              operational readiness.
-            </p>
-          </div>
-          <div className="hover-lift rounded-lg border border-border bg-card p-6 transition-all duration-300">
-            <h3 className="font-semibold text-lg mb-2">Public Artifacts</h3>
-            <p className="text-muted-foreground text-sm">
-              Publishing selected models and datasets for transparent,
-              reproducible AI work.
-            </p>
-          </div>
         </div>
       </div>
     </section>

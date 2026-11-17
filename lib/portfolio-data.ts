@@ -134,6 +134,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/AyoubCherguelaine/Doc-tool",
+      demo: "https://github.com/AyoubCherguelaine/Doc-tool",
       status: "available",
     },
     details: {
@@ -432,7 +433,7 @@ export const projects: Project[] = [
       "Developed and fine-tuned models targeting Saudi Arabic dialect for classification and conversational tasks, with dataset and artifact preparation for reproducibility.",
     impact:
       "Expanded available Arabic NLP coverage with dialect-specific artifacts and documented training setups.",
-    coverImage: "/projects/saudi-arabic-dialect-models.svg",
+    coverImage: "/projects/saudi-arabic-dialect-cover.jpeg",
     tags: ["Arabic NLP", "Dialect Modeling", "Fine-tuning", "Transformers", "Dataset"],
     links: {
       demo: "https://huggingface.co/collections/AyoubChLin/saudi-dialect-fine-tuned-models",
@@ -631,6 +632,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/AyoubCherguelaine/querylens",
+      demo: "https://github.com/AyoubCherguelaine/querylens",
       status: "available",
     },
     details: {
@@ -766,7 +768,7 @@ export const projects: Project[] = [
       "Built a seeded pipeline that renders documents for 60 synthetic companies, checks text and financial totals, and exports gold fields, word boxes, and degraded scans.",
     impact:
       "Published 404,514 PDF pages and 120,523 degraded page images, with company-based splits for classification, OCR, and field extraction.",
-    coverImage: "/projects/company-document-dataset-v2.svg",
+    coverImage: "/projects/company-documents-enterprise-ocr-dataset.png",
     tags: ["Dataset", "Document AI", "OCR", "Synthetic Data", "English / French"],
     links: {
       github: "https://github.com/AyoubCherguelaine/Company-document-dataset-v2",

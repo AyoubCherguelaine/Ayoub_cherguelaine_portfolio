@@ -47,7 +47,7 @@ export default function Navigation() {
           </div>
 
           <a href="#contact" className="nav-contact hidden sm:inline-flex">
-            Get In Touch
+            Book a Call
             <ArrowUpRight size={15} />
           </a>
 
@@ -82,7 +82,7 @@ export default function Navigation() {
               className="block px-3 py-2 text-sm text-primary"
               onClick={() => setIsOpen(false)}
             >
-              Get In Touch
+              Book a Call
             </a>
           </div>
         )}
