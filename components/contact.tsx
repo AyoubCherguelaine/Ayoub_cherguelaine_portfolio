@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Mail, Linkedin, Github, MessageCircle } from "lucide-react"
+import { Calendar, Mail, Linkedin, Github, MessageCircle } from "lucide-react"
 import { profileSnapshot } from "@/lib/portfolio-data"
 
 export default function Contact() {
@@ -12,11 +12,23 @@ export default function Contact() {
 
           <p className="mt-4 text-muted-foreground">
             Available for projects &amp; retainers.
-            Connect directly via email, LinkedIn, or WhatsApp to schedule a 15-minute consultation.
+            Book a 15-minute consultation directly via Cal.com, or reach out via email, LinkedIn, or WhatsApp.
           </p>
         </div>
 
         <div className="contact-links my-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <a
+            href="https://cal.com/ayoub-cherguelaine-nsa8kv/15min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover-lift flex flex-col items-center gap-3 rounded-lg border border-primary/40 bg-card p-6 text-center transition-colors hover:border-primary hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+          >
+            <Calendar size={32} className="text-primary" />
+            <h3 className="font-semibold text-foreground">Cal.com</h3>
+            <p className="text-sm text-muted-foreground">
+              Book a 15-min call
+            </p>
+          </a>
           <a
             href="mailto:cherguelainea@gmail.com"
             className="hover-lift flex flex-col items-center gap-3 rounded-lg border border-border bg-card p-6 text-center transition-colors hover:border-primary hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"

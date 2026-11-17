@@ -13,6 +13,7 @@ export const siteConfig = {
     github: "https://github.com/AyoubCherguelaine",
     linkedin: "https://www.linkedin.com/in/ayoub-cherguelaine",
     huggingface: "https://huggingface.co/AyoubChLin",
+    cal: "https://cal.com/ayoub-cherguelaine-nsa8kv/15min",
   },
 } as const
 

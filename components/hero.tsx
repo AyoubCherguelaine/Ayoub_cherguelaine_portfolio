@@ -113,7 +113,12 @@ export default function Hero({ github }: { github: typeof profileSnapshot.github
           </div>
           <div className="hero-cta-block">
             <div className="hero-actions">
-              <a href="#contact" className="primary-action">
+              <a
+                href="https://cal.com/ayoub-cherguelaine-nsa8kv/15min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="primary-action"
+              >
                 Book a 15-min call
                 <Calendar size={18} />
               </a>
