@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, ChevronDown, ExternalLink, Github } from "lucide-react"
+import { ArrowRight, ChevronDown, ExternalLink, Github, Play } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -17,6 +17,7 @@ const statusLabel: Record<ProjectLinkStatus, string> = {
   request: "Demo on Request",
   coming_soon: "Coming Soon",
   available: "Open Source",
+  demo_only: "Closed Source · Demo Only",
 }
 
 function ProjectCard({ project }: { project: Project }) {
@@ -85,28 +86,39 @@ function ProjectCard({ project }: { project: Project }) {
           </Link>
         </Button>
 
+        {project.links.video && (
+          <Button asChild size="sm" className="min-h-11">
+            <a href={project.links.video} target="_blank" rel="noopener noreferrer">
+              <Play aria-hidden="true" />
+              Watch Demo
+            </a>
+          </Button>
+        )}
+
         {project.links.github && (
-          <a
-            href={project.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full text-sm font-medium text-primary transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-          >
-            <Github size={16} />
-            Code
-          </a>
+          <Button asChild variant="outline" size="sm" className="min-h-11">
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github size={16} />
+              Repository
+            </a>
+          </Button>
         )}
 
         {project.links.demo && (
-          <a
-            href={project.links.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full text-sm font-medium text-primary transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-          >
-            <ExternalLink size={16} />
-            Demo
-          </a>
+          <Button asChild size="sm" className="min-h-11">
+            <a
+              href={project.links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink size={16} />
+              Live Demo
+            </a>
+          </Button>
         )}
 
         {project.links.status && (

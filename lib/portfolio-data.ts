@@ -1,8 +1,9 @@
-export type ProjectLinkStatus = "private" | "request" | "coming_soon" | "available"
+export type ProjectLinkStatus = "private" | "request" | "coming_soon" | "available" | "demo_only"
 
 export type ProjectLinks = {
   github?: string
   demo?: string
+  video?: string
   status?: ProjectLinkStatus
 }
 
@@ -43,6 +44,7 @@ export type Project = {
   solution: string
   impact: string
   coverImage: string
+  heroImage?: { src: string; alt: string; width: number; height: number; focusClassName?: string }
   tags: string[]
   screenshots?: { src: string; alt: string; caption: string; width: number; height: number }[]
   links: ProjectLinks
@@ -82,6 +84,48 @@ export const profileSnapshot: ProfileSnapshot = {
 
 export const projects: Project[] = [
   {
+    id: "qatari-legal-ai",
+    title: "Qatari Legal AI — Graph-Based Legal Research",
+    summary:
+      "An Arabic legal research platform that turns Qatar’s statutory corpus into traceable answers. Combines a legal knowledge graph, multi-agent reasoning, claim-level evidence review, and deterministic calculations across a documented corpus of 9,738 legislations and 70,276 articles.",
+    problem:
+      "A legal answer depends on more than finding a matching paragraph. Amendments, repeals, cross-references, exceptions, and missing case facts can change which rule applies; fluent text alone cannot establish that an answer or calculation is supported.",
+    solution:
+      "Built an end-to-end platform that collects official Al Meezan legislation, structures articles and legal relationships in PostgreSQL and Neo4j, and routes Arabic questions through coordinated retrieval and reasoning agents. Answers connect claims to source passages, check legislative status, and request clarification when facts or evidence are incomplete.",
+    impact:
+      "Brings data engineering, graph retrieval, legal reasoning, and an Arabic research workspace into one inspectable workflow. The documented corpus includes 18,011 legal sections, 14,410 relationships, and 5,384 statutory definitions. Users can follow official article citations and inspect the evidence behind an answer; supported calculations run through a separate decimal arithmetic engine.",
+    coverImage: "/projects/qatari-legal-ai/demo-cover.jpg",
+    heroImage: {
+      src: "/projects/qatari-legal-ai/demo-cover.jpg",
+      alt: "Qatari Legal AI Arabic research workspace, from the project demo video",
+      width: 1280,
+      height: 720,
+    },
+    tags: ["Graph RAG", "Multi-Agent AI", "Arabic NLP", "Legal Tech", "Python", "FastAPI", "PostgreSQL", "Neo4j", "React", "Docker"],
+    links: {
+      video: "https://www.youtube.com/watch?v=lytlAsQl-FQ",
+      status: "demo_only",
+    },
+    details: {
+      timeline:
+        "Developed across official-source ingestion, legal knowledge extraction, graph indexing, agent orchestration, and the Arabic web application. Portfolio entry prepared November 19, 2026.",
+      roleScope:
+        "Built the legal data pipeline, PostgreSQL schema and search tools, Neo4j knowledge graph, coordinated retrieval and reasoning agents, claim review, deterministic calculation safeguards, FastAPI services, and React research interface.",
+      teamSetup:
+        "End-to-end engineering spanning data infrastructure, Arabic retrieval, AI orchestration, backend APIs, and frontend development.",
+      architecture:
+        "A staged pipeline moves collected source records from SQLite into PostgreSQL, extracts legal hierarchy, definitions, and cross-references, and builds the Neo4j graph. A FastAPI coordinator routes questions to specialist agents. Retrieval combines PostgreSQL text search with graph context and related provisions; synthesis and claim review use the retrieved passages. React presents streamed responses through Server-Sent Events, with persisted conversations and execution traces.",
+      dataEvaluation:
+        "Evidence checks examine legal status, dependencies, citation provenance, and support for individual claims. Historical questions require verified validity dates; missing coverage and conflicting facts trigger explicit limitations or clarification. Calculations validate source-backed parameters, units, and formulas before executing decimal arithmetic. Corpus figures describe the repository’s documented data snapshot, rather than measured answer accuracy.",
+      productionOps:
+        "Docker Compose packages the web app, FastAPI backend, Redis, and data monitor alongside PostgreSQL and Neo4j infrastructure. Authentication, session persistence, request limits, health checks, and execution traces support operation and debugging. The repository includes regression and storage integration checks for retrieval, evidence handling, and calculations.",
+      lessonsLearned:
+        "Useful legal AI needs to preserve the conditions around a rule: its scope, exceptions, dependencies, and validity. Separating retrieval, claim review, and arithmetic makes answers easier to inspect and gives the system a clear path to ask for missing information.",
+    },
+    visibility: "featured",
+    priority: 0,
+  },
+  {
     id: "doctool-document-ai",
     title: "DOCTool — Bilingual Document AI Workspace",
     summary:
@@ -92,7 +136,14 @@ export const projects: Project[] = [
       "Built a bilingual workspace with a searchable service catalog, document chat, semantic OCR, and an extraction playground for uploaded files or direct text. Users choose a processing model, customize the prompt and JSON schema, and inspect structured output and agent steps. Optional Guardian mode checks schemas and source evidence; the same service engine powers API requests and queued jobs.",
     impact:
       "Connects document review and application integration in one workflow: extract invoice fields, review contract terms, classify documents, mask sensitive text, or translate between Arabic and English. The current local app includes 16 catalog services, model comparison, credit tracking, and developer integration guides. Outputs remain reviewable against the source.",
-    coverImage: "/projects/doctool/services-workspace.png",
+    coverImage: "/projects/doctool/invoice-playground.png",
+    heroImage: {
+      src: "/projects/doctool/invoice-playground.png",
+      alt: "DOCTool invoice playground showing invoice input, extraction schema, and structured JSON output",
+      width: 1600,
+      height: 1100,
+      focusClassName: "absolute top-[-11.4%] left-[-22.25%] h-auto w-[125.4%] max-w-none",
+    },
     tags: ["Document AI", "Arabic & English", "Semantic OCR", "Hybrid RAG", "AI Agents", "FastAPI", "Next.js", "PostgreSQL", "Redis"],
     screenshots: [
       {
@@ -134,7 +185,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/AyoubCherguelaine/Doc-tool",
-      demo: "https://github.com/AyoubCherguelaine/Doc-tool",
+      video: "https://www.youtube.com/watch?v=90nGSRXG5w0",
       status: "available",
     },
     details: {
@@ -521,7 +572,7 @@ export const projects: Project[] = [
       lessonsLearned:
         "Legal users trusted the system more when intermediate artifacts were explicit and replayable; streaming transparency was as important as final prediction quality.",
     },
-    visibility: "featured",
+    visibility: "more",
     priority: 6,
   },
   {
@@ -589,15 +640,15 @@ export const projects: Project[] = [
     id: "chat-with-database",
     title: "QueryLens — Conversational Data Analytics",
     summary:
-      "A bilingual analytics workspace that turns CSV, SQLite, and PostgreSQL data into conversations, interactive charts, and written reports, with inspectable SQL and downloadable source evidence.",
+      "A bilingual analytics workspace that turns Excel, CSV, SQLite, and PostgreSQL data into conversations, interactive charts, and written reports, with inspectable SQL and downloadable source evidence.",
     problem:
-      "Exploring unfamiliar relational data takes SQL knowledge and context across tables. A fluent AI answer or polished chart alone does not show which query, rows, or assumptions support it.",
+      "Exploring unfamiliar spreadsheets and relational data takes SQL knowledge and context across sheets and tables. A fluent AI answer or polished chart alone does not show which query, rows, or assumptions support it.",
     solution:
-      "Built a source-aware analyst that inspects schemas, samples selected tables, executes guarded read-only SQL with joins, and answers from observed results. The workspace now combines a dataset overview, relational schema explorer, multi-table conversations, and evidence-linked chart generation. Users can switch chart types, filter results, compare grouped or stacked series, and download chart data as CSV or JSON.",
+      "Built a source-aware analyst that imports Excel workbooks with each worksheet as its own table, inspects schemas, samples selected tables, executes guarded read-only SQL with joins, and answers from observed results. The workspace now combines a dataset overview, relational schema explorer, multi-table conversations, and evidence-linked chart generation. Users can switch chart types, filter results, compare grouped or stacked series, and download chart data as CSV or JSON.",
     impact:
-      "Connects data import, schema inspection, multi-table questions, visual exploration, and reporting in one English and Arabic workflow. Model selection, agent process controls, and a visible credit balance make analysis settings and application costs easier to understand. A local demo joined three imported tables and generated a grouped revenue chart from six query-result rows.",
+      "Connects Excel and database imports, schema inspection, multi-table questions, visual exploration, and reporting in one English and Arabic workflow. Model selection, agent process controls, and a visible credit balance make analysis settings and application costs easier to understand. A local demo joined three imported tables and generated a grouped revenue chart from six query-result rows.",
     coverImage: "/projects/querylens/overview-current.png",
-    tags: ["AI Agents", "Text-to-SQL", "Data Visualization", "Arabic & English", "Next.js", "FastAPI", "PostgreSQL", "Docker"],
+    tags: ["AI Agents", "Text-to-SQL", "Excel", "Data Visualization", "Arabic & English", "Next.js", "FastAPI", "PostgreSQL", "Docker"],
     screenshots: [
       {
         src: "/projects/querylens/chart-current.png",
@@ -632,18 +683,18 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/AyoubCherguelaine/querylens",
-      demo: "https://github.com/AyoubCherguelaine/querylens",
+      video: "https://youtu.be/WlsUtt0Z3J0?si=J0c9jgjy6bSNABrP",
       status: "available",
     },
     details: {
       timeline:
-        "Evolved from Chat OLAP into QueryLens. Reviewed November 3, 2026 after adding multi-table chat, chart generation, grouped and stacked series, the overview dashboard, relational schema inspection, and model and credit settings.",
+        "Evolved from Chat OLAP into QueryLens. Reviewed November 3, 2026 after adding multi-table chat, chart generation, grouped and stacked series, the overview dashboard, relational schema inspection, and model and credit settings. Updated November 19, 2026 with Excel workbook imports and a video demo.",
       roleScope:
-        "Built the Next.js interface, FastAPI backend, PostgreSQL source catalog, CSV and SQLite imports, conversational tool agent, SQL validation, chart tooling, model and credit controls, and report and evidence downloads.",
+        "Built the Next.js interface, FastAPI backend, PostgreSQL source catalog, Excel, CSV, and SQLite imports, conversational tool agent, SQL validation, chart tooling, model and credit controls, and report and evidence downloads.",
       teamSetup:
         "A portfolio project bringing frontend, backend, data modeling, and agent tooling together in one repository.",
       architecture:
-        "Next.js proxies same-origin requests to FastAPI and keeps authentication in an HTTP-only cookie. PostgreSQL persists sources, semantic cubes, conversations, model preferences, and credit transactions. The analyst inspects the selected tables and runs SELECT queries; GraphAgent validates chart specifications against successful query evidence and packages result rows for export. Recharts renders bar, line, area, pie, and scatter views, including third-dimension series and bubble sizing.",
+        "Next.js proxies same-origin requests to FastAPI and keeps authentication in an HTTP-only cookie. Excel imports turn each worksheet into a typed table for the same multi-table analysis workflow as CSV and SQLite uploads. PostgreSQL persists sources, semantic cubes, conversations, model preferences, and credit transactions. The analyst inspects the selected tables and runs SELECT queries; GraphAgent validates chart specifications against successful query evidence and packages result rows for export. Recharts renders bar, line, area, pie, and scatter views, including third-dimension series and bubble sizing.",
       dataEvaluation:
         "Repository tests cover imports, query scope, conversational history, narrative references, chart specifications and evidence, credit accounting, model settings, and provider failures. The current local walkthrough imported three related SQLite tables and generated a grouped chart through the live agent. Screenshots use synthetic data and demonstrate functionality; analytical claims still need review against query results and limitations.",
       productionOps:

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, ExternalLink, Github } from "lucide-react"
+import { ArrowLeft, ArrowRight, ExternalLink, Github, Play } from "lucide-react"
 import { notFound } from "next/navigation"
 
 import { Badge } from "@/components/ui/badge"
@@ -24,6 +24,7 @@ const statusLabel: Record<ProjectLinkStatus, string> = {
   request: "Demo on Request",
   coming_soon: "Coming Soon",
   available: "Open Source",
+  demo_only: "Closed Source · Demo Only",
 }
 
 const evidencePlatformLabel: Record<PublicEvidence["platform"], string> = {
@@ -77,6 +78,30 @@ export async function generateMetadata({
   }
 }
 
+function getVideoEmbedUrl(videoUrl?: string): string | null {
+  if (!videoUrl) return null
+
+  try {
+    const url = new URL(videoUrl)
+    const host = url.hostname.replace(/^www\./, "")
+    const videoId = host === "youtu.be"
+      ? url.pathname.split("/")[1]
+      : host === "youtube.com" || host === "youtube-nocookie.com"
+        ? url.pathname === "/watch"
+          ? url.searchParams.get("v")
+          : /^\/(embed|shorts)\//.test(url.pathname)
+            ? url.pathname.split("/")[2]
+            : null
+        : null
+
+    return videoId && /^[a-zA-Z0-9_-]{11}$/.test(videoId)
+      ? `https://www.youtube-nocookie.com/embed/${videoId}`
+      : null
+  } catch {
+    return null
+  }
+}
+
 function DetailPanel({ title, content }: { title: string; content: string }) {
   return (
     <div className="rounded-xl border border-border bg-card/70 p-5">
@@ -113,6 +138,8 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
   if (!project) {
     notFound()
   }
+
+  const videoEmbedUrl = getVideoEmbedUrl(project.links.video)
 
   const projectIndex = projects.findIndex((item) => item.id === project.id)
   const previousProject = projectIndex > 0 ? projects[projectIndex - 1] : null
@@ -167,19 +194,88 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
               </Badge>
             ))}
           </div>
+          <div className="flex flex-wrap items-center gap-3" aria-label="Project links">
+            {project.links.video && (
+              <Button asChild size="lg" className="min-h-11">
+                <a href={videoEmbedUrl ? "#demo-video" : project.links.video}>
+                  <Play aria-hidden="true" />
+                  Watch Demo
+                </a>
+              </Button>
+            )}
+            {project.links.demo && (
+              <Button asChild size="lg" variant={project.links.video ? "outline" : "default"} className="min-h-11">
+                <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink aria-hidden="true" />
+                  Live Demo
+                </a>
+              </Button>
+            )}
+            {project.links.github && (
+              <Button asChild size="lg" variant={project.links.demo || project.links.video ? "outline" : "default"} className="min-h-11">
+                <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+                  <Github aria-hidden="true" />
+                  Repository
+                </a>
+              </Button>
+            )}
+            {project.links.status && (
+              <Badge variant="outline" className="border-primary/30 text-primary">
+                {statusLabel[project.links.status]}
+              </Badge>
+            )}
+          </div>
         </header>
 
-        <div className="overflow-hidden rounded-xl border border-border/80">
+        {videoEmbedUrl && (
+          <section id="demo-video" aria-labelledby="demo-video-heading" className="scroll-mt-8 space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 id="demo-video-heading" className="text-2xl font-semibold">
+                Project Demo
+              </h2>
+              <a
+                href={project.links.video}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                Watch on YouTube
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+            <div className="aspect-video overflow-hidden rounded-xl border border-border/80 bg-black">
+              <iframe
+                src={videoEmbedUrl}
+                title={`${project.title} — demo video`}
+                width="1280"
+                height="720"
+                className="h-full w-full border-0"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </section>
+        )}
+
+        <a
+          href={project.heroImage?.src ?? project.coverImage}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Open full-size image: ${project.title}`}
+          className={`relative block overflow-hidden rounded-xl border border-border/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${project.heroImage?.focusClassName ? "aspect-[1280/790]" : ""}`}
+        >
           <Image
-            src={project.coverImage}
-            alt={`${project.title} cover`}
-            width={project.screenshots?.length ? 1600 : 1200}
-            height={project.screenshots?.length ? 1200 : 720}
-            sizes="(min-width: 1024px) 896px, (min-width: 768px) calc(100vw - 96px), calc(100vw - 32px)"
+            src={project.heroImage?.src ?? project.coverImage}
+            alt={project.heroImage?.alt ?? `${project.title} cover`}
+            width={project.heroImage?.width ?? (project.screenshots?.length ? 1600 : 1200)}
+            height={project.heroImage?.height ?? (project.screenshots?.length ? 1200 : 720)}
+            sizes="(min-width: 1088px) 1280px, 125vw"
             priority
-            className="h-auto w-full object-cover"
+            className={project.heroImage?.focusClassName ?? "h-auto w-full object-cover"}
           />
-        </div>
+        </a>
 
         {project.screenshots?.length ? (
           <section className="space-y-5" aria-labelledby="screenshots-heading">
@@ -268,53 +364,14 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="space-y-3 rounded-xl border border-border bg-card/70 p-6">
-          <h2 className="text-xl font-semibold">Links</h2>
-          <p className="text-xs text-muted-foreground">
-            Last verified: {verifiedLabel}
-          </p>
-          <div className="flex flex-wrap items-center gap-3">
-            {project.links.github && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-chart-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-              >
-                <Github className="h-4 w-4" />
-                Repository
-              </a>
-            )}
-
-            {project.links.demo && (
-              <a
-                href={project.links.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-chart-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-              >
-                <ExternalLink className="h-4 w-4" />
-                Live Demo
-              </a>
-            )}
-
-            {project.links.status && (
-              <Badge
-                variant="outline"
-                className="border-primary/30 text-primary"
-              >
-                {statusLabel[project.links.status]}
-              </Badge>
-            )}
-          </div>
-        </section>
-
         <section className="space-y-4 rounded-xl border border-border bg-card/70 p-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-xl font-semibold">Public Evidence</h2>
-            <p className="text-xs text-muted-foreground">
-              Last verified: {verifiedLabel}
-            </p>
+            {publicEvidence.length > 0 && (
+              <p className="text-xs text-muted-foreground">
+                Last verified: {verifiedLabel}
+              </p>
+            )}
           </div>
 
           {publicEvidence.length > 0 ? (
@@ -364,6 +421,19 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                   </div>
                 )
               })}
+            </div>
+          ) : project.links.status === "demo_only" && project.links.video ? (
+            <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+              <p>
+                The demo video is the only public project artifact. Source code is
+                private and is not available as open source.
+              </p>
+              <Button asChild>
+                <a href={project.links.video} target="_blank" rel="noopener noreferrer">
+                  <Play aria-hidden="true" />
+                  Watch Demo
+                </a>
+              </Button>
             </div>
           ) : (
             <p className="text-sm leading-relaxed text-muted-foreground">
