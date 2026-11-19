@@ -986,13 +986,13 @@ export const experiences: Experience[] = [
   },
   {
     id: "jurai-part-time-llm-engineer",
-    role: "Part-Time LLM Engineer & Full-Stack Developer",
+    role: "Part-Time Applied AI Engineer",
     company: "JURAI",
     period: "1/2025 - 12/2025",
     projects: [
       {
         name: "Jurai Assistant",
-        context: "Denmark - Jan 2025 - Dec 2025 - LLM Engineer & Full-Stack Developer",
+        context: "Denmark - Jan 2025 - Dec 2025 - Part-Time Applied AI Engineer",
         description:
           "Designed and implemented production-grade agentic AI systems using LangChain and CrewAI, including retrieval, classification, reasoning, legal analysis, RAG, and decision-prediction agents. Built LLM pipelines with semantic retrieval, embeddings, and long-term contextual memory, plus automated legal-data ingestion, preprocessing, validation, and enrichment. Developed the FastAPI backend and AI orchestration layer, integrating PostgreSQL/vector databases, external APIs, authentication, and scalable async workflows. Deployed and monitored AI services on AWS EC2 with Docker, implementing production testing, logging, error handling, fallback mechanisms, and performance monitoring.",
       },
