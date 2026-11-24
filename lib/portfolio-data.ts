@@ -85,15 +85,15 @@ export const profileSnapshot: ProfileSnapshot = {
 export const projects: Project[] = [
   {
     id: "qatari-legal-ai",
-    title: "Qatari Legal AI — Graph-Based Legal Research",
+    title: "Qatari Legal AI — Legal Research & Consultation",
     summary:
-      "An Arabic legal research platform that turns Qatar’s statutory corpus into traceable answers. Combines a legal knowledge graph, multi-agent reasoning, claim-level evidence review, and deterministic calculations across a documented corpus of 9,738 legislations and 70,276 articles.",
+      "An Arabic legal research and consultation MVP grounded in 9,738 legislative records and 70,276 articles from Qatar’s Al Meezan portal. Combines PostgreSQL and Neo4j retrieval, persistent case intake, cited answers, and deterministic calculations for supervised internal use.",
     problem:
-      "A legal answer depends on more than finding a matching paragraph. Amendments, repeals, cross-references, exceptions, and missing case facts can change which rule applies; fluent text alone cannot establish that an answer or calculation is supported.",
+      "A matching paragraph is only the start of a legal answer. The applicable law, person, date, exceptions, and missing case facts can change the result. Follow-up questions must preserve those conditions without losing unresolved issues or treating assumptions as facts.",
     solution:
-      "Built an end-to-end platform that collects official Al Meezan legislation, structures articles and legal relationships in PostgreSQL and Neo4j, and routes Arabic questions through coordinated retrieval and reasoning agents. Answers connect claims to source passages, check legislative status, and request clarification when facts or evidence are incomplete.",
+      "Built an assistant for direct legal questions and a consultant that maintains case facts, unresolved issues, and clarification questions across turns. Both use scoped PostgreSQL/Neo4j retrieval, exact article lookup, bounded reference expansion, and separate checks for claim support and question coverage before publishing an answer.",
     impact:
-      "Brings data engineering, graph retrieval, legal reasoning, and an Arabic research workspace into one inspectable workflow. The documented corpus includes 18,011 legal sections, 14,410 relationships, and 5,384 statutory definitions. Users can follow official article citations and inspect the evidence behind an answer; supported calculations run through a separate decimal arithmetic engine.",
+      "Connected ingestion, legal research, consultation intake, and an Arabic workspace in one traceable system. A fixed 33-query benchmark retrieved all 36 required source targets across 13 distinct articles. Seven completed comparison turns used about 49% fewer reported tokens after the workflow revisions; failed-attempt usage was recorded separately.",
     coverImage: "/projects/qatari-legal-ai/demo-cover.jpg",
     heroImage: {
       src: "/projects/qatari-legal-ai/demo-cover.jpg",
@@ -101,26 +101,26 @@ export const projects: Project[] = [
       width: 1280,
       height: 720,
     },
-    tags: ["Graph RAG", "Multi-Agent AI", "Arabic NLP", "Legal Tech", "Python", "FastAPI", "PostgreSQL", "Neo4j", "React", "Docker"],
+    tags: ["Graph RAG", "Multi-Agent AI", "RAG Evaluation", "Arabic NLP", "Legal Tech", "Python", "FastAPI", "PostgreSQL", "Neo4j", "React", "Docker"],
     links: {
-      video: "https://www.youtube.com/watch?v=lytlAsQl-FQ",
+      video: "https://youtu.be/cdui0IhUlzE",
       status: "demo_only",
     },
     details: {
       timeline:
-        "Developed across official-source ingestion, legal knowledge extraction, graph indexing, agent orchestration, and the Arabic web application. Portfolio entry prepared November 19, 2026.",
+        "Developed across official-source ingestion, legal knowledge extraction, graph indexing, agent orchestration, and the Arabic web application. Updated November 24, 2026 to reflect the evaluated assistant and consultation MVP.",
       roleScope:
-        "Built the legal data pipeline, PostgreSQL schema and search tools, Neo4j knowledge graph, coordinated retrieval and reasoning agents, claim review, deterministic calculation safeguards, FastAPI services, and React research interface.",
+        "Built the ingestion pipeline, PostgreSQL schema and search tools, Neo4j graph, assistant and consultation workflows, persistent case state, claim and coverage review, deterministic calculation safeguards, FastAPI services, React interface, and regression/evaluation tooling.",
       teamSetup:
         "End-to-end engineering spanning data infrastructure, Arabic retrieval, AI orchestration, backend APIs, and frontend development.",
       architecture:
-        "A staged pipeline moves collected source records from SQLite into PostgreSQL, extracts legal hierarchy, definitions, and cross-references, and builds the Neo4j graph. A FastAPI coordinator routes questions to specialist agents. Retrieval combines PostgreSQL text search with graph context and related provisions; synthesis and claim review use the retrieved passages. React presents streamed responses through Server-Sent Events, with persisted conversations and execution traces.",
+        "Source snapshots move from SQLite into PostgreSQL, where extraction builds legal hierarchy, definitions, and references before projecting them into Neo4j. A FastAPI coordinator routes direct questions to the assistant or personal cases to consultation intake, research, analysis, and review. Retrieval preserves instrument and person scope; a case ledger retains issues and corrections across turns. React provides clarification forms, saved conversations, and SSE transport for completed answers.",
       dataEvaluation:
-        "Evidence checks examine legal status, dependencies, citation provenance, and support for individual claims. Historical questions require verified validity dates; missing coverage and conflicting facts trigger explicit limitations or clarification. Calculations validate source-backed parameters, units, and formulas before executing decimal arithmetic. Corpus figures describe the repository’s documented data snapshot, rather than measured answer accuracy.",
+        "Verification includes 275 backend/data tests, 21 isolated PostgreSQL/Neo4j storage tests, 40 frontend tests, and a successful frontend build. The repeated 33-query benchmark improved from 34/36 to 36/36 required source targets over 13 articles. Seven completed paired turns used 79,547 reported tokens versus 156,832 before; a failed provider attempt added 10,085 reported tokens separately. These measure retrieval and observed usage, not legal accuracy or guaranteed savings. Historical conclusions are withheld without certified dated versions.",
       productionOps:
-        "Docker Compose packages the web app, FastAPI backend, Redis, and data monitor alongside PostgreSQL and Neo4j infrastructure. Authentication, session persistence, request limits, health checks, and execution traces support operation and debugging. The repository includes regression and storage integration checks for retrieval, evidence handling, and calculations.",
+        "Packaged for supervised internal use with Docker Compose, authentication, persisted sessions, context resets, health checks, and execution traces. Assistant and consultant share one correction allowance and a configurable limit of eight model attempts per request, including fallback. An 80,000-token stop threshold is checked between calls using reported usage. Compact prompts retain full legal passages and active fact provenance; provider failures remain explicit.",
       lessonsLearned:
-        "Useful legal AI needs to preserve the conditions around a rule: its scope, exceptions, dependencies, and validity. Separating retrieval, claim review, and arithmetic makes answers easier to inspect and gives the system a clear path to ask for missing information.",
+        "Reliable legal research requires both supported claims and coverage of the original question. Stable issue IDs, explicit assumptions, context resets, and source-backed arithmetic make follow-ups easier to inspect. Asking for material facts before research also avoids spending a full analysis budget just to request clarification. The system remains an internal research MVP, with legal review and historical-source curation still needed.",
     },
     visibility: "featured",
     priority: 0,
