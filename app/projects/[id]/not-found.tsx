@@ -11,7 +11,7 @@ export default function ProjectNotFound() {
           The project you are trying to open does not exist yet or the URL is incorrect.
         </p>
         <Button asChild variant="outline">
-          <Link href="/#projects">Back to Projects</Link>
+          <Link href="/projects">Back to Projects</Link>
         </Button>
       </section>
     </main>

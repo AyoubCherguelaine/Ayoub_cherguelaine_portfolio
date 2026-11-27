@@ -176,7 +176,7 @@ export default function Skills() {
                 <div className="flex items-start gap-3">
                   <span
                     className={cn(
-                      "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-background text-primary",
+                      "inline-flex h-10 w-10 shrink-0 items-center justify-center border border-border bg-background text-primary",
                     )}
                   >
                     <Icon className={cn("h-5 w-5 text-primary")} />

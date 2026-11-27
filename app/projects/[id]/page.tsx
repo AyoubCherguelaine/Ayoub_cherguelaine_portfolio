@@ -102,16 +102,33 @@ function getVideoEmbedUrl(videoUrl?: string): string | null {
   }
 }
 
-function DetailPanel({ title, content }: { title: string; content: string }) {
+function CaseStudyNotes({
+  id,
+  title,
+  notes,
+}: {
+  id: string
+  title: string
+  notes: { title: string; content: string }[]
+}) {
   return (
-    <div className="rounded-xl border border-border bg-card/70 p-5">
-      <h3 className="text-sm font-semibold tracking-wide text-foreground/80 uppercase">
+    <section aria-labelledby={id} className="py-3 sm:py-5">
+      <h2 id={id} className="project-display mb-6 text-[clamp(2.25rem,4vw,3.25rem)] sm:mb-8">
         {title}
-      </h3>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        {content}
-      </p>
-    </div>
+      </h2>
+      <div className="divide-y divide-(--work-border) border-y border-(--work-border)">
+        {notes.map((note) => (
+          <div key={note.title} className="grid gap-2 py-5 sm:py-7 md:grid-cols-[minmax(0,1fr)_minmax(0,2.5fr)] md:gap-8">
+            <h3 className="text-lg leading-snug font-semibold text-(--work-accent) sm:text-xl">
+              {note.title}
+            </h3>
+            <p className="max-w-[67ch] text-base leading-[1.75] text-(--work-muted)">
+              {note.content}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -140,6 +157,22 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
   }
 
   const videoEmbedUrl = getVideoEmbedUrl(project.links.video)
+  const overview = [
+    { title: "Timeline", content: project.details.timeline },
+    { title: "Role & Scope", content: project.details.roleScope },
+    { title: "Team Setup", content: project.details.teamSetup },
+  ]
+  const contextNotes = [
+    { title: "Problem", content: project.problem },
+    { title: "Solution", content: project.solution },
+    { title: "Impact", content: project.impact },
+  ]
+  const implementationNotes = [
+    { title: "Architecture", content: project.details.architecture },
+    { title: "Data & Evaluation", content: project.details.dataEvaluation },
+    { title: "Production & Ops", content: project.details.productionOps },
+    { title: "Lessons Learned", content: project.details.lessonsLearned },
+  ]
 
   const projectIndex = projects.findIndex((item) => item.id === project.id)
   const previousProject = projectIndex > 0 ? projects[projectIndex - 1] : null
@@ -162,11 +195,11 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
   }).format(new Date(`${latestVerification}T00:00:00Z`))
 
   return (
-    <main className="portfolio-shell min-h-screen bg-background px-4 py-14 text-foreground sm:px-6 lg:px-8">
+    <main className="portfolio-shell project-showcase min-h-screen bg-background px-4 py-14 text-foreground sm:px-6 lg:px-8">
       <article className="mx-auto max-w-5xl space-y-10">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Button asChild variant="outline" size="sm">
-            <Link href="/#projects">
+            <Link href="/projects">
               <ArrowLeft className="h-4 w-4" />
               Back to projects
             </Link>
@@ -315,54 +348,21 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
           </section>
         ) : null}
 
-        <section className="grid gap-4 md:grid-cols-3">
-          <DetailPanel title="Timeline" content={project.details.timeline} />
-          <DetailPanel
-            title="Role & Scope"
-            content={project.details.roleScope}
-          />
-          <DetailPanel title="Team Setup" content={project.details.teamSetup} />
+        <section aria-label="Project overview">
+          <dl className="grid divide-y divide-(--work-border) border-y border-(--work-border) md:grid-cols-3 md:divide-x md:divide-y-0">
+            {overview.map(({ title, content }) => (
+              <div key={title} className="py-5 md:px-6 md:py-6 md:first:pl-0 md:last:pr-0">
+                <dt className="text-lg font-semibold text-(--work-accent)">{title}</dt>
+                <dd className="mt-2 max-w-[67ch] text-base leading-relaxed text-(--work-muted)">
+                  {content}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </section>
 
-        <section className="space-y-4 rounded-xl border border-border bg-card/70 p-6">
-          <h2 className="text-xl font-semibold">Context</h2>
-          <div className="space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            <p>
-              <span className="font-medium text-foreground">Problem:</span>{" "}
-              {project.problem}
-            </p>
-            <p>
-              <span className="font-medium text-foreground">Solution:</span>{" "}
-              {project.solution}
-            </p>
-            <p>
-              <span className="font-medium text-foreground">Impact:</span>{" "}
-              {project.impact}
-            </p>
-          </div>
-        </section>
-
-        <section className="space-y-4 rounded-xl border border-border bg-card/70 p-6">
-          <h2 className="text-xl font-semibold">Implementation Details</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <DetailPanel
-              title="Architecture"
-              content={project.details.architecture}
-            />
-            <DetailPanel
-              title="Data & Evaluation"
-              content={project.details.dataEvaluation}
-            />
-            <DetailPanel
-              title="Production & Ops"
-              content={project.details.productionOps}
-            />
-            <DetailPanel
-              title="Lessons Learned"
-              content={project.details.lessonsLearned}
-            />
-          </div>
-        </section>
+        <CaseStudyNotes id="project-context" title="Context" notes={contextNotes} />
+        <CaseStudyNotes id="implementation-details" title="Implementation Details" notes={implementationNotes} />
 
         <section className="space-y-4 rounded-xl border border-border bg-card/70 p-6">
           <div className="flex flex-wrap items-center justify-between gap-2">

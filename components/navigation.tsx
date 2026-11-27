@@ -38,7 +38,7 @@ export default function Navigation() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="rounded-full text-xs font-medium text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                  className="text-xs font-medium text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                 >
                   {link.label}
                 </a>
@@ -52,7 +52,7 @@ export default function Navigation() {
           </a>
 
           <button
-            className="rounded-full p-2 text-muted-foreground transition-colors hover:text-primary md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+            className="p-2 text-muted-foreground transition-colors hover:text-primary md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={
               isOpen ? "Close navigation menu" : "Open navigation menu"

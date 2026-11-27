@@ -28,7 +28,7 @@
   --chart-3: #a3a69b;
   --chart-4: #f1f1e9;
   --chart-5: #8fa277;
-  --radius: 0.5rem;
+  --radius: 0px;
   --sidebar: #191b17;
   --sidebar-foreground: #f1f1e9;
   --sidebar-primary: #c1f760;
@@ -66,10 +66,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: var(--radius);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -163,7 +163,6 @@
   align-items: center;
   gap: 24px;
   border: 1px solid #53574a;
-  border-radius: 30px;
   padding: 9px 22px;
   font-size: 12px;
   white-space: nowrap;
@@ -239,7 +238,6 @@
   font-family: var(--font-geist-mono), monospace;
   font-size: 12px;
   padding: 4px 10px;
-  border-radius: 4px;
   background: var(--card);
   border: 1px solid var(--border);
   color: var(--foreground);
@@ -261,7 +259,6 @@
   padding: 14px 22px;
   background: var(--primary);
   color: var(--primary-foreground);
-  border-radius: 5px;
   font-size: 13px;
   font-weight: 600;
   transition:
@@ -280,7 +277,6 @@
   background: transparent;
   color: var(--foreground);
   border: 1px solid var(--border);
-  border-radius: 5px;
   font-size: 13px;
   font-weight: 500;
   transition:
@@ -388,19 +384,47 @@
 .hero-proof-note span {
   color: var(--foreground);
 }
-.project-card {
-  border-radius: 9px;
-  box-shadow: none;
+.project-showcase {
+  --work-base: #1b1e1c;
+  --work-panel: #242825;
+  --work-border: #454b45;
+  --work-text: #f4eee4;
+  --work-muted: #c5c8bd;
+  --work-accent: var(--primary);
 }
-.project-card > a:first-child {
-  margin: -24px -24px 8px;
-  border: 0;
-  border-radius: 8px 8px 0 0;
+.portfolio-shell > .section-anchor.selected-work {
+  padding-inline: clamp(16px, 5vw, 72px);
 }
-.project-card [data-slot="badge"] {
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
+.portfolio-shell > .selected-work > div {
+  max-width: none;
+}
+.selected-work-banner {
+  background:
+    radial-gradient(ellipse at 91% 3%, #39482b 0%, transparent 65%),
+    linear-gradient(115deg, #171e1a 12%, #283024 100%);
+}
+.project-display {
+  color: var(--work-text);
+  font-family: Georgia, "Times New Roman", serif;
   font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.project-text-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--work-accent);
+  font-weight: 600;
+  text-underline-offset: 0.3em;
+}
+.project-text-link:hover {
+  text-decoration: underline;
+}
+.project-text-link:focus-visible {
+  outline-color: var(--work-accent);
 }
 .about-services > div,
 .skill-services > div {
@@ -454,7 +478,6 @@
   padding: 50px;
   background: var(--primary);
   color: var(--background);
-  border-radius: 9px;
 }
 .contact-section h2 {
   font-size: clamp(36px, 5vw, 67px);
