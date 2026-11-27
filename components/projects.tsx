@@ -122,9 +122,12 @@ export default function Projects() {
     >
       <div className="mx-auto">
         <header className="mb-8 flex flex-wrap items-end justify-between gap-x-10 gap-y-3 sm:mb-10">
-          <h2 id="selected-work-title" className="project-display text-[clamp(2.75rem,5vw,4.5rem)]">
-            Selected Work
-          </h2>
+          <div className="space-y-3">
+            <span className="eyebrow block text-muted-foreground">02 / PROJECTS</span>
+            <h2 id="selected-work-title" className="project-display text-[clamp(2.75rem,5vw,4.5rem)]">
+              Selected Work
+            </h2>
+          </div>
           <p className="max-w-72 text-sm leading-relaxed text-(--work-muted)">
             Applied AI and data products for documents, legal research, and analytics.
           </p>
